@@ -17,7 +17,6 @@ namespace prjt.ViewModels
         public Employer Employer
         {
             get { return _employer; }
-            set { Set(ref _employer, value); }
         }
 
 
@@ -49,35 +48,26 @@ namespace prjt.ViewModels
 
         private EmployerFacade _employerFacade;
 
-
         public EmployerDeletionViewModel(Employer employer, EmployerFacade employerFacade)
         {
-            Employer = employer;
+            _employer = employer;
             _employerFacade = employerFacade;
         }
 
 
-        public delegate void EmployerDeletionHandler(object sender, EventArgs args);
-        public event EmployerDeletionHandler OnDeletedEmployer;
+        public event Action<object, EventArgs> OnDeletedEmployer;
         private void DeleteEmployer()
         {
             _employerFacade.Delete(Employer);
 
-            EmployerDeletionHandler handler = OnDeletedEmployer;
-            if (handler != null) {
-                handler(this, EventArgs.Empty);
-            }
+            OnDeletedEmployer?.Invoke(this, EventArgs.Empty);
         }
 
 
-        public delegate void ReturnbackHandler(object sender, EventArgs args);
-        public event ReturnbackHandler OnReturnBackClicked;
+        public event Action<object, EventArgs> OnReturnBackClicked;
         private void ReturnBack()
         {
-            ReturnbackHandler handler = OnReturnBackClicked;
-            if (handler != null) {
-                handler(this, EventArgs.Empty);
-            }
+            OnReturnBackClicked?.Invoke(this, EventArgs.Empty);
         }
     }
 }

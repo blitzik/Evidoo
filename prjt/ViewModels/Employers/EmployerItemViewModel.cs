@@ -8,14 +8,8 @@ namespace prjt.ViewModels
 {
     public class EmployerItemViewModel : BaseConductorOneActive
     {
-        private Employer _employer;
-        public Employer Employer
-        {
-            get { return _employer; }
-        }
-
-
         private EmployerDetailViewModel _employerDetailViewModel;
+        private EmployerDeletionViewModel _employerDeletionViewModel;
 
 
         private IEmployerViewModelsFactory _employerVMFactory;
@@ -25,19 +19,30 @@ namespace prjt.ViewModels
 
         public EmployerItemViewModel(Employer employer, EmployerFacade employerFacade, IEmployerViewModelsFactory employerVMFactory)
         {
-            _employer = employer;
-
             _employerVMFactory = employerVMFactory;
             _employerFacade = employerFacade;
+
+            _employerDetailViewModel = (EmployerDetailViewModel)_employerVMFactory.Create(employer, EmployerViewModel.DETAIL);
+            _employerDetailViewModel.OnDeletionClicked += (object sender, EventArgs e) =>
+            {
+                if (_employerDeletionViewModel == null) {
+                    _employerDeletionViewModel = (EmployerDeletionViewModel)_employerVMFactory.Create(employer, EmployerViewModel.DELETION);
+                    _employerDeletionViewModel.OnReturnBackClicked += (object s, EventArgs ea) =>
+                    {
+                        ActivateItem(_employerDetailViewModel);
+                    };
+                    _employerDeletionViewModel.OnDeletedEmployer += (object s, EventArgs ea) =>
+                    {
+                        ActivateItem(_employerDetailViewModel);
+                        OnDeletedEmployer?.Invoke(this, EventArgs.Empty);
+                    };
+                }
+                ActivateItem(_employerDeletionViewModel);
+            };
+            ActivateItem(_employerDetailViewModel);
         }
 
 
-        protected override void OnInitialize()
-        {
-            base.OnInitialize();
 
-            _employerDetailViewModel = (EmployerDetailViewModel)_employerVMFactory.Create(_employer, EmployerViewModel.DETAIL);
-            //ActivateItem(_employerDetailViewModel);
-        }
     }
 }

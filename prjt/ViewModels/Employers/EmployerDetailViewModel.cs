@@ -66,6 +66,7 @@ namespace prjt.ViewModels
         public EmployerDetailViewModel(Employer employer, EmployerFacade employerFacade)
         {
             _employer = employer;
+            Name = employer.Name;
             _employerFacade = employerFacade;
         }
 
@@ -81,20 +82,10 @@ namespace prjt.ViewModels
         }
 
 
-        public void ResetName()
-        {
-            Name = Employer.Name;
-        }
-
-
-        public delegate void DisplayEmployerDeletionHandler(object sender, EventArgs args);
-        public event DisplayEmployerDeletionHandler OnDeletionClicked;
+        public event Action<object, EventArgs> OnDeletionClicked;
         private void DisplayDeletion()
         {
-            DisplayEmployerDeletionHandler handler = OnDeletionClicked;
-            if (handler != null) {
-                handler(this, EventArgs.Empty);
-            }
+            OnDeletionClicked?.Invoke(this, EventArgs.Empty);
         }
 
     }
