@@ -6,10 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 using System.Windows;
-using intf.Views;
-using prjt.ViewModels;
 using Common.Validation;
 using Common.FlashMessages;
+using Common.ViewModelResolver;
+using prjt.ViewModels.Base;
+using prjt.ViewModels;
+using intf.Views;
 
 namespace Evidoo
 {
@@ -43,6 +45,7 @@ namespace Evidoo
             _container.Singleton<IWindowManager, WindowManager>();
             _container.Singleton<IEventAggregator, EventAggregator>();
             _container.Singleton<IFlashMessagesManager, FlashMessagesManager>();
+            _container.Singleton<IViewModelResolver<IViewModel>, ViewModelResolver<IViewModel>>();
             _container.PerRequest<IValidationObject, ValidationObject>();
 
 
@@ -56,7 +59,7 @@ namespace Evidoo
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
             MainWindowViewModel vm = _container.GetInstance<MainWindowViewModel>();
-            BuildUp(vm);
+            _container.BuildUp(vm);
 
             _container.GetInstance<IWindowManager>().ShowWindow(vm);
         }
