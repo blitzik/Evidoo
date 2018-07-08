@@ -60,6 +60,9 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FlashMessages\FlashMessages.xaml.cs">
+      <DependentUpon>FlashMessages.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -73,8 +76,65 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Views\Employers\EmployerDeletionView.xaml.cs">
+      <DependentUpon>EmployerDeletionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employers\EmployerDetailView.xaml.cs">
+      <DependentUpon>EmployerDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employers\EmployerItemView.xaml.cs">
+      <DependentUpon>EmployerItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employers\EmployersView.xaml.cs">
+      <DependentUpon>EmployersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EmptyListingsGenerationView.xaml.cs">
+      <DependentUpon>EmptyListingsGenerationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ListingDeletionView.xaml.cs">
+      <DependentUpon>ListingDeletionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ListingDetailView.xaml.cs">
+      <DependentUpon>ListingDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ListingEditingView.xaml.cs">
+      <DependentUpon>ListingEditingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ListingItemView.xaml.cs">
+      <DependentUpon>ListingItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ListingPdfGenerationView.xaml.cs">
+      <DependentUpon>ListingPdfGenerationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ListingsOverviewView.xaml.cs">
+      <DependentUpon>ListingsOverviewView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ListingView.xaml.cs">
+      <DependentUpon>ListingView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindowView.xaml.cs">
       <DependentUpon>MainWindowView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProgressBar\FailureView.xaml.cs">
+      <DependentUpon>FailureView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProgressBar\ProgressBarWindowView.xaml.cs">
+      <DependentUpon>ProgressBarWindowView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProgressBar\ProgressView.xaml.cs">
+      <DependentUpon>ProgressView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProgressBar\SuccessView.xaml.cs">
+      <DependentUpon>SuccessView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StartupErrorWindowView.xaml.cs">
+      <DependentUpon>StartupErrorWindowView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WorkedTimeSettingView.xaml.cs">
+      <DependentUpon>WorkedTimeSettingView.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -91,11 +151,103 @@
       <Project>{94033fb6-8c9f-456e-a9ad-a9640b8c3bc3}</Project>
       <Name>Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\prjt\prjt.csproj">
+      <Project>{dea96e3a-77b2-4919-8559-626c6f63bd8e}</Project>
+      <Name>prjt</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\MainWindowView.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="FlashMessages\FlashMessages.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Validation\ValidationResource.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Employers\EmployerDeletionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Employers\EmployerDetailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Employers\EmployerItemView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Employers\EmployersView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\EmptyListingsGenerationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ListingDeletionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ListingDetailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ListingEditingView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ListingItemView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ListingPdfGenerationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ListingsOverviewView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ListingView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MainWindowView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ProgressBar\FailureView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ProgressBar\ProgressBarWindowView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ProgressBar\ProgressView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ProgressBar\SuccessView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\StartupErrorWindowView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\WorkedTimeSettingView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

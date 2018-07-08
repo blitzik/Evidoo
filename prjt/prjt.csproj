@@ -40,12 +40,30 @@
     <Reference Include="Caliburn.Micro.Platform.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.3.2.0\lib\net45\Caliburn.Micro.Platform.Core.dll</HintPath>
     </Reference>
+    <Reference Include="MigraDoc.DocumentObjectModel, Version=1.32.4334.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.4334.0\lib\net20\MigraDoc.DocumentObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering, Version=1.32.4334.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.4334.0\lib\net20\MigraDoc.Rendering.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.RtfRendering, Version=1.32.4334.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.4334.0\lib\net20\MigraDoc.RtfRendering.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.4334.0\lib\net20\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.4334.0\lib\net20\PdfSharp.Charting.dll</HintPath>
+    </Reference>
     <Reference Include="PerstNetGenerics">
       <HintPath>..\..\..\Perst4.NET\bin\PerstNetGenerics.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.3.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -58,12 +76,99 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Comparers\SortIntDescending.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\IntToMonthNameConverter.cs" />
+    <Compile Include="Converters\IntToTimeConverter.cs" />
+    <Compile Include="Converters\InverseBooleansToBooleanConverter.cs" />
+    <Compile Include="Converters\NegateBoolConverter.cs" />
+    <Compile Include="Converters\TimeToHoursAndMinutesConverter.cs" />
+    <Compile Include="Converters\TimeToHoursAndMinutesRangeConverter.cs" />
+    <Compile Include="Converters\TimeToIntConverter.cs" />
+    <Compile Include="Converters\TimeToTimeInWordsConverter.cs" />
+    <Compile Include="Converters\ViewModelToBooleanConverter.cs" />
+    <Compile Include="Domain\DayItem.cs" />
+    <Compile Include="Domain\DbVersion.cs" />
+    <Compile Include="Domain\DefaultListingPdfReportSetting.cs" />
+    <Compile Include="Domain\DefaultSettings.cs" />
+    <Compile Include="Domain\Employer.cs" />
+    <Compile Include="Domain\Listing.cs" />
+    <Compile Include="Domain\ListingItem.cs" />
+    <Compile Include="Domain\PageTitle.cs" />
+    <Compile Include="Domain\Persistent.cs" />
+    <Compile Include="Domain\ResultObject.cs" />
+    <Compile Include="Domain\TimeSetting.cs" />
+    <Compile Include="Domain\Week.cs" />
+    <Compile Include="EventAggregator\Messages\ChangeViewMessage.cs" />
+    <Compile Include="EventArguments\ListingArgs.cs" />
+    <Compile Include="EventArguments\ListingItemArgs.cs" />
+    <Compile Include="EventArguments\SelectedDayItemArgs.cs" />
+    <Compile Include="EventArguments\WorkedTimeEventArgs.cs" />
+    <Compile Include="Exceptions\InvalidStateException.cs" />
+    <Compile Include="Exceptions\ListingItemAlreadyExistsException.cs" />
+    <Compile Include="Exceptions\LunchHoursOutOfWorkedHoursRangeException.cs" />
+    <Compile Include="Exceptions\LunchHoursRangeException.cs" />
+    <Compile Include="Exceptions\OtherHoursException.cs" />
+    <Compile Include="Exceptions\OutOfRangeException.cs" />
+    <Compile Include="Exceptions\WorkedHoursRangeException.cs" />
+    <Compile Include="Exceptions\WrongTimeException.cs" />
+    <Compile Include="Facades\BaseFacade.cs" />
+    <Compile Include="Facades\EmployerFacade.cs" />
+    <Compile Include="Facades\ListingFacade.cs" />
+    <Compile Include="Facades\SettingFacade.cs" />
+    <Compile Include="Messages\EditDayItemMessage.cs" />
+    <Compile Include="Messages\IEventAggregatorMessage.cs" />
+    <Compile Include="Messages\ListingMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Backup\BackupImport.cs" />
+    <Compile Include="Services\Backup\IBackupImport.cs" />
+    <Compile Include="Services\Entities\EmployerFactory.cs" />
+    <Compile Include="Services\Entities\IEmployerFactory.cs" />
+    <Compile Include="Services\Entities\IListingFactory.cs" />
+    <Compile Include="Services\Entities\ListingFactory.cs" />
+    <Compile Include="Services\IO\IOpeningFilePathSelector.cs" />
+    <Compile Include="Services\IO\ISavingFilePathSelector.cs" />
+    <Compile Include="Services\IO\OpenFilePathSelector.cs" />
+    <Compile Include="Services\IO\SaveFilePathSelector.cs" />
+    <Compile Include="Services\Pdf\DefaultListingPdfReportFactory.cs" />
+    <Compile Include="Services\Pdf\IListingPdfDocumentFactory.cs" />
+    <Compile Include="Services\Pdf\IListingReportGenerator.cs" />
+    <Compile Include="Services\Pdf\IListingSectionFactory.cs" />
+    <Compile Include="Services\Pdf\IMultipleListingReportFactory.cs" />
+    <Compile Include="Services\Pdf\ListingReportGenerator.cs" />
+    <Compile Include="Services\Pdf\ListingSectionFactory.cs" />
+    <Compile Include="Services\Pdf\MultipleListingReportFactory.cs" />
+    <Compile Include="Services\PerstStorageFactory.cs" />
+    <Compile Include="Services\Root.cs" />
+    <Compile Include="Services\StoragePool.cs" />
+    <Compile Include="Utils\Date.cs" />
+    <Compile Include="Utils\Time.cs" />
     <Compile Include="ViewModels\Base\BaseConductorAllActive.cs" />
     <Compile Include="ViewModels\Base\BaseConductorOneActive.cs" />
     <Compile Include="ViewModels\Base\BaseScreen.cs" />
     <Compile Include="ViewModels\Base\IViewModel.cs" />
+    <Compile Include="ViewModels\Employers\EmployerDeletionViewModel.cs" />
+    <Compile Include="ViewModels\Employers\EmployerDetailViewModel.cs" />
+    <Compile Include="ViewModels\Employers\EmployerItemViewModel.cs" />
+    <Compile Include="ViewModels\Employers\EmployersViewModel.cs" />
+    <Compile Include="ViewModels\Employers\Factory\EmployerViewModelsFactory.cs" />
+    <Compile Include="ViewModels\Employers\Factory\IEmployerViewModelsFactory.cs" />
+    <Compile Include="ViewModels\EmptyListingsGenerationViewModel.cs" />
+    <Compile Include="ViewModels\ListingDeletionViewModel.cs" />
+    <Compile Include="ViewModels\ListingDetailViewModel.cs" />
+    <Compile Include="ViewModels\ListingEditingViewModel.cs" />
+    <Compile Include="ViewModels\ListingItemViewModel.cs" />
+    <Compile Include="ViewModels\ListingPdfGenerationViewModel.cs" />
+    <Compile Include="ViewModels\ListingsOverviewViewModel.cs" />
+    <Compile Include="ViewModels\ListingViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\ProgressBar\FailureViewModel.cs" />
+    <Compile Include="ViewModels\ProgressBar\ProgressBarWindowViewModel.cs" />
+    <Compile Include="ViewModels\ProgressBar\ProgressViewModel.cs" />
+    <Compile Include="ViewModels\ProgressBar\SuccessViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\StartupErrorWindowViewModel.cs" />
+    <Compile Include="ViewModels\WorkedTimeSettingViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
@@ -74,5 +179,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

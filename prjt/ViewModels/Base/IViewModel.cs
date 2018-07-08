@@ -1,4 +1,5 @@
-﻿using System;
+﻿using prjt.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,7 @@ namespace prjt.ViewModels.Base
 {
     public interface IViewModel : Common.ViewModels.IViewModel
     {
+        string BaseWindowTitle { get; set; }
+        PageTitle WindowTitle { get; set; }
     }
 }

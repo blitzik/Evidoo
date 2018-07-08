@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="intf.Views.EmployersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:intf.Views"
+             xmlns:viewModels="clr-namespace:prjt.ViewModels;assembly=prjt"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="1000">
+    
+    <Grid HorizontalAlignment="Left">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="38" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="400" />
+        </Grid.ColumnDefinitions>
+        
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Přehled zaměstnavatelů" Margin="0 0 0 10" Style="{StaticResource DefaultHeader}" />
+        <Grid Grid.Row="2" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+            <TextBlock Grid.Row="0">
+                Celkem zaměstnavatelů: <TextBlock Text="{Binding Employers.Count}" />
+            </TextBlock>
+
+            <ScrollViewer Grid.Row="2" Padding="0 0 10 0" Name="ScrollViewer" VerticalScrollBarVisibility="Auto" Template="{StaticResource ScrollViewerControlTemplate}">
+                <ItemsControl ItemsSource="{Binding Employers, UpdateSourceTrigger=PropertyChanged}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type viewModels:EmployerItemViewModel}">
+                            <local:EmployerItemView />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+
+        <TextBlock Grid.Row="0" Grid.Column="2" Text="Nový zaměstnavatel" Style="{StaticResource DefaultHeader}" />
+        <StackPanel Grid.Row="2" Grid.Column="2">
+            <TextBlock Text="Název zaměstnavatele" Margin="0 0 0 5" />
+            <TextBox Text="{Binding NewEmployerName, UpdateSourceTrigger=PropertyChanged}" MaxLength="50" Margin="0 0 0 10" Style="{StaticResource DefaultTextBox}" />
+            <Button Content="Uložit nového zaměstnavatele" Command="{Binding SaveNewEmployerCommand}" Width="250" HorizontalAlignment="Right" Style="{StaticResource DefaultButton}" />
+        </StackPanel>
+    </Grid>
+    
+</UserControl>

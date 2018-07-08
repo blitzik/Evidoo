@@ -1,0 +1,30 @@
+﻿<Window x:Class="intf.Views.StartupErrorWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:intf.Views"
+        mc:Ignorable="d"
+        Title="Evidoo - Chyba při spouštění aplikace" ResizeMode="NoResize" Width="600" SizeToContent="Height" FontSize="18">
+      
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Padding="15">
+            <StackPanel>
+                <StackPanel.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Margin" Value="0 0 0 15" />
+                        <Setter Property="TextWrapping" Value="Wrap" />
+                    </Style>
+                </StackPanel.Resources>
+
+                <TextBlock Margin="0 0 0 20" TextWrapping="Wrap" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}" />
+
+                <Button Content="Ok" Command="{Binding CloseAppCommand}" Width="150" Height="35" HorizontalAlignment="Right" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

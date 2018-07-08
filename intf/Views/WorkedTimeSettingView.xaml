@@ -1,0 +1,114 @@
+﻿<UserControl x:Class="intf.Views.WorkedTimeSettingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:intf.Views"
+             xmlns:converters="clr-namespace:prjt.Converters;assembly=prjt"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="900">
+
+    <UserControl.Resources>
+        <converters:TimeToIntConverter x:Key="TimeToIntConverter" />
+        <converters:IntToTimeConverter x:Key="IntToTimeConverter" />
+        <converters:TimeToTimeInWordsConverter x:Key="TimeToTimeInWordsConverter" />
+        <converters:NegateBoolConverter x:Key="NegateBoolConverter" />
+    </UserControl.Resources>
+
+    <StackPanel>
+        <StackPanel.Resources>
+            <Style TargetType="TextBox" BasedOn="{StaticResource DefaultTextBox}">
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+            </Style>
+        </StackPanel.Resources>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="30" />
+
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="30" />
+
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="10" />
+
+                <ColumnDefinition Width="325" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Shift Hours -->
+            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Text="Začátek práce" Style="{StaticResource LabelText}" />
+            <Button Grid.Row="2" Grid.Column="0" Content="-" Command="{Binding ShiftStartSubCommand}" />
+            <TextBox x:Name="tb_shiftStart" Grid.Row="2" Grid.Column="2" Text="{Binding StartTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToTimeConverter}}" IsReadOnly="True" />
+            <Button Grid.Row="2" Grid.Column="4" Content="+" Command="{Binding ShiftStartAddCommand}" />
+
+            <TextBlock Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="5" Text="Konec práce" Style="{StaticResource LabelText}" />
+            <Button Grid.Row="2" Grid.Column="6" Content="-" Command="{Binding ShiftEndSubCommand}" />
+            <TextBox Name="tb_shiftEnd" Grid.Row="2" Grid.Column="8" Text="{Binding EndTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToTimeConverter}}" IsReadOnly="True" />
+            <Button Grid.Row="2" Grid.Column="10" Content="+" Command="{Binding ShiftEndAddCommand}" />
+
+            <!-- Lunch Hours -->
+            <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5" Text="Oběd začátek" Style="{StaticResource LabelText}" />
+            <Button Grid.Row="6" Grid.Column="0" Content="-" Command="{Binding LunchStartSubCommand}" />
+            <TextBox Name="tb_lunchStart" Grid.Row="6" Grid.Column="2" Text="{Binding LunchStart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToTimeConverter}}" IsReadOnly="True" />
+            <Button Grid.Row="6" Grid.Column="4" Content="+" Command="{Binding LunchStartAddCommand}" />
+
+            <TextBlock Grid.Row="4" Grid.Column="6" Grid.ColumnSpan="5" Text="Oběd konec" Style="{StaticResource LabelText}" />
+            <Button Grid.Row="6" Grid.Column="6" Content="-" Command="{Binding LunchEndSubCommand}" />
+            <TextBox Name="tb_lunchEnd" Grid.Row="6" Grid.Column="8" Text="{Binding LunchEnd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToTimeConverter}}" IsReadOnly="True" />
+            <Button Grid.Row="6" Grid.Column="10" Content="+" Command="{Binding LunchEndAddCommand}" />
+
+            <!-- Other Hours -->
+            <TextBlock Grid.Row="0" Grid.Column="12" Grid.ColumnSpan="5" Text="Ostatní hodiny" Style="{StaticResource LabelText}" />
+            <Button Grid.Row="2" Grid.Column="12" Content="-" Command="{Binding OtherHoursSubCommand}" />
+            <TextBox Name="tb_otherHours" Grid.Row="2" Grid.Column="14" Text="{Binding OtherHours, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToTimeConverter}}" IsReadOnly="True" />
+            <Button Grid.Row="2" Grid.Column="16" Content="+" Command="{Binding OtherHoursAddCommand}" />
+
+            <TextBlock Grid.Row="4" Grid.Column="12" Grid.ColumnSpan="5" Text="Posun času" Style="{StaticResource LabelText}" />
+            <ComboBox Grid.Row="6"
+                      Grid.Column="12"
+                      Grid.ColumnSpan="5"
+                      FontSize="18"
+                      ItemsSource="{Binding PossibleTimeTicks, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedValue="{Binding SelectedTimeTickInMinutes, UpdateSourceTrigger=PropertyChanged}" ItemStringFormat="{}{0} minut">
+            </ComboBox>
+
+            <!-- Worked Hours -->
+            <TextBlock Grid.Row="0" Grid.Column="21" Text="Odpr. hodin" Style="{StaticResource LabelText}" />
+            <TextBox Grid.Row="2" Grid.RowSpan="5" Grid.Column="25" FontSize="28" VerticalContentAlignment="Center" IsReadOnly="True" Text="{Binding WorkedHours, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TimeToTimeInWordsConverter}}" />
+        </Grid>
+
+
+        <StackPanel Margin="0 25 0 10" Orientation="Horizontal">
+            <!-- Total time checkbox -->
+            <CheckBox VerticalAlignment="Center" Margin="0 0 30 0" IsChecked="{Binding NoTime, UpdateSourceTrigger=PropertyChanged}">
+                <TextBlock Text="žádný čas" Margin="0 -2 0 0" FontSize="15" />
+            </CheckBox>
+
+            <!-- Lunch checkbox -->
+            <CheckBox VerticalAlignment="Center" IsChecked="{Binding NoLunch, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding NoTime, Converter={StaticResource NegateBoolConverter}}">
+                <TextBlock Text="bez oběda" Margin="0 -2 0 0" FontSize="15" />
+            </CheckBox>
+        </StackPanel>
+    </StackPanel>
+</UserControl>
