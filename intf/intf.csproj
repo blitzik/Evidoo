@@ -41,8 +41,29 @@
     <Reference Include="Caliburn.Micro.Platform.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.3.2.0\lib\net45\Caliburn.Micro.Platform.Core.dll</HintPath>
     </Reference>
+    <Reference Include="MigraDoc.DocumentObjectModel, Version=1.32.4334.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.4334.0\lib\net20\MigraDoc.DocumentObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering, Version=1.32.4334.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.4334.0\lib\net20\MigraDoc.Rendering.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.RtfRendering, Version=1.32.4334.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.4334.0\lib\net20\MigraDoc.RtfRendering.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.4334.0\lib\net20\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.4334.0\lib\net20\PdfSharp.Charting.dll</HintPath>
+    </Reference>
+    <Reference Include="PerstNetGenerics, Version=1.0.5349.17940, Culture=neutral, PublicKeyToken=ac1b8589238349b8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Perst4.NET\bin\PerstNetGenerics.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.3.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -60,9 +81,26 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseViewModels\BaseConductorAllActive.cs" />
+    <Compile Include="BaseViewModels\BaseConductorOneActive.cs" />
+    <Compile Include="BaseViewModels\BaseScreen.cs" />
+    <Compile Include="BaseViewModels\IViewModel.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\IntToMonthNameConverter.cs" />
+    <Compile Include="Converters\IntToTimeConverter.cs" />
+    <Compile Include="Converters\InverseBooleansToBooleanConverter.cs" />
+    <Compile Include="Converters\NegateBoolConverter.cs" />
+    <Compile Include="Converters\TimeToHoursAndMinutesConverter.cs" />
+    <Compile Include="Converters\TimeToHoursAndMinutesRangeConverter.cs" />
+    <Compile Include="Converters\TimeToIntConverter.cs" />
+    <Compile Include="Converters\TimeToTimeInWordsConverter.cs" />
+    <Compile Include="Converters\ViewModelToBooleanConverter.cs" />
     <Compile Include="FlashMessages\FlashMessages.xaml.cs">
       <DependentUpon>FlashMessages.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Messages\EditDayItemMessage.cs" />
+    <Compile Include="Messages\IEventAggregatorMessage.cs" />
+    <Compile Include="Messages\ListingMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -79,63 +117,85 @@
     <Compile Include="Views\Employers\EmployerDeletionView.xaml.cs">
       <DependentUpon>EmployerDeletionView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Employers\EmployerDeletionViewModel.cs" />
     <Compile Include="Views\Employers\EmployerDetailView.xaml.cs">
       <DependentUpon>EmployerDetailView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Employers\EmployerDetailViewModel.cs" />
     <Compile Include="Views\Employers\EmployerItemView.xaml.cs">
       <DependentUpon>EmployerItemView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Employers\EmployerItemViewModel.cs" />
     <Compile Include="Views\Employers\EmployersView.xaml.cs">
       <DependentUpon>EmployersView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EmptyListingsGenerationView.xaml.cs">
+    <Compile Include="Views\Employers\EmployersViewModel.cs" />
+    <Compile Include="Factories\Employers\EmployerViewModelsFactory.cs" />
+    <Compile Include="Factories\Employers\IEmployerViewModelsFactory.cs" />
+    <Compile Include="Views\EmptyListingsGeneration\EmptyListingsGenerationView.xaml.cs">
       <DependentUpon>EmptyListingsGenerationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ListingDeletionView.xaml.cs">
+    <Compile Include="Views\EmptyListingsGeneration\EmptyListingsGenerationViewModel.cs" />
+    <Compile Include="Views\ListingDeletion\ListingDeletionView.xaml.cs">
       <DependentUpon>ListingDeletionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ListingDetailView.xaml.cs">
+    <Compile Include="Views\ListingDeletion\ListingDeletionViewModel.cs" />
+    <Compile Include="Views\ListingDetail\ListingDetailView.xaml.cs">
       <DependentUpon>ListingDetailView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ListingEditingView.xaml.cs">
+    <Compile Include="Views\ListingDetail\ListingDetailViewModel.cs" />
+    <Compile Include="Views\ListingEditing\ListingEditingView.xaml.cs">
       <DependentUpon>ListingEditingView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ListingItemView.xaml.cs">
+    <Compile Include="Views\ListingEditing\ListingEditingViewModel.cs" />
+    <Compile Include="Views\ListingItem\ListingItemView.xaml.cs">
       <DependentUpon>ListingItemView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ListingPdfGenerationView.xaml.cs">
+    <Compile Include="Views\ListingItem\ListingItemViewModel.cs" />
+    <Compile Include="Views\ListingPdfGeneration\ListingPdfGenerationView.xaml.cs">
       <DependentUpon>ListingPdfGenerationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ListingsOverviewView.xaml.cs">
+    <Compile Include="Views\ListingPdfGeneration\ListingPdfGenerationViewModel.cs" />
+    <Compile Include="Views\ListingsOverview\ListingsOverviewView.xaml.cs">
       <DependentUpon>ListingsOverviewView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ListingView.xaml.cs">
+    <Compile Include="Views\ListingsOverview\ListingsOverviewViewModel.cs" />
+    <Compile Include="Views\Listing\ListingView.xaml.cs">
       <DependentUpon>ListingView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainWindowView.xaml.cs">
+    <Compile Include="Views\Listing\ListingViewModel.cs" />
+    <Compile Include="Views\Main\MainWindowView.xaml.cs">
       <DependentUpon>MainWindowView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Main\MainWindowViewModel.cs" />
     <Compile Include="Views\ProgressBar\FailureView.xaml.cs">
       <DependentUpon>FailureView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ProgressBar\FailureViewModel.cs" />
     <Compile Include="Views\ProgressBar\ProgressBarWindowView.xaml.cs">
       <DependentUpon>ProgressBarWindowView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ProgressBar\ProgressBarWindowViewModel.cs" />
     <Compile Include="Views\ProgressBar\ProgressView.xaml.cs">
       <DependentUpon>ProgressView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ProgressBar\ProgressViewModel.cs" />
     <Compile Include="Views\ProgressBar\SuccessView.xaml.cs">
       <DependentUpon>SuccessView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SettingsView.xaml.cs">
+    <Compile Include="Views\ProgressBar\SuccessViewModel.cs" />
+    <Compile Include="Views\Settings\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\StartupErrorWindowView.xaml.cs">
+    <Compile Include="Views\Settings\SettingsViewModel.cs" />
+    <Compile Include="Views\StartupErrorWindow\StartupErrorWindowView.xaml.cs">
       <DependentUpon>StartupErrorWindowView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WorkedTimeSettingView.xaml.cs">
+    <Compile Include="Views\StartupErrorWindow\StartupErrorWindowViewModel.cs" />
+    <Compile Include="Views\WorkedTimeSettingView\WorkedTimeSettingView.xaml.cs">
       <DependentUpon>WorkedTimeSettingView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\WorkedTimeSettingView\WorkedTimeSettingViewModel.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -185,39 +245,39 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\EmptyListingsGenerationView.xaml">
+    <Page Include="Views\EmptyListingsGeneration\EmptyListingsGenerationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\ListingDeletionView.xaml">
+    <Page Include="Views\ListingDeletion\ListingDeletionView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\ListingDetailView.xaml">
+    <Page Include="Views\ListingDetail\ListingDetailView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\ListingEditingView.xaml">
+    <Page Include="Views\ListingEditing\ListingEditingView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\ListingItemView.xaml">
+    <Page Include="Views\ListingItem\ListingItemView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\ListingPdfGenerationView.xaml">
+    <Page Include="Views\ListingPdfGeneration\ListingPdfGenerationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\ListingsOverviewView.xaml">
+    <Page Include="Views\ListingsOverview\ListingsOverviewView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\ListingView.xaml">
+    <Page Include="Views\Listing\ListingView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\MainWindowView.xaml">
+    <Page Include="Views\Main\MainWindowView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -237,18 +297,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\SettingsView.xaml">
+    <Page Include="Views\Settings\SettingsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\StartupErrorWindowView.xaml">
+    <Page Include="Views\StartupErrorWindow\StartupErrorWindowView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\WorkedTimeSettingView.xaml">
+    <Page Include="Views\WorkedTimeSettingView\WorkedTimeSettingView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

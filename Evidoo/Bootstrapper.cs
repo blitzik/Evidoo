@@ -9,8 +9,6 @@ using System.Windows;
 using Common.Validation;
 using Common.FlashMessages;
 using Common.ViewModelResolver;
-using prjt.ViewModels.Base;
-using prjt.ViewModels;
 using intf.Views;
 using System.Threading;
 using prjt.Services;
@@ -21,6 +19,8 @@ using prjt.Services.Entities;
 using prjt.Facades;
 using prjt.Domain;
 using Perst;
+using intf.BaseViewModels;
+using intf.Factories.Employers;
 
 namespace Evidoo
 {
@@ -42,7 +42,7 @@ namespace Evidoo
             var config = new TypeMappingConfiguration()
             {
                 DefaultSubNamespaceForViews = "intf.Views",
-                DefaultSubNamespaceForViewModels = "prjt.ViewModels"
+                DefaultSubNamespaceForViewModels = "intf.Views"
             };
             ViewLocator.ConfigureTypeMappings(config);
             ViewModelLocator.ConfigureTypeMappings(config);

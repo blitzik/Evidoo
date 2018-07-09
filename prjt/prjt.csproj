@@ -77,16 +77,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Comparers\SortIntDescending.cs" />
-    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
-    <Compile Include="Converters\IntToMonthNameConverter.cs" />
-    <Compile Include="Converters\IntToTimeConverter.cs" />
-    <Compile Include="Converters\InverseBooleansToBooleanConverter.cs" />
-    <Compile Include="Converters\NegateBoolConverter.cs" />
-    <Compile Include="Converters\TimeToHoursAndMinutesConverter.cs" />
-    <Compile Include="Converters\TimeToHoursAndMinutesRangeConverter.cs" />
-    <Compile Include="Converters\TimeToIntConverter.cs" />
-    <Compile Include="Converters\TimeToTimeInWordsConverter.cs" />
-    <Compile Include="Converters\ViewModelToBooleanConverter.cs" />
     <Compile Include="Domain\DayItem.cs" />
     <Compile Include="Domain\DbVersion.cs" />
     <Compile Include="Domain\DefaultListingPdfReportSetting.cs" />
@@ -99,7 +89,6 @@
     <Compile Include="Domain\ResultObject.cs" />
     <Compile Include="Domain\TimeSetting.cs" />
     <Compile Include="Domain\Week.cs" />
-    <Compile Include="EventAggregator\Messages\ChangeViewMessage.cs" />
     <Compile Include="EventArguments\ListingArgs.cs" />
     <Compile Include="EventArguments\ListingItemArgs.cs" />
     <Compile Include="EventArguments\SelectedDayItemArgs.cs" />
@@ -116,9 +105,6 @@
     <Compile Include="Facades\EmployerFacade.cs" />
     <Compile Include="Facades\ListingFacade.cs" />
     <Compile Include="Facades\SettingFacade.cs" />
-    <Compile Include="Messages\EditDayItemMessage.cs" />
-    <Compile Include="Messages\IEventAggregatorMessage.cs" />
-    <Compile Include="Messages\ListingMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Backup\BackupImport.cs" />
     <Compile Include="Services\Backup\IBackupImport.cs" />
@@ -143,32 +129,6 @@
     <Compile Include="Services\StoragePool.cs" />
     <Compile Include="Utils\Date.cs" />
     <Compile Include="Utils\Time.cs" />
-    <Compile Include="ViewModels\Base\BaseConductorAllActive.cs" />
-    <Compile Include="ViewModels\Base\BaseConductorOneActive.cs" />
-    <Compile Include="ViewModels\Base\BaseScreen.cs" />
-    <Compile Include="ViewModels\Base\IViewModel.cs" />
-    <Compile Include="ViewModels\Employers\EmployerDeletionViewModel.cs" />
-    <Compile Include="ViewModels\Employers\EmployerDetailViewModel.cs" />
-    <Compile Include="ViewModels\Employers\EmployerItemViewModel.cs" />
-    <Compile Include="ViewModels\Employers\EmployersViewModel.cs" />
-    <Compile Include="ViewModels\Employers\Factory\EmployerViewModelsFactory.cs" />
-    <Compile Include="ViewModels\Employers\Factory\IEmployerViewModelsFactory.cs" />
-    <Compile Include="ViewModels\EmptyListingsGenerationViewModel.cs" />
-    <Compile Include="ViewModels\ListingDeletionViewModel.cs" />
-    <Compile Include="ViewModels\ListingDetailViewModel.cs" />
-    <Compile Include="ViewModels\ListingEditingViewModel.cs" />
-    <Compile Include="ViewModels\ListingItemViewModel.cs" />
-    <Compile Include="ViewModels\ListingPdfGenerationViewModel.cs" />
-    <Compile Include="ViewModels\ListingsOverviewViewModel.cs" />
-    <Compile Include="ViewModels\ListingViewModel.cs" />
-    <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="ViewModels\ProgressBar\FailureViewModel.cs" />
-    <Compile Include="ViewModels\ProgressBar\ProgressBarWindowViewModel.cs" />
-    <Compile Include="ViewModels\ProgressBar\ProgressViewModel.cs" />
-    <Compile Include="ViewModels\ProgressBar\SuccessViewModel.cs" />
-    <Compile Include="ViewModels\SettingsViewModel.cs" />
-    <Compile Include="ViewModels\StartupErrorWindowViewModel.cs" />
-    <Compile Include="ViewModels\WorkedTimeSettingViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
