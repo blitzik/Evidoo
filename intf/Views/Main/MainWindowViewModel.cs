@@ -9,7 +9,10 @@ using intf.BaseViewModels;
 
 namespace intf.Views
 {
-    public class MainWindowViewModel : BaseConductorOneActive, IHandle<ChangeViewMessage<BaseViewModels.IViewModel>>
+    public class MainWindowViewModel :
+        BaseConductorOneActive,
+        IHandle<IChangeViewMessage<BaseViewModels.IViewModel>>,
+        IHandle<IChangeViewWithArgumentMessage<BaseViewModels.IViewModel>>
     {
         private PageTitle _title = new PageTitle();
         public PageTitle Title
@@ -72,19 +75,25 @@ namespace intf.Views
         public void DisplayEmptyListingsGeneration()
         {
             ActivateItem(nameof(EmptyListingsGenerationViewModel));
-        }        
+        }
 
 
         // -----
 
 
-        public void Handle(ChangeViewMessage<BaseViewModels.IViewModel> message)
+        public void Handle(IChangeViewMessage<BaseViewModels.IViewModel> message)
         {
             if (message.ViewModel != null) {
                 ActivateItem(message.ViewModel);
             } else {
                 ActivateItem(message.ViewModelName);
             }
+        }
+
+
+        public void Handle(IChangeViewWithArgumentMessage<BaseViewModels.IViewModel> message)
+        {
+            message.Apply(ActiveItem);
         }
 
 

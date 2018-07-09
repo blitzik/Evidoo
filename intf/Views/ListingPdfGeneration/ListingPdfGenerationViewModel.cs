@@ -26,7 +26,7 @@ using intf.BaseViewModels;
 
 namespace intf.Views
 {
-    public class ListingPdfGenerationViewModel : BaseScreen, IHandle<ListingMessage>
+    public class ListingPdfGenerationViewModel : BaseScreen
     {
         private Listing _listing;
         public Listing Listing
@@ -179,15 +179,6 @@ namespace intf.Views
         private void ReturnBack()
         {
             EventAggregator.PublishOnUIThread(new ChangeViewMessage<IViewModel>(nameof(ListingDetailViewModel)));
-        }
-
-
-        // -----
-
-
-        public void Handle(ListingMessage message)
-        {
-            Listing = message.Listing;
         }
     }
 }

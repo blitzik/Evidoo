@@ -14,7 +14,7 @@ using intf.BaseViewModels;
 
 namespace intf.Views
 {
-    public class ListingDetailViewModel : BaseScreen, IHandle<ListingMessage>
+    public class ListingDetailViewModel : BaseScreen
     {
         private Listing _listing;
         public Listing Listing
@@ -23,6 +23,7 @@ namespace intf.Views
             set
             {
                 Set(ref _listing, value);
+                Reset(value);
             }
         }
 
@@ -176,40 +177,21 @@ namespace intf.Views
         }
 
 
-        protected override void OnActivate()
-        {
-            base.OnActivate();
-
-            if (Listing != null) {
-                WindowTitle.Text = GenerateWindowTitle(Listing);
-            }
-        }
-
-
         private void OpenEditing()
         {
-            // we need to create view model first before we can send a message to it
-            // second time and on the resolver(SimpleContainer precisely) wont create new one(it is declared as Singleton)
-            ViewModelResolver.Resolve(nameof(ListingEditingViewModel));
-
-            EventAggregator.PublishOnUIThread(new ListingMessage(Listing));
-            EventAggregator.PublishOnUIThread(new ChangeViewMessage<IViewModel>(nameof(ListingEditingViewModel)));
+            EventAggregator.PublishOnUIThread(new ParameterizedChangeViewMessage<ListingEditingViewModel>(x => { x.Listing = Listing; }));
         }
 
 
         private void OpenListingItemDetail(int day)
         {
-            ViewModelResolver.Resolve(nameof(ListingItemViewModel));
-
-            EventAggregator.PublishOnUIThread(new EditDayItemMessage(_dayItems[day - 1]));
-            EventAggregator.PublishOnUIThread(new ChangeViewMessage<IViewModel>(nameof(ListingItemViewModel)));
+            EventAggregator.PublishOnUIThread(new ParameterizedChangeViewMessage<ListingItemViewModel>(x => { x.DayItem = _dayItems[day - 1]; }));
         }
 
 
         private void DisplayListingDeletion()
         {
-            EventAggregator.PublishOnUIThread(new ChangeViewMessage<IViewModel>(nameof(ListingDeletionViewModel)));
-            EventAggregator.PublishOnUIThread(new ListingMessage(Listing));
+            EventAggregator.PublishOnUIThread(new ParameterizedChangeViewMessage<ListingDeletionViewModel>(x => { x.Listing = Listing; }));
         }
 
 
@@ -217,7 +199,7 @@ namespace intf.Views
         {
             ViewModelResolver.Resolve(nameof(ListingPdfGenerationViewModel));
 
-            EventAggregator.PublishOnUIThread(new ListingMessage(Listing));
+            //EventAggregator.PublishOnUIThread(new ListingMessage(Listing));
             EventAggregator.PublishOnUIThread(new ChangeViewMessage<IViewModel>(nameof(ListingPdfGenerationViewModel)));
         }
 
@@ -305,14 +287,5 @@ namespace intf.Views
             return weeks;
         }
 
-
-        // -----
-
-
-        public void Handle(ListingMessage message)
-        {
-            Listing = message.Listing;
-            Reset(Listing);
-        }
     }
 }

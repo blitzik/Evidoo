@@ -15,7 +15,7 @@ using intf.Subscribers.Messages;
 
 namespace intf.Views
 {
-    public class ListingDeletionViewModel : BaseScreen, IHandle<ListingMessage>
+    public class ListingDeletionViewModel : BaseScreen
     {
         private Listing _listing;
         public Listing Listing
@@ -107,15 +107,6 @@ namespace intf.Views
         private void ReturnBack()
         {
             EventAggregator.PublishOnUIThread(new ChangeViewMessage<IViewModel>(nameof(ListingDetailViewModel)));
-        }
-
-
-        // -----
-
-
-        public void Handle(ListingMessage message)
-        {
-            Listing = message.Listing;
         }
     }
 }

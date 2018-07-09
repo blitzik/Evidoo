@@ -1,4 +1,5 @@
-﻿using prjt.Domain;
+﻿using Common.EventAggregator.Messages;
+using prjt.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;

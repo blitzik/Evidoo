@@ -17,7 +17,7 @@ using intf.BaseViewModels;
 
 namespace intf.Views
 {
-    public class ListingEditingViewModel : BaseScreen, IHandle<ListingMessage>
+    public class ListingEditingViewModel : BaseScreen
     {
         private Listing _listing;
         public Listing Listing
@@ -26,6 +26,7 @@ namespace intf.Views
             set
             {
                 Set(ref _listing, value);
+                Reset(Listing);
             }
         }
 
@@ -250,22 +251,6 @@ namespace intf.Views
             base.OnInitialize();
 
             EventAggregator.Subscribe(this);
-        }
-
-
-        protected override void OnActivate()
-        {
-            base.OnActivate();
-
-            if (Listing != null) {
-                Reset(Listing);
-            }
-        }
-
-
-        public void Handle(ListingMessage message)
-        {
-            Listing = message.Listing;
         }
 
 

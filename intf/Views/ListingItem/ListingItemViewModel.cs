@@ -21,7 +21,7 @@ using intf.BaseViewModels;
 
 namespace intf.Views
 {
-    public class ListingItemViewModel : BaseScreen, IHandle<EditDayItemMessage>
+    public class ListingItemViewModel : BaseScreen
     {
         private string _header;
         public string Header
@@ -188,15 +188,6 @@ namespace intf.Views
         private void ReturnBackToListingDetail()
         {
             EventAggregator.PublishOnUIThread(new ChangeViewMessage<IViewModel>(nameof(ListingDetailViewModel)));
-        }
-
-
-        // -----
-
-
-        public void Handle(EditDayItemMessage message)
-        {
-            DayItem = message.DayItem;
         }
     }
 }

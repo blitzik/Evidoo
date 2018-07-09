@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace intf.Messages
 {
-    public class EditDayItemMessage : IEventAggregatorMessage
+    public class EditDayItemMessage
     {
         private readonly DayItem _dayItem;
         public DayItem DayItem

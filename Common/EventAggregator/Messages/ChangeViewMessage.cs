@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Common.EventAggregator.Messages
 {
-    public class ChangeViewMessage<T>
+    public class ChangeViewMessage<T> : IChangeViewMessage<T>
     {
         private string _viewModelName;
         public string ViewModelName

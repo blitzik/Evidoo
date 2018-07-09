@@ -56,6 +56,8 @@
   <ItemGroup>
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="EventAggregator\Messages\ChangeViewMessage.cs" />
+    <Compile Include="EventAggregator\Messages\IChangeViewMessage.cs" />
+    <Compile Include="EventAggregator\Messages\IChangeViewWithArgumentMessage.cs" />
     <Compile Include="FlashMessages\FlashMessage.cs" />
     <Compile Include="FlashMessages\FlashMessagesCollection.cs" />
     <Compile Include="FlashMessages\FlashMessagesManager.cs" />
