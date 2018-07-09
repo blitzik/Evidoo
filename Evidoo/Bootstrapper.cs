@@ -21,6 +21,7 @@ using prjt.Domain;
 using Perst;
 using intf.BaseViewModels;
 using intf.Factories.Employers;
+using intf.Subscribers;
 
 namespace Evidoo
 {
@@ -95,7 +96,9 @@ namespace Evidoo
             _container.Singleton<SettingsViewModel>(nameof(SettingsViewModel));
             _container.Singleton<EmptyListingsGenerationViewModel>(nameof(EmptyListingsGenerationViewModel));
 
-            //_container.Singleton<TestWindowViewModel>(nameof(TestWindowViewModel));
+            // Subscribers
+            _container.Singleton<ListingSubscriber>().GetInstance<ListingSubscriber>();
+            _container.Singleton<EmployerSubscriber>().GetInstance<EmployerSubscriber>();
 
             _container.Instance(_container);
         }

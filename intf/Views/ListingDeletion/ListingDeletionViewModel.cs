@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Common.EventAggregator.Messages;
 using intf.BaseViewModels;
+using intf.Subscribers.Messages;
 
 namespace intf.Views
 {
@@ -99,7 +100,7 @@ namespace intf.Views
             Listing = null;
             ConfirmationText = null;
 
-            EventAggregator.PublishOnUIThread(new ChangeViewMessage<IViewModel>(nameof(ListingsOverviewViewModel)));
+            EventAggregator.PublishOnUIThread(new ListingSuccessfullyDeletedMessage(Listing));
         }
 
 

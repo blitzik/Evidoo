@@ -114,6 +114,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Subscribers\BaseSubscriber.cs" />
+    <Compile Include="Subscribers\EmployerSubscriber.cs" />
+    <Compile Include="Subscribers\ListingSubscriber.cs" />
+    <Compile Include="Subscribers\Messages\BaseListingMessage.cs" />
+    <Compile Include="Subscribers\Messages\BaseEmployerMessage.cs" />
+    <Compile Include="Subscribers\Messages\EmployerSuccessfullyDeletedMessage.cs" />
+    <Compile Include="Subscribers\Messages\EmployerSuccessfullySavedMessage.cs" />
+    <Compile Include="Subscribers\Messages\ListingSuccessfullyDeletedMessage.cs" />
+    <Compile Include="Subscribers\Messages\ListingSuccessfulySavedMessage.cs" />
     <Compile Include="Views\Employers\EmployerDeletionView.xaml.cs">
       <DependentUpon>EmployerDeletionView.xaml</DependentUpon>
     </Compile>

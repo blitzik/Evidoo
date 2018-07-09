@@ -208,10 +208,8 @@ namespace intf.Views
 
         private void DisplayListingDeletion()
         {
-            ViewModelResolver.Resolve(nameof(ListingDeletionViewModel));
-
-            EventAggregator.PublishOnUIThread(new ListingMessage(Listing));
             EventAggregator.PublishOnUIThread(new ChangeViewMessage<IViewModel>(nameof(ListingDeletionViewModel)));
+            EventAggregator.PublishOnUIThread(new ListingMessage(Listing));
         }
 
 

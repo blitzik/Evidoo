@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using Common.EventAggregator.Messages;
 using intf.BaseViewModels;
+using intf.Subscribers.Messages;
 
 namespace intf.Views
 {
@@ -186,8 +187,7 @@ namespace intf.Views
 
             SetDefaults();
 
-            EventAggregator.PublishOnUIThread(new ChangeViewMessage<IViewModel>(nameof(ListingDetailViewModel)));
-            EventAggregator.PublishOnUIThread(new ListingMessage(newListing));
+            EventAggregator.PublishOnUIThread(new ListingSuccessfulySavedMessage(newListing));
         }
 
 

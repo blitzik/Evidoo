@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:intf.Views"
         xmlns:converters="clr-namespace:intf.Converters"
+        xmlns:flashMessages="clr-namespace:intf.FlashMessages"
         mc:Ignorable="d"
         Title="Evidoo - Evidence odpracovaných hodin" Height="700" Width="1200" MinWidth="1200" MinHeight="700" Background="#F0F0F0">
 
@@ -138,5 +139,6 @@
             <ContentControl x:Name="ActiveItem" />
         </Border>
 
+        <flashMessages:FlashMessages Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
     </Grid>
 </Window>

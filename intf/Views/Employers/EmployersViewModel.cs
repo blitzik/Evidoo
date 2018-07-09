@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using intf.BaseViewModels;
 using intf.Factories.Employers;
+using intf.Subscribers.Messages;
 
 namespace intf.Views
 {
@@ -75,6 +76,8 @@ namespace intf.Views
             Employers.Insert(0, CreateEmployerItemViewModel(e));
 
             NewEmployerName = null;
+
+            EventAggregator.PublishOnUIThread(new EmployerSuccessfullySavedMessage(e));
         }
 
 

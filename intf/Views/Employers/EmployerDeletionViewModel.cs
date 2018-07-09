@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using Common.Commands;
 using intf.BaseViewModels;
+using intf.Subscribers.Messages;
 using prjt.Domain;
 using prjt.Facades;
 using System;
@@ -60,6 +61,7 @@ namespace intf.Views
         {
             _employerFacade.Delete(Employer);
 
+            EventAggregator.PublishOnUIThread(new EmployerSuccessfullyDeletedMessage(Employer));
             OnDeletedEmployer?.Invoke(this, EventArgs.Empty);
         }
 

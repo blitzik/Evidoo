@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using intf.BaseViewModels;
+using intf.Subscribers.Messages;
 
 namespace intf.Views
 {
@@ -79,6 +80,7 @@ namespace intf.Views
             _employerFacade.Update(_employer);
 
             EmployerNameSaveCommand.RaiseCanExecuteChanged();
+            EventAggregator.PublishOnUIThread(new EmployerSuccessfullySavedMessage(_employer));
         }
 
 
