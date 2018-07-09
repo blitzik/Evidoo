@@ -92,7 +92,7 @@ namespace intf.Views
 
         private void OpenListing(Listing listing)
         {
-            EventAggregator.PublishOnUIThread(new ParameterizedChangeViewMessage<ListingDetailViewModel>(x => { x.Listing = listing; }));
+            EventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingDetailViewModel>(x => { x.Listing = listing; }));
         }
 
 

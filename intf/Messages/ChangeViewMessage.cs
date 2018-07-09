@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace intf.Messages
 {
-    public class ParameterizedChangeViewMessage<T> : IChangeViewWithArgumentMessage<IViewModel> where T : IViewModel
+    public class ChangeViewMessage<T> : IChangeViewMessage<IViewModel> where T : IViewModel
     {
         protected string _viewModelName;
         public string ViewModelName
@@ -28,15 +28,15 @@ namespace intf.Messages
         private Action<T> _action;
 
 
-        public ParameterizedChangeViewMessage(Action<T> action)
+        public ChangeViewMessage(Action<T> action = null)
         {
             Type t = typeof(T);
-            _viewModelName = t.Name;
+            _viewModelName = t.FullName;
             _action = action;
         }
 
 
-        public ParameterizedChangeViewMessage(T viewModel, Action<T> action)
+        public ChangeViewMessage(T viewModel, Action<T> action = null)
         {
             _viewModel = viewModel;
             _action = action;
@@ -50,7 +50,7 @@ namespace intf.Messages
 
         public void Apply(IViewModel viewModel)
         {
-            _action.Invoke((T)viewModel);
+            _action?.Invoke((T)viewModel);
         }
     }
 }

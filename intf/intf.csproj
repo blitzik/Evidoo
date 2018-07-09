@@ -98,11 +98,7 @@
     <Compile Include="FlashMessages\FlashMessages.xaml.cs">
       <DependentUpon>FlashMessages.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Messages\EditDayItemMessage.cs" />
-    <Compile Include="Messages\Listing\ChangeToListingDeletionViewMessage.cs" />
-    <Compile Include="Messages\Listing\ChangeToListingDetailViewMessage.cs" />
-    <Compile Include="Messages\Listing\ChangeToListingUpdateViewMessage.cs" />
-    <Compile Include="Messages\Listing\ParameterizedChangeViewMessage.cs" />
+    <Compile Include="Messages\ChangeViewMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

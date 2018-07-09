@@ -106,7 +106,7 @@ namespace intf.Views
 
         private void ReturnBack()
         {
-            EventAggregator.PublishOnUIThread(new ChangeViewMessage<IViewModel>(nameof(ListingDetailViewModel)));
+            EventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingDetailViewModel>());
         }
     }
 }

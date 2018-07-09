@@ -179,19 +179,19 @@ namespace intf.Views
 
         private void OpenEditing()
         {
-            EventAggregator.PublishOnUIThread(new ParameterizedChangeViewMessage<ListingEditingViewModel>(x => { x.Listing = Listing; }));
+            EventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingEditingViewModel>(x => { x.Listing = Listing; }));
         }
 
 
         private void OpenListingItemDetail(int day)
         {
-            EventAggregator.PublishOnUIThread(new ParameterizedChangeViewMessage<ListingItemViewModel>(x => { x.DayItem = _dayItems[day - 1]; }));
+            EventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingItemViewModel>(x => { x.DayItem = _dayItems[day - 1]; }));
         }
 
 
         private void DisplayListingDeletion()
         {
-            EventAggregator.PublishOnUIThread(new ParameterizedChangeViewMessage<ListingDeletionViewModel>(x => { x.Listing = Listing; }));
+            EventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingDeletionViewModel>(x => { x.Listing = Listing; }));
         }
 
 
@@ -200,7 +200,7 @@ namespace intf.Views
             ViewModelResolver.Resolve(nameof(ListingPdfGenerationViewModel));
 
             //EventAggregator.PublishOnUIThread(new ListingMessage(Listing));
-            EventAggregator.PublishOnUIThread(new ChangeViewMessage<IViewModel>(nameof(ListingPdfGenerationViewModel)));
+            EventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingPdfGenerationViewModel>());
         }
 
 

@@ -292,13 +292,13 @@ namespace intf.Views
                 HourlyWage = null;
             }
 
-            EventAggregator.PublishOnUIThread(new ChangeViewMessage<IViewModel>(nameof(ListingDetailViewModel)));
+            EventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingDetailViewModel>());
         }
 
 
         private void ReturnBack()
         {
-            EventAggregator.PublishOnUIThread(new ChangeViewMessage<IViewModel>(nameof(ListingDetailViewModel)));
+            EventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingDetailViewModel>());
         }
 
 

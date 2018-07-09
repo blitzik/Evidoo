@@ -26,7 +26,7 @@ namespace intf.Subscribers
         {
             _flashMessagesManager.DisplayFlashMessage("Výčetka byla úspěšně vytvořena.", Common.FlashMessages.Type.SUCCESS);
 
-            _eventAggregator.PublishOnUIThread(new ChangeViewMessage<IViewModel>(nameof(ListingDetailViewModel)));
+            _eventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingDetailViewModel>());
             //_eventAggregator.PublishOnUIThread(new ListingMessage(message.Listing));
         }
 
@@ -34,7 +34,7 @@ namespace intf.Subscribers
         public void Handle(ListingSuccessfullyDeletedMessage message)
         {
             _flashMessagesManager.DisplayFlashMessage("Výčetka byla úspěšně odstraněna.", Common.FlashMessages.Type.SUCCESS);
-            _eventAggregator.PublishOnUIThread(new ChangeViewMessage<IViewModel>(nameof(ListingsOverviewViewModel)));
+            _eventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingsOverviewViewModel>());
         }
     }
 }

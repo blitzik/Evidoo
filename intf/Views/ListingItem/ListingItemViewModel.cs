@@ -181,13 +181,13 @@ namespace intf.Views
 
             DayItem.Update(newItem);
 
-            EventAggregator.PublishOnUIThread(new ChangeViewMessage<IViewModel>(nameof(ListingDetailViewModel)));
+            EventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingDetailViewModel>());
         }
 
 
         private void ReturnBackToListingDetail()
         {
-            EventAggregator.PublishOnUIThread(new ChangeViewMessage<IViewModel>(nameof(ListingDetailViewModel)));
+            EventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingDetailViewModel>());
         }
     }
 }

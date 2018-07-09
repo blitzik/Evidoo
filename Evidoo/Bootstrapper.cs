@@ -85,16 +85,16 @@ namespace Evidoo
             _container.PerRequest<StartupErrorWindowViewModel>();
 
             // ViewModels
-            _container.Singleton<ListingsOverviewViewModel>(nameof(ListingsOverviewViewModel));
-            _container.Singleton<EmployersViewModel>(nameof(EmployersViewModel));
-            _container.Singleton<ListingViewModel>(nameof(ListingViewModel));
-            _container.Singleton<ListingDeletionViewModel>(nameof(ListingDeletionViewModel));
-            _container.Singleton<ListingDetailViewModel>(nameof(ListingDetailViewModel));
-            _container.Singleton<ListingEditingViewModel>(nameof(ListingEditingViewModel));
-            _container.Singleton<ListingItemViewModel>(nameof(ListingItemViewModel));
-            _container.Singleton<ListingPdfGenerationViewModel>(nameof(ListingPdfGenerationViewModel));
-            _container.Singleton<SettingsViewModel>(nameof(SettingsViewModel));
-            _container.Singleton<EmptyListingsGenerationViewModel>(nameof(EmptyListingsGenerationViewModel));
+            _container.Singleton<ListingsOverviewViewModel>(typeof(ListingsOverviewViewModel).FullName);
+            _container.Singleton<EmployersViewModel>(typeof(EmployersViewModel).FullName);
+            _container.Singleton<ListingViewModel>(typeof(ListingViewModel).FullName);
+            _container.Singleton<ListingDeletionViewModel>(typeof(ListingDeletionViewModel).FullName);
+            _container.Singleton<ListingDetailViewModel>(typeof(ListingDetailViewModel).FullName);
+            _container.Singleton<ListingEditingViewModel>(typeof(ListingEditingViewModel).FullName);
+            _container.Singleton<ListingItemViewModel>(typeof(ListingItemViewModel).FullName);
+            _container.Singleton<ListingPdfGenerationViewModel>(typeof(ListingPdfGenerationViewModel).FullName);
+            _container.Singleton<SettingsViewModel>(typeof(SettingsViewModel).FullName);
+            _container.Singleton<EmptyListingsGenerationViewModel>(typeof(EmptyListingsGenerationViewModel).FullName);
 
             // Subscribers
             _container.Singleton<ListingSubscriber>().GetInstance<ListingSubscriber>();

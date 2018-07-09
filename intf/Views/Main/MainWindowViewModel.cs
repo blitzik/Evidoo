@@ -11,8 +11,7 @@ namespace intf.Views
 {
     public class MainWindowViewModel :
         BaseConductorOneActive,
-        IHandle<IChangeViewMessage<BaseViewModels.IViewModel>>,
-        IHandle<IChangeViewWithArgumentMessage<BaseViewModels.IViewModel>>
+        IHandle<IChangeViewMessage<BaseViewModels.IViewModel>>
     {
         private PageTitle _title = new PageTitle();
         public PageTitle Title
@@ -50,31 +49,31 @@ namespace intf.Views
 
         public void DisplayListingsOverview()
         {
-            ActivateItem(nameof(ListingsOverviewViewModel));
+            ActivateItem(typeof(ListingsOverviewViewModel).FullName);
         }
 
 
         public void DisplayListingCreation()
         {
-            ActivateItem(nameof(ListingViewModel));
+            ActivateItem(typeof(ListingViewModel).FullName);
         }
 
 
         public void DisplayEmployersList()
         {
-            ActivateItem(nameof(EmployersViewModel));
+            ActivateItem(typeof(EmployersViewModel).FullName);
         }
 
 
         public void DisplaySettings()
         {
-            ActivateItem(nameof(SettingsViewModel));
+            ActivateItem(typeof(SettingsViewModel).FullName);
         }
 
 
         public void DisplayEmptyListingsGeneration()
         {
-            ActivateItem(nameof(EmptyListingsGenerationViewModel));
+            ActivateItem(typeof(EmptyListingsGenerationViewModel).FullName);
         }
 
 
@@ -88,11 +87,6 @@ namespace intf.Views
             } else {
                 ActivateItem(message.ViewModelName);
             }
-        }
-
-
-        public void Handle(IChangeViewWithArgumentMessage<BaseViewModels.IViewModel> message)
-        {
             message.Apply(ActiveItem);
         }
 
