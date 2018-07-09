@@ -10,7 +10,7 @@
 
     <UserControl.Resources>
         <Path x:Key="SuccessIcon" Fill="#FFF" Data="M213.333,0C95.518,0,0,95.514,0,213.333s95.518,213.333,213.333,213.333 c117.828,0,213.333-95.514,213.333-213.333S331.157,0,213.333,0z M174.199,322.918l-93.935-93.931l31.309-31.309l62.626,62.622 l140.894-140.898l31.309,31.309L174.199,322.918z" />
-        <Path x:Key="FailureIcon" Fill="#FFF" Data="M213.333,0C95.514,0,0,95.514,0,213.333s95.514,213.333,213.333,213.333 s213.333-95.514,213.333-213.333S331.153,0,213.333,0z M330.995,276.689l-54.302,54.306l-63.36-63.356l-63.36,63.36l-54.302-54.31 l63.356-63.356l-63.356-63.36l54.302-54.302l63.36,63.356l63.36-63.356l54.302,54.302l-63.356,63.36L330.995,276.689z" />
+        <Path x:Key="ErrorIcon" Fill="#FFF" Data="M213.333,0C95.514,0,0,95.514,0,213.333s95.514,213.333,213.333,213.333 s213.333-95.514,213.333-213.333S331.153,0,213.333,0z M330.995,276.689l-54.302,54.306l-63.36-63.356l-63.36,63.36l-54.302-54.31 l63.356-63.356l-63.356-63.36l54.302-54.302l63.36,63.356l63.36-63.356l54.302,54.302l-63.356,63.36L330.995,276.689z" />
         <Path x:Key="WarningIcon" Fill="#FFF" Data="M479.963,425.047L269.051,29.854c-5.259-9.88-15.565-16.081-26.782-16.081h-0.03 c-11.217,0-21.492,6.171-26.782,16.051L3.603,425.016c-5.046,9.485-4.773,20.854,0.699,29.974 c5.502,9.15,15.413,14.774,26.083,14.774H453.12c10.701,0,20.58-5.594,26.083-14.774 C484.705,445.84,484.979,434.471,479.963,425.047z M242.239,408.965c-16.781,0-30.399-13.619-30.399-30.399 c0-16.78,13.619-30.399,30.399-30.399c16.75,0,30.399,13.619,30.399,30.399C272.638,395.346,259.02,408.965,242.239,408.965z M272.669,287.854c0,16.811-13.649,30.399-30.399,30.399c-16.781,0-30.399-13.589-30.399-30.399V166.256	c0-16.781,13.619-30.399,30.399-30.399c16.75,0,30.399,13.619,30.399,30.399V287.854z" />
         <Path x:Key="InfoIcon" Fill="#FFF" Data="M255,0C114.75,0,0,114.75,0,255s114.75,255,255,255s255-114.75,255-255S395.25,0,255,0z M280.5,382.5h-51v-153h51V382.5z M280.5,178.5h-51v-51h51V178.5z" />
     </UserControl.Resources>
@@ -67,88 +67,50 @@
                             </Style.Triggers>
                         </Style>
                     </Border.Resources>
-                    <ContentControl Content="{Binding Path=Type}">
-                        <ContentControl.Resources>
-                            <DataTemplate x:Key="notifINFO">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="20" />
-                                        <ColumnDefinition Width="10" />
-                                        <ColumnDefinition Width="*" MaxWidth="275" />
-                                    </Grid.ColumnDefinitions>
-                                    <Rectangle Grid.Column="0" VerticalAlignment="Top" Width="20" Height="20" Fill="White">
-                                        <Rectangle.OpacityMask>
-                                            <VisualBrush Stretch="Fill" Visual="{StaticResource InfoIcon}" />
-                                        </Rectangle.OpacityMask>
-                                    </Rectangle>
-                                    <TextBlock Grid.Column="2" Text="{Binding ElementName=ItemBorder, Path=DataContext.Message}" TextAlignment="Right" TextWrapping="Wrap" Foreground="#FFF" FontSize="14" />
-                                </Grid>                                
-                            </DataTemplate>
-                            <DataTemplate x:Key="notifSUCCESS">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="20" />
-                                        <ColumnDefinition Width="10" />
-                                        <ColumnDefinition Width="*" MaxWidth="275" />
-                                    </Grid.ColumnDefinitions>
-                                    <Rectangle Grid.Column="0" VerticalAlignment="Top" Width="20" Height="20" Fill="White">
-                                        <Rectangle.OpacityMask>
-                                            <VisualBrush Stretch="Fill" Visual="{StaticResource SuccessIcon}" />
-                                        </Rectangle.OpacityMask>
-                                    </Rectangle>
-                                    <TextBlock Grid.Column="2" Text="{Binding ElementName=ItemBorder, Path=DataContext.Message}" TextAlignment="Right" TextWrapping="Wrap" Foreground="#FFF" FontSize="14" />
-                                </Grid>
-                            </DataTemplate>
-                            <DataTemplate x:Key="notifWARNING">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="20" />
-                                        <ColumnDefinition Width="10" />
-                                        <ColumnDefinition Width="*" MaxWidth="275" />
-                                    </Grid.ColumnDefinitions>
-                                    <Rectangle Grid.Column="0" VerticalAlignment="Top" Width="20" Height="20" Fill="White">
-                                        <Rectangle.OpacityMask>
-                                            <VisualBrush Stretch="Fill" Visual="{StaticResource WarningIcon}" />
-                                        </Rectangle.OpacityMask>
-                                    </Rectangle>
-                                    <TextBlock Grid.Column="2" Text="{Binding ElementName=ItemBorder, Path=DataContext.Message}" TextAlignment="Right" TextWrapping="Wrap" Foreground="#FFF" FontSize="14" />
-                                </Grid>
-                            </DataTemplate>
-                            <DataTemplate x:Key="notifERROR">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="20" />
-                                        <ColumnDefinition Width="10" />
-                                        <ColumnDefinition Width="*" MaxWidth="275" />
-                                    </Grid.ColumnDefinitions>
-                                    <Rectangle Grid.Column="0" VerticalAlignment="Top" Width="20" Height="20" Fill="White">
-                                        <Rectangle.OpacityMask>
-                                            <VisualBrush Stretch="Fill" Visual="{StaticResource FailureIcon}" />
-                                        </Rectangle.OpacityMask>
-                                    </Rectangle>
-                                    <TextBlock Grid.Column="2" Text="{Binding ElementName=ItemBorder, Path=DataContext.Message}" TextAlignment="Right" TextWrapping="Wrap" Foreground="#FFF" FontSize="14" />
-                                </Grid>
-                            </DataTemplate>
-                        </ContentControl.Resources>
-                        <ContentControl.Style>
-                            <Style TargetType="ContentControl">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Type}" Value="{x:Static flashMessages:Type.INFO}">
-                                        <Setter Property="ContentTemplate" Value="{StaticResource notifINFO}" />
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding Type}" Value="{x:Static flashMessages:Type.SUCCESS}">
-                                        <Setter Property="ContentTemplate" Value="{StaticResource notifSUCCESS}" />
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding Type}" Value="{x:Static flashMessages:Type.WARNING}">
-                                        <Setter Property="ContentTemplate" Value="{StaticResource notifWARNING}" />
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding Type}" Value="{x:Static flashMessages:Type.ERROR}">
-                                        <Setter Property="ContentTemplate" Value="{StaticResource notifERROR}" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </ContentControl.Style>
-                    </ContentControl>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="*" MaxWidth="275" />
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" VerticalAlignment="Top" Width="20" Height="20" Fill="White">
+                            <Rectangle.Style>
+                                <Style TargetType="{x:Type Rectangle}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=Type}" Value="{x:Static flashMessages:Type.INFO}">
+                                            <Setter Property="OpacityMask">
+                                                <Setter.Value>
+                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource InfoIcon}" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=Type}" Value="{x:Static flashMessages:Type.SUCCESS}">
+                                            <Setter Property="OpacityMask">
+                                                <Setter.Value>
+                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource SuccessIcon}" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=Type}" Value="{x:Static flashMessages:Type.WARNING}">
+                                            <Setter Property="OpacityMask">
+                                                <Setter.Value>
+                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource WarningIcon}" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=Type}" Value="{x:Static flashMessages:Type.ERROR}">
+                                            <Setter Property="OpacityMask">
+                                                <Setter.Value>
+                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource ErrorIcon}" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <TextBlock Grid.Column="2" Text="{Binding ElementName=ItemBorder, Path=DataContext.Message}" TextAlignment="Right" TextWrapping="Wrap" Foreground="#FFF" FontSize="14" />
+                    </Grid>
                 </Border>
             </DataTemplate>
         </ItemsControl.ItemTemplate>
