@@ -132,7 +132,6 @@ namespace intf.Views
             _settingFacade = settingFacade;
 
             Localities = new ObservableCollection<string>();
-            //DayItem = dayItem;
         }
 
 
@@ -155,10 +154,10 @@ namespace intf.Views
                 ListingItem l = dayItem.ListingItem;
                 Locality = l.Locality;
 
-                WorkedTimeViewModel = new WorkedTimeSettingViewModel(_defaultSettings.Time, l.TimeSetting, _defaultSettings.TimeTickInMinutes);
+                WorkedTimeViewModel = PrepareViewModel(() => { return new WorkedTimeSettingViewModel(_defaultSettings.Time, l.TimeSetting, _defaultSettings.TimeTickInMinutes); });
 
             } else {
-                WorkedTimeViewModel = new WorkedTimeSettingViewModel(_defaultSettings.Time, _defaultSettings.Time, _defaultSettings.TimeTickInMinutes);
+                WorkedTimeViewModel = PrepareViewModel(() => { return new WorkedTimeSettingViewModel(_defaultSettings.Time, _defaultSettings.Time, _defaultSettings.TimeTickInMinutes); });
             }
 
             Localities = new ObservableCollection<string>(dayItem.Localities);
