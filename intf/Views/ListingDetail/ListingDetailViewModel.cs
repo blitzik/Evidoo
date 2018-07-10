@@ -186,6 +186,8 @@ namespace intf.Views
         private void OpenListingItemDetail(int day)
         {
             EventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingItemViewModel>(x => { x.DayItem = _dayItems[day - 1]; }));
+
+
         }
 
 
@@ -197,9 +199,6 @@ namespace intf.Views
 
         private void DisplayPdfGenerationPage()
         {
-            ViewModelResolver.Resolve(nameof(ListingPdfGenerationViewModel));
-
-            //EventAggregator.PublishOnUIThread(new ListingMessage(Listing));
             EventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingPdfGenerationViewModel>());
         }
 

@@ -49,31 +49,31 @@ namespace intf.Views
 
         public void DisplayListingsOverview()
         {
-            ActivateItem(typeof(ListingsOverviewViewModel).FullName);
+            Handle(new ChangeViewMessage<ListingsOverviewViewModel>());
         }
 
 
         public void DisplayListingCreation()
         {
-            ActivateItem(typeof(ListingViewModel).FullName);
+            Handle(new ChangeViewMessage<ListingViewModel>());
         }
 
 
         public void DisplayEmployersList()
         {
-            ActivateItem(typeof(EmployersViewModel).FullName);
+            Handle(new ChangeViewMessage<EmployersViewModel>());
         }
 
 
         public void DisplaySettings()
         {
-            ActivateItem(typeof(SettingsViewModel).FullName);
+            Handle(new ChangeViewMessage<SettingsViewModel>());
         }
 
 
         public void DisplayEmptyListingsGeneration()
         {
-            ActivateItem(typeof(EmptyListingsGenerationViewModel).FullName);
+            Handle(new ChangeViewMessage<EmptyListingsGenerationViewModel>());
         }
 
 
