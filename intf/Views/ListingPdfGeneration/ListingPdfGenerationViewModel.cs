@@ -138,7 +138,7 @@ namespace intf.Views
                 return;
             }
 
-            ProgressBarWindowViewModel pb = ViewModelResolver.Resolve<ProgressBarWindowViewModel>();
+            ProgressBarWindowViewModel pb = PrepareViewModel<ProgressBarWindowViewModel>();
             Task.Run(async () => {
                 Document doc = _listingPdfDocumentFactory.Create(Listing, _pdfSetting);
                 _listingReportGenerator.Save(filePath, doc);

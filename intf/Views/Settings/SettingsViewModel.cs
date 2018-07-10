@@ -152,7 +152,6 @@ namespace intf.Views
         private IIODialogService _filePathDialogService;
         private SettingFacade _settingFacade;
 
-
         public SettingsViewModel(
             IWindowManager windowManager,
             SettingFacade settingFacade,
@@ -180,8 +179,7 @@ namespace intf.Views
             PdfSetting = CreateNewPdfSetting(_defaultSetting.Pdfsetting);
 
             if (_workedTimeViewModel == null) {
-                _workedTimeViewModel = new WorkedTimeSettingViewModel(_defaultSetting.Time, _defaultSetting.Time, _defaultSetting.TimeTickInMinutes);
-                //ViewModelResolver.BuildUp(_workedTimeViewModel); todo, udělat factorku místo volání viewmodel resolveru
+                _workedTimeViewModel = PrepareViewModel(() => { return new WorkedTimeSettingViewModel(_defaultSetting.Time, _defaultSetting.Time, _defaultSetting.TimeTickInMinutes); });
                 _workedTimeViewModel.OnTimeChanged += (object sender, WorkedTimeEventArgs args) =>
                 {
                     CancelChangesCommand.RaiseCanExecuteChanged();

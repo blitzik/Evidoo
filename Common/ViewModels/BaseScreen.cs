@@ -51,6 +51,24 @@ namespace Common.ViewModels
         }
 
 
+        protected VM PrepareViewModel<VM>() where VM : IViewModel, new()
+        {
+            VM vm = Activator.CreateInstance<VM>();
+            ViewModelResolver.BuildUp(vm);
+
+            return vm;
+        }
+
+
+        protected VM PrepareViewModel<VM>(Func<VM> instantiation) where VM : IViewModel
+        {
+            VM vm = instantiation.Invoke();
+            ViewModelResolver.BuildUp(vm);
+
+            return vm;
+        }
+
+
         protected override void OnInitialize()
         {
             base.OnInitialize();

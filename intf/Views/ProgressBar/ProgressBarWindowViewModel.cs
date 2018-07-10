@@ -26,9 +26,6 @@ namespace intf.Views
         {
             get
             {
-                if (_progressViewModel == null) {
-                    _progressViewModel = new ProgressViewModel();
-                }
                 return _progressViewModel;
             }
         }
@@ -39,9 +36,6 @@ namespace intf.Views
         {
             get
             {
-                if (_successViewModel == null) {
-                    _successViewModel = new SuccessViewModel();
-                }
                 return _successViewModel;
             }
         }
@@ -52,9 +46,6 @@ namespace intf.Views
         {
             get
             {
-                if (_failureViewModel == null) {
-                    _failureViewModel = new FailureViewModel();
-                }
                 return _failureViewModel;
             }
         }
@@ -92,6 +83,16 @@ namespace intf.Views
         {
             Success = null;
             ResultIconDelay = 750;
+        }
+
+
+        protected override void OnInitialize()
+        {
+            base.OnInitialize();
+
+            _progressViewModel = PrepareViewModel<ProgressViewModel>();
+            _successViewModel = PrepareViewModel<SuccessViewModel>();
+            _failureViewModel = PrepareViewModel<FailureViewModel>();
         }
 
 
