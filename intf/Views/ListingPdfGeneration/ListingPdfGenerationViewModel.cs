@@ -1,28 +1,16 @@
 ﻿using Caliburn.Micro;
 using Common.Commands;
+using intf.BaseViewModels;
+using intf.Messages;
+using MigraDoc.DocumentObjectModel;
 using prjt.Domain;
 using prjt.Facades;
-using intf.Messages;
-using prjt.Services;
 using prjt.Services.IO;
 using prjt.Services.Pdf;
 using prjt.Utils;
-using MigraDoc.DocumentObjectModel;
-using MigraDoc.DocumentObjectModel.Tables;
-using MigraDoc.Rendering;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Dynamic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Forms;
-using Common.EventAggregator.Messages;
-using intf.BaseViewModels;
 
 namespace intf.Views
 {
@@ -93,7 +81,7 @@ namespace intf.Views
         }
 
 
-        private readonly ISavingFilePathSelector _savingFilePathSelector;
+        private readonly IIODialogService _filePathDialogService;
         private readonly SettingFacade _settingFacade;
         private readonly IWindowManager _windowManager;
         private readonly IListingPdfDocumentFactory _listingPdfDocumentFactory;
@@ -101,11 +89,10 @@ namespace intf.Views
 
         private DefaultSettings _defaultSettings;
 
-
         public ListingPdfGenerationViewModel(
             SettingFacade settingFacade,
             IWindowManager windowManager,
-            ISavingFilePathSelector savingFilePathSelector,
+            IIODialogService filePathDialogService,
             IListingPdfDocumentFactory listingPdfDocumentFactory,
             IListingReportGenerator listingReportGenerator
         ) {
@@ -113,7 +100,7 @@ namespace intf.Views
 
             _settingFacade = settingFacade;
             _windowManager = windowManager;
-            _savingFilePathSelector = savingFilePathSelector;
+            _filePathDialogService = filePathDialogService;
             _listingPdfDocumentFactory = listingPdfDocumentFactory;
             _listingReportGenerator = listingReportGenerator;
 
@@ -143,12 +130,15 @@ namespace intf.Views
 
         private void GeneratePdf()
         {
-            string filePath = _savingFilePathSelector.GetFilePath(string.Format("{0} {1} - {2}", Date.Months[12 - Listing.Month], Listing.Year, Listing.Name), PrepareDialog);
+            string filePath = _filePathDialogService.GetFilePath<SaveFileDialog>(
+                string.Format("{0} {1} - {2}", Date.Months[12 - Listing.Month], Listing.Year, Listing.Name),
+                d => { d.Filter = "PDF dokument (*.pdf)|*.pdf"; }
+            );
             if (string.IsNullOrEmpty(filePath)) {
                 return;
             }
 
-            ProgressBarWindowViewModel pb = new ProgressBarWindowViewModel() { Text = "Vytváří se Váš PDF dokument..." };
+            ProgressBarWindowViewModel pb = ViewModelResolver.Resolve<ProgressBarWindowViewModel>();
             Task.Run(async () => {
                 Document doc = _listingPdfDocumentFactory.Create(Listing, _pdfSetting);
                 _listingReportGenerator.Save(filePath, doc);
@@ -160,13 +150,6 @@ namespace intf.Views
             });
             
             _windowManager.ShowDialog(pb);
-        }
-
-
-        private void PrepareDialog(object obj)
-        {
-            SaveFileDialog d = (SaveFileDialog)obj;
-            d.Filter = "PDF dokument (*.pdf)|*.pdf";
         }
 
 

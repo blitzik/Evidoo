@@ -7,8 +7,8 @@ using System.Windows.Forms;
 
 namespace prjt.Services.IO
 {
-    public interface IOpeningFilePathSelector
+    public interface IIODialogService
     {
-        string GetFilePath(string defaultFilePath, Action<object> modifier);
+        string GetFilePath<T>(string defaultFilePath, Action<T> modifier) where T : FileDialog;
     }
 }

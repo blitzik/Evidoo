@@ -149,33 +149,28 @@ namespace intf.Views
         private DefaultSettings _defaultSetting;
 
         private IWindowManager _windowManager;
-        private ISavingFilePathSelector _savingFilePathSelector;
-        private IOpeningFilePathSelector _openingFilePathSelector;
+        private IIODialogService _filePathDialogService;
         private SettingFacade _settingFacade;
 
 
         public SettingsViewModel(
             IWindowManager windowManager,
             SettingFacade settingFacade,
-            ISavingFilePathSelector savingFilePathSelector,
-            IOpeningFilePathSelector openingFilePathSelector
+            IIODialogService filePathDialogService
         ) {
             _windowManager = windowManager;
             _settingFacade = settingFacade;
-            _savingFilePathSelector = savingFilePathSelector;
-            _openingFilePathSelector = openingFilePathSelector;
+            _filePathDialogService = filePathDialogService;
             BaseWindowTitle = "Nastavení";
-
-            Reset();
         }
 
 
-        /*protected override void OnActivate()
+        protected override void OnActivate()
         {
             base.OnActivate();
 
             Reset();
-        }*/
+        }
 
 
         public void Reset()
@@ -186,6 +181,7 @@ namespace intf.Views
 
             if (_workedTimeViewModel == null) {
                 _workedTimeViewModel = new WorkedTimeSettingViewModel(_defaultSetting.Time, _defaultSetting.Time, _defaultSetting.TimeTickInMinutes);
+                //ViewModelResolver.BuildUp(_workedTimeViewModel); todo, udělat factorku místo volání viewmodel resolveru
                 _workedTimeViewModel.OnTimeChanged += (object sender, WorkedTimeEventArgs args) =>
                 {
                     CancelChangesCommand.RaiseCanExecuteChanged();
@@ -253,8 +249,7 @@ namespace intf.Views
 
         private void Browse()
         {
-            string filePath = _openingFilePathSelector.GetFilePath(null, obj => {
-                OpenFileDialog d = (OpenFileDialog)obj;
+            string filePath = _filePathDialogService.GetFilePath<OpenFileDialog>(null, d => {
                 d.DefaultExt = "." + PerstStorageFactory.DATABASE_EXTENSION;
                 d.Filter = "Evidoo data (*.evdo)|*.evdo";
             });
@@ -269,12 +264,9 @@ namespace intf.Views
         private void CreateBackup()
         {
             DateTime now = DateTime.Now;
-            string filePath = _savingFilePathSelector.GetFilePath(
+            string filePath = _filePathDialogService.GetFilePath<SaveFileDialog>(
                 string.Format("Záloha dat - {0}-{1}-{2}", now.Day, now.Month, now.Year),
-                obj => {
-                    SaveFileDialog d = (SaveFileDialog)obj;
-                    d.Filter = "Evidoo data (*.evdo)|*.evdo";
-                }
+                d => { d.Filter = "Evidoo data (*.evdo)|*.evdo"; }
             );
             if (string.IsNullOrEmpty(filePath)) {
                 return;

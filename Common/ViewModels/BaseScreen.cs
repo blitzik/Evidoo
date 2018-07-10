@@ -11,7 +11,7 @@ using Common.ViewModels;
 
 namespace Common.ViewModels
 {
-    public abstract class BaseScreen<P> : Screen, IViewModel, INotifyDataErrorInfo where P : class
+    public abstract class BaseScreen : Screen, IViewModel, INotifyDataErrorInfo
     {
         // property injection
         private IEventAggregator _eventAggregator;
@@ -32,11 +32,22 @@ namespace Common.ViewModels
 
 
         // property injection
-        private IViewModelResolver<P> _viewModelResolver;
-        public IViewModelResolver<P> ViewModelResolver
+        private IViewModelResolver _viewModelResolver;
+        public IViewModelResolver ViewModelResolver
         {
             get { return _viewModelResolver; }
             set { _viewModelResolver = value; }
+        }
+
+
+        protected virtual VM GetViewModel<VM>() where VM : IViewModel
+        {
+            VM viewModel = _viewModelResolver.Resolve<VM>();
+            if (viewModel == null) {
+                throw new Exception("Requested ViewModel does not Exist!");
+            }
+
+            return viewModel;
         }
 
 

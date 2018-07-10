@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace intf.BaseViewModels
 {
-    public abstract class BaseScreen : Common.ViewModels.BaseScreen<IViewModel>, IViewModel
+    public abstract class BaseScreen : Common.ViewModels.BaseScreen, IViewModel
     {
         protected PageTitle _windowTitle = new PageTitle();
         public PageTitle WindowTitle

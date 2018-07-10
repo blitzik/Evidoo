@@ -60,9 +60,8 @@ namespace Evidoo
             // Services
             _container.Singleton<PerstStorageFactory>();
             _container.Singleton<StoragePool>();
-            _container.Singleton<IViewModelResolver<IViewModel>, ViewModelResolver<IViewModel>>();
-            _container.Singleton<IOpeningFilePathSelector, OpenFilePathSelector>();
-            _container.Singleton<ISavingFilePathSelector, SaveFilePathSelector>();
+            _container.Singleton<IViewModelResolver, ViewModelResolver>();
+            _container.Singleton<IIODialogService, FilePathDialogService>();
             _container.Singleton<IListingSectionFactory, ListingSectionFactory>();
             _container.Singleton<IListingPdfDocumentFactory, DefaultListingPdfReportFactory>();
             _container.Singleton<IMultipleListingReportFactory, MultipleListingReportFactory>();
@@ -95,6 +94,8 @@ namespace Evidoo
             _container.Singleton<ListingPdfGenerationViewModel>(typeof(ListingPdfGenerationViewModel).FullName);
             _container.Singleton<SettingsViewModel>(typeof(SettingsViewModel).FullName);
             _container.Singleton<EmptyListingsGenerationViewModel>(typeof(EmptyListingsGenerationViewModel).FullName);
+            _container.PerRequest<WorkedTimeSettingViewModel>(typeof(WorkedTimeSettingViewModel).FullName);
+            _container.PerRequest<ProgressBarWindowViewModel>(typeof(ProgressBarWindowViewModel).FullName);
 
             // Subscribers
             _container.Singleton<ListingSubscriber>().GetInstance<ListingSubscriber>();

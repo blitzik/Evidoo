@@ -8,7 +8,7 @@ namespace Common.EventAggregator.Messages
 {
     public interface IChangeViewMessage<T>
     {
-        string ViewModelName { get; }
+        Type Type { get; }
         T ViewModel { get; }
 
         void Apply(T viewModel);

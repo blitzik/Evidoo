@@ -112,10 +112,8 @@
     <Compile Include="Services\Entities\IEmployerFactory.cs" />
     <Compile Include="Services\Entities\IListingFactory.cs" />
     <Compile Include="Services\Entities\ListingFactory.cs" />
-    <Compile Include="Services\IO\IOpeningFilePathSelector.cs" />
-    <Compile Include="Services\IO\ISavingFilePathSelector.cs" />
-    <Compile Include="Services\IO\OpenFilePathSelector.cs" />
-    <Compile Include="Services\IO\SaveFilePathSelector.cs" />
+    <Compile Include="Services\IO\FilePathDialogService.cs" />
+    <Compile Include="Services\IO\IIODialogService.cs" />
     <Compile Include="Services\Pdf\DefaultListingPdfReportFactory.cs" />
     <Compile Include="Services\Pdf\IListingPdfDocumentFactory.cs" />
     <Compile Include="Services\Pdf\IListingReportGenerator.cs" />

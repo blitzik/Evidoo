@@ -7,11 +7,11 @@ using System.Windows.Forms;
 
 namespace prjt.Services.IO
 {
-    public class OpenFilePathSelector : IOpeningFilePathSelector
+    public class FilePathDialogService : IIODialogService
     {
-        public string GetFilePath(string defaultFilePath, Action<object> modifier)
+        public string GetFilePath<T>(string defaultFilePath, Action<T> modifier) where T : FileDialog
         {
-            OpenFileDialog d = new OpenFileDialog();
+            T d = (T)Activator.CreateInstance(typeof(T));
             if (!string.IsNullOrEmpty(defaultFilePath)) {
                 d.FileName = defaultFilePath;
             }

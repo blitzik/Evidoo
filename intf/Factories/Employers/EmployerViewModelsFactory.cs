@@ -21,12 +21,12 @@ namespace intf.Factories.Employers
 
     public class EmployerViewModelsFactory : IEmployerViewModelsFactory
     {
-        private IViewModelResolver<IViewModel> _viewModelResolver;
+        private IViewModelResolver _viewModelResolver;
         private EmployerFacade _employerFacade;
 
 
         public EmployerViewModelsFactory(
-            IViewModelResolver<IViewModel> viewModelResolver,
+            IViewModelResolver viewModelResolver,
             EmployerFacade employerFacade
         ) {
             _viewModelResolver = viewModelResolver;

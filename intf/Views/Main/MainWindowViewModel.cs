@@ -85,7 +85,7 @@ namespace intf.Views
             if (message.ViewModel != null) {
                 ActivateItem(message.ViewModel);
             } else {
-                ActivateItem(message.ViewModelName);
+                ActivateItem(GetViewModel(message.Type));
             }
             message.Apply(ActiveItem);
         }

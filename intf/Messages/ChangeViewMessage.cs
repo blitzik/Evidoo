@@ -11,10 +11,10 @@ namespace intf.Messages
 {
     public class ChangeViewMessage<T> : IChangeViewMessage<IViewModel> where T : IViewModel
     {
-        protected string _viewModelName;
-        public string ViewModelName
+        protected Type _type;
+        public Type Type
         {
-            get { return _viewModelName; }
+            get { return _type; }
         }
 
 
@@ -30,8 +30,7 @@ namespace intf.Messages
 
         public ChangeViewMessage(Action<T> action = null)
         {
-            Type t = typeof(T);
-            _viewModelName = t.FullName;
+            _type = typeof(T);
             _action = action;
         }
 

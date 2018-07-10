@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace Common.ViewModelResolver
 {
-    public interface IViewModelResolver<T>
+    public interface IViewModelResolver
     {
-        T Resolve(string viewModel);
-        T BuildUp(T instance);
+        VM Resolve<VM>(System.Type viewModel) where VM : IViewModel;
+        VM Resolve<VM>() where VM : IViewModel;
+        VM BuildUp<VM>(VM instance) where VM : IViewModel;
     }
 }

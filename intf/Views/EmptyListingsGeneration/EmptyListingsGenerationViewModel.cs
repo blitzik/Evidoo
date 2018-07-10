@@ -50,7 +50,7 @@ namespace intf.Views
 
 
         private readonly IWindowManager _windowManager;
-        private readonly ISavingFilePathSelector _savingFilePathSelector;
+        private readonly IIODialogService _filePathDialogService;
         private readonly IMultipleListingReportFactory _multipleListingReportFactory;
         private readonly IListingReportGenerator _listingReportGenerator;
         private readonly IListingFactory _listingFactory;
@@ -58,7 +58,7 @@ namespace intf.Views
 
         public EmptyListingsGenerationViewModel(
             IWindowManager windowManager,
-            ISavingFilePathSelector savingFilePathSelector,
+            IIODialogService filePathDialogService,
             IMultipleListingReportFactory multipleListingReportFactory,
             IListingReportGenerator listingReportGenerator,
             IListingFactory listingFactory
@@ -67,7 +67,7 @@ namespace intf.Views
             SelectedYear = DateTime.Now.Year;
 
             _windowManager = windowManager;
-            _savingFilePathSelector = savingFilePathSelector;
+            _filePathDialogService = filePathDialogService;
             _multipleListingReportFactory = multipleListingReportFactory;
             _listingReportGenerator = listingReportGenerator;
             _listingFactory = listingFactory;
@@ -79,12 +79,9 @@ namespace intf.Views
 
         private void GeneratePdfs()
         {
-            string filePath = _savingFilePathSelector.GetFilePath(
+            string filePath = _filePathDialogService.GetFilePath<SaveFileDialog>(
                 string.Format("Výčetky {0}", SelectedYear),
-                obj => {
-                    SaveFileDialog d = (SaveFileDialog)obj;
-                    d.Filter = "PDF dokument (*.pdf)|*.pdf";
-                }
+                d => { d.Filter = "PDF dokument (*.pdf)|*.pdf"; }
             );
 
             if (string.IsNullOrEmpty(filePath)) {

@@ -43,9 +43,6 @@
             <DataTemplate>
                 <Border Name="ItemBorder">
                     <Border.Resources>
-                        <!--<Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="Foreground" Value="#FFF" />
-                            </Style>-->
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="Background" Value="#3498db" />
                             <Setter Property="BorderBrush" Value="#3498db" />
