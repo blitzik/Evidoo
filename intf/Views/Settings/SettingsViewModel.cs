@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using Common.Commands;
 using intf.BaseViewModels;
+using intf.Subscribers.Messages;
 using prjt.Domain;
 using prjt.EventArguments;
 using prjt.Facades;
@@ -226,13 +227,14 @@ namespace intf.Views
                 new Time(_workedTimeViewModel.OtherHours)
             );
             _defaultSetting.TimeTickInMinutes = _workedTimeViewModel.SelectedTimeTickInMinutes;
-            //_defaultSetting.Pdfsetting.UpdateBy(_pdfSetting);
             _defaultSetting.Pdfsetting = new DefaultListingPdfReportSetting(PdfSetting);
 
             _settingFacade.UpdateDefaultSettings(_defaultSetting);
 
             CancelChangesCommand.RaiseCanExecuteChanged();
             SaveSettingsCommand.RaiseCanExecuteChanged();
+
+            EventAggregator.PublishOnUIThread(new SettingsSuccessfullySavedMessage());
         }
 
 
@@ -313,7 +315,7 @@ namespace intf.Views
         private DefaultListingPdfReportSetting CreateNewPdfSetting(DefaultListingPdfReportSetting oldSetting)
         {
             DefaultListingPdfReportSetting setting = new DefaultListingPdfReportSetting(oldSetting);
-            setting.OnPropertyChanged += (object sender, EventArgs args) => {
+            setting.OnSettingPropertyChanged += (object sender, EventArgs args) => {
                 CancelChangesCommand.RaiseCanExecuteChanged();
                 SaveSettingsCommand.RaiseCanExecuteChanged();
             };

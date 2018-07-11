@@ -121,6 +121,8 @@
     <Compile Include="Subscribers\Messages\EmployerSuccessfullySavedMessage.cs" />
     <Compile Include="Subscribers\Messages\ListingSuccessfullyDeletedMessage.cs" />
     <Compile Include="Subscribers\Messages\ListingSuccessfulySavedMessage.cs" />
+    <Compile Include="Subscribers\Messages\SettingsSuccessfullySavedMessage.cs" />
+    <Compile Include="Subscribers\SettingsSubscriber.cs" />
     <Compile Include="Views\Employers\EmployerDeletionView.xaml.cs">
       <DependentUpon>EmployerDeletionView.xaml</DependentUpon>
     </Compile>

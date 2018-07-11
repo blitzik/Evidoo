@@ -107,7 +107,7 @@ namespace intf.Views
             _defaultSettings = settingFacade.GetDefaultSettings();
 
             PdfSetting = new DefaultListingPdfReportSetting(_defaultSettings.Pdfsetting);
-            PdfSetting.OnPropertyChanged += (object sender, EventArgs args) => { ResetSettingsCommand.RaiseCanExecuteChanged(); };
+            PdfSetting.OnSettingPropertyChanged += (object sender, EventArgs args) => { ResetSettingsCommand.RaiseCanExecuteChanged(); };
         }
 
 

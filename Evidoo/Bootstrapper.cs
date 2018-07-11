@@ -100,6 +100,7 @@ namespace Evidoo
             // Subscribers
             _container.Singleton<ListingSubscriber>().GetInstance<ListingSubscriber>();
             _container.Singleton<EmployerSubscriber>().GetInstance<EmployerSubscriber>();
+            _container.Singleton<SettingsSubscriber>().GetInstance<SettingsSubscriber>();
 
             _container.Instance(_container);
         }

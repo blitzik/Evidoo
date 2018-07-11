@@ -24,7 +24,7 @@ namespace intf.Subscribers
 
         public void Handle(ListingSuccessfulySavedMessage message)
         {
-            _flashMessagesManager.DisplayFlashMessage("Výčetka byla úspěšně vytvořena.", Common.FlashMessages.Type.SUCCESS);
+            _flashMessagesManager.DisplayFlashMessage("Výčetka byla úspěšně uložena.", Common.FlashMessages.Type.SUCCESS);
 
             _eventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingDetailViewModel>(x => x.Listing = message.Listing));
         }

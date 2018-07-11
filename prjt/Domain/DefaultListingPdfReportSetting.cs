@@ -293,12 +293,12 @@ namespace prjt.Domain
 
 
         public delegate void PropertyChangedHandler(object sender, EventArgs args);
-        public event PropertyChangedHandler OnPropertyChanged;
+        public event PropertyChangedHandler OnSettingPropertyChanged;
 
         private void ProcessOnPropertyChanged()
         {
-            if (OnPropertyChanged != null) {
-                OnPropertyChanged(this, EventArgs.Empty);
+            if (OnSettingPropertyChanged != null) {
+                OnSettingPropertyChanged(this, EventArgs.Empty);
             }
         }
 
