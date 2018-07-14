@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:intf.Views"
              xmlns:converters="clr-namespace:intf.Converters"
+             xmlns:b="clr-namespace:intf.Behaviors"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="1200">
 
@@ -97,6 +99,28 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="0 0 0 10">
+                            <Grid.Resources>
+                                <Style TargetType="{x:Type Grid}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ListingItem, UpdateSourceTrigger=PropertyChanged}" Value="{x:Null}">
+                                            <DataTrigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To=".75" Duration="0:0:.3" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </DataTrigger.EnterActions>
+                                            <DataTrigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From=".75" To="1" Duration="0:0:.3" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </DataTrigger.ExitActions>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Resources>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="10" />
@@ -104,12 +128,27 @@
                                 <ColumnDefinition Width="10" />
                                 <ColumnDefinition Width="50" />
                             </Grid.ColumnDefinitions>
-                            
-                            <Button Name="ItemContainer" Grid.Column="0" Padding="7" Command="{Binding ElementName=ScrollViewer, Path=DataContext.OpenListingItemDetailCommand}" CommandParameter="{Binding Day}" Background="#FFF" BorderBrush="#CCC" BorderThickness="1 1 1 3" HorizontalContentAlignment="Stretch">
+
+                            <Button Grid.Column="0" Padding="7" Command="{Binding ElementName=ScrollViewer, Path=DataContext.OpenListingItemDetailCommand}" CommandParameter="{Binding Day}" HorizontalContentAlignment="Stretch">
                                 <Button.Resources>
                                     <Style x:Key="LabelText" TargetType="{x:Type TextBlock}">
                                         <Setter Property="FontWeight" Value="Bold" />
                                         <Setter Property="HorizontalAlignment" Value="Left" />
+                                    </Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="#FFF" />
+                                        <Setter Property="BorderBrush" Value="#CCC" />
+                                        <Setter Property="BorderThickness" Value="1 1 1 3" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsWeekendDay}" Value="True">
+                                                <Setter Property="Background" Value="#efebe9" />
+                                                <Setter Property="BorderBrush" Value="#bcaaa4" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsCurrentDay}" Value="True">
+                                                <Setter Property="Background" Value="#e8f5e9" />
+                                                <Setter Property="BorderBrush" Value="#81c784" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
                                     </Style>
                                 </Button.Resources>
                                 <Grid>
@@ -186,8 +225,12 @@
                                 </Grid>
                             </Button>
 
-                            <!-- Copy button -->
-                            <Button Grid.Column="2" FontSize="17" Visibility="{Binding CanBeCopiedDown, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=reversed}" Command="{Binding ElementName=ScrollViewer, Path=DataContext.CopyItemDownCommand}" CommandParameter="{Binding Day}" Style="{StaticResource TurquoiseButton}">
+                            <Button Grid.Column="2" FontSize="17" 
+                                    Command="{Binding ElementName=ScrollViewer, Path=DataContext.CopyItemDownCommand}"
+                                    CommandParameter="{Binding Day}"
+                                    Style="{StaticResource TurquoiseButton}"
+                                    b:AnimateableVisibility.StartVisibility="{Binding CanBeCopiedDown, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=reversed}"
+                                    b:AnimateableVisibility.Visibility="{Binding CanBeCopiedDown, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=reversed}">
                                 <Rectangle Width="14" Height="17" Fill="White">
                                     <Rectangle.OpacityMask>
                                         <VisualBrush Stretch="Fill" Visual="{StaticResource ArrowDownIcon}" />
@@ -196,7 +239,11 @@
                             </Button>
 
                             <!-- Delete button -->
-                            <Button Grid.Column="4" FontSize="17" Visibility="{Binding CanBeRemoved, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=reversed}" Command="{Binding ElementName=ScrollViewer, Path=DataContext.RemoveItemCommand}" CommandParameter="{Binding Day}" Style="{StaticResource CriticalButton}">
+                            <Button Grid.Column="4" FontSize="17"
+                                    Command="{Binding ElementName=ScrollViewer, Path=DataContext.RemoveItemCommand}" CommandParameter="{Binding Day}"
+                                    Style="{StaticResource CriticalButton}"
+                                    b:AnimateableVisibility.StartVisibility="{Binding CanBeRemoved, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=reversed}"
+                                    b:AnimateableVisibility.Visibility="{Binding CanBeRemoved, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=reversed}">
                                 <Rectangle Width="14" Height="14" Fill="White">
                                     <Rectangle.OpacityMask>
                                         <VisualBrush Stretch="Fill" Visual="{StaticResource CloseIcon}" />
@@ -204,17 +251,6 @@
                                 </Rectangle>
                             </Button>
                         </Grid>
-
-                        <DataTemplate.Triggers>
-                            <DataTrigger Binding="{Binding IsWeekendDay}" Value="True">
-                                <Setter TargetName="ItemContainer" Property="Background" Value="#efebe9" />
-                                <Setter TargetName="ItemContainer" Property="BorderBrush" Value="#bcaaa4" />
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding IsCurrentDay}" Value="True">
-                                <Setter TargetName="ItemContainer" Property="Background" Value="#e8f5e9" />
-                                <Setter TargetName="ItemContainer" Property="BorderBrush" Value="#81c784" />
-                            </DataTrigger>
-                        </DataTemplate.Triggers>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

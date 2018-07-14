@@ -17,7 +17,7 @@ namespace intf.Converters
                 return Binding.DoNothing;
             }
 
-            BaseScreen viewModel = (BaseScreen)value;
+            IViewModel viewModel = (IViewModel)value;
             string checkValue = viewModel.GetType().Name;
             string targetValue = (string)parameter;
 
