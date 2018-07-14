@@ -41,7 +41,7 @@ namespace intf.Behaviors
         private static void _fe_Loaded(object sender, RoutedEventArgs e)
         {
             FrameworkElement s = sender as FrameworkElement;
-            if (GetStartVisibility(s) == Visibility.Hidden) {
+            if (GetVisibility(s) == Visibility.Hidden) {
                 s.SetCurrentValue(UIElement.VisibilityProperty, Visibility.Hidden);
             }
         }
@@ -51,25 +51,6 @@ namespace intf.Behaviors
         {
             _fe.Visibility = Visibility.Hidden;
         }
-
-
-        // -----
-
-
-        public static Visibility GetStartVisibility(DependencyObject obj)
-        {
-            return (Visibility)obj.GetValue(StartVisibilityProperty);
-        }
-
-
-        public static void SetStartVisibility(DependencyObject obj, Visibility value)
-        {
-            obj.SetValue(StartVisibilityProperty, value);
-        }
-
-        
-        public static readonly DependencyProperty StartVisibilityProperty =
-            DependencyProperty.RegisterAttached("StartVisibility", typeof(Visibility), typeof(AnimateableVisibility), new PropertyMetadata(default(Visibility)));
 
 
         // -----

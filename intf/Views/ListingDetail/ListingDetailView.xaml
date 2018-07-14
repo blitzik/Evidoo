@@ -229,7 +229,6 @@
                                     Command="{Binding ElementName=ScrollViewer, Path=DataContext.CopyItemDownCommand}"
                                     CommandParameter="{Binding Day}"
                                     Style="{StaticResource TurquoiseButton}"
-                                    b:AnimateableVisibility.StartVisibility="{Binding CanBeCopiedDown, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=reversed}"
                                     b:AnimateableVisibility.Visibility="{Binding CanBeCopiedDown, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=reversed}">
                                 <Rectangle Width="14" Height="17" Fill="White">
                                     <Rectangle.OpacityMask>
@@ -242,7 +241,6 @@
                             <Button Grid.Column="4" FontSize="17"
                                     Command="{Binding ElementName=ScrollViewer, Path=DataContext.RemoveItemCommand}" CommandParameter="{Binding Day}"
                                     Style="{StaticResource CriticalButton}"
-                                    b:AnimateableVisibility.StartVisibility="{Binding CanBeRemoved, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=reversed}"
                                     b:AnimateableVisibility.Visibility="{Binding CanBeRemoved, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=reversed}">
                                 <Rectangle Width="14" Height="14" Fill="White">
                                     <Rectangle.OpacityMask>
