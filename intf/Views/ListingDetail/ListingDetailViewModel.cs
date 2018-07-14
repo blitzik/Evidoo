@@ -203,6 +203,10 @@ namespace intf.Views
 
         private void RemoveItemByDay(int day)
         {
+            if (_dayItems[day - 1].Listing == null) {
+                return;
+            }
+
             Listing.RemoveItemByDay(day);
             _dayItems[day - 1].Reset();
 
