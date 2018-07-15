@@ -29,7 +29,7 @@ namespace intf.Behaviors
                 _da.From = 0.0;
                 _da.To = 1.0;
 
-            } else if (v == Visibility.Hidden || v == Visibility.Collapsed) {
+            } else { // Hidden or Collapsed
                 _da.From = 1.0;
                 _da.To = 0.0;
                 _da.Completed += AnimationCompletedHandler;
