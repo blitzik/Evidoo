@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:intf.Views"
              xmlns:converters="clr-namespace:intf.Converters"
+             xmlns:b="clr-namespace:intf.Behaviors"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="1000">
     <UserControl.Resources>
@@ -62,7 +64,8 @@
             </ComboBox>
 
             <TextBlock Grid.Row="4" Grid.Column="2" Margin="0 10 0 0" Text="Hodinová mzda" Style="{StaticResource LabelText}" />
-            <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding HourlyWage, UpdateSourceTrigger=PropertyChanged}" MaxLength="60" Style="{StaticResource DefaultTextBox}" HorizontalContentAlignment="Right" />
+            <!-- Text="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(b:IntegersOnly.Text), UpdateSourceTrigger=PropertyChanged}" -->
+            <TextBox b:IntegersOnly.Mode="ALL" Grid.Row="5" Grid.Column="2" Text="{Binding HourlyWage, UpdateSourceTrigger=PropertyChanged}" MaxLength="60" Style="{StaticResource DefaultTextBox}" HorizontalContentAlignment="Right" />
             <TextBlock Grid.Row="5" Grid.Column="4" Text="Kč/h" FontWeight="Bold" VerticalAlignment="Center" />
         </Grid>
 
@@ -80,7 +83,6 @@
 
             <TextBlock Grid.Row="0" Grid.Column="0" Text="Název výčetky" Style="{StaticResource LabelText}" />
             <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding Name}" MaxLength="50" Style="{StaticResource DefaultTextBox}" />
-
             <Button Grid.Row="2" Grid.Column="2" Margin="0 10 0 0" Content="Uložit" Command="{Binding SaveCommand}" Style="{StaticResource PrimaryButton}" />
         </Grid>
     </StackPanel>

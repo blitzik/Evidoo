@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using Common.EventAggregator.Messages;
 using intf.BaseViewModels;
 using intf.Subscribers.Messages;
+using intf.Behaviors;
 
 namespace intf.Views
 {
@@ -88,26 +89,12 @@ namespace intf.Views
 
 
         private int? _hourlyWage;
-        public string HourlyWage
+        public int? HourlyWage
         {
-            get { return _hourlyWage.ToString(); }
+            get { return _hourlyWage; }
             set
             {
-                if (string.IsNullOrEmpty(value)) {
-                    Set(ref _hourlyWage, null);
-                    return;
-                }
-
-                if (!int.TryParse(value, out int result)) {
-                    return;
-                }
-
-                if (result < 0) {
-                    return;
-
-                } else {
-                    Set(ref _hourlyWage, result);
-                }
+                Set(ref _hourlyWage, value);
             }
         }
 

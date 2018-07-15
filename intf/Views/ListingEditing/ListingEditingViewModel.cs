@@ -125,26 +125,12 @@ namespace intf.Views
 
 
         private int? _hourlyWage;
-        public string HourlyWage
+        public int? HourlyWage
         {
-            get { return _hourlyWage.ToString(); }
+            get { return _hourlyWage; }
             set
             {
-                if (string.IsNullOrEmpty(value)) {
-                    Set(ref _hourlyWage, null);
-                    return;
-                }
-
-                if (!int.TryParse(value, out int result)) {
-                    return;
-                }
-
-                if (result < 0) {
-                    return;
-
-                } else {
-                    Set(ref _hourlyWage, result);
-                }                
+                Set(ref _hourlyWage, value);             
             }
         }
 
@@ -325,7 +311,7 @@ namespace intf.Views
             }
 
             Name = listing.Name;
-            HourlyWage = listing.HourlyWage == null ? null : listing.HourlyWage.ToString();
+            HourlyWage = listing.HourlyWage;
 
             Vacation = Listing.Vacation;
             Holiday = Listing.Holiday;

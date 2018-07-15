@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:intf.Views"
              xmlns:converters="clr-namespace:intf.Converters"
+             xmlns:b="clr-namespace:intf.Behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="1000">
     <UserControl.Resources>
@@ -81,7 +82,7 @@
             </ComboBox>
 
             <TextBlock Grid.Row="4" Grid.Column="0" Text="Hodinová mzda" Style="{StaticResource LabelText}" />
-            <TextBox Grid.Row="5" Grid.Column="0" Name="HoursWage" Text="{Binding HourlyWage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="60" Style="{StaticResource DefaultTextBox}" HorizontalContentAlignment="Right" />
+            <TextBox b:IntegersOnly.Mode="ALL" Grid.Row="5" Grid.Column="0" Text="{Binding HourlyWage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="60" Style="{StaticResource DefaultTextBox}" HorizontalContentAlignment="Right" />
             <TextBlock Grid.Row="5" Grid.Column="2" Text="Kč/h" FontWeight="Bold" VerticalAlignment="Center" />
                         
             <!-- // -->
@@ -147,14 +148,7 @@
             <TextBlock Grid.Row="6" Grid.Column="0" Text="Název výčetky" Style="{StaticResource LabelText}" />
             <TextBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding Name}" MaxLength="50" Style="{StaticResource DefaultTextBox}" />
 
-            <Button Grid.Row="9" Grid.Column="2" Content="Uložit změny" Command="{Binding SaveCommand}" Style="{StaticResource PrimaryButton}">
-                <Button.IsEnabled>
-                    <MultiBinding Converter="{StaticResource InverseBooleansToBooleanConverter}" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                        <Binding ElementName="HoursWage" Path="(Validation.HasError)" />
-                    </MultiBinding>
-                </Button.IsEnabled>
-            </Button>
-
+            <Button Grid.Row="9" Grid.Column="2" Content="Uložit změny" Command="{Binding SaveCommand}" Style="{StaticResource PrimaryButton}" />
 
         </Grid>
     </StackPanel>
