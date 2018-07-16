@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:intf.Views"
              xmlns:converters="clr-namespace:intf.Converters"
-             xmlns:b="clr-namespace:intf.Behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="1000">
     <UserControl.Resources>
@@ -82,7 +81,7 @@
             </ComboBox>
 
             <TextBlock Grid.Row="4" Grid.Column="0" Text="Hodinová mzda" Style="{StaticResource LabelText}" />
-            <TextBox b:PositiveIntegersOnly.Apply="True" Grid.Row="5" Grid.Column="0" Text="{Binding HourlyWage, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBox}" MaxLength="60" HorizontalContentAlignment="Right" />
+            <TextBox Grid.Row="5" Grid.Column="0" Text="{Binding HourlyWage, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBox}" MaxLength="60" HorizontalContentAlignment="Right" />
             <TextBlock Grid.Row="5" Grid.Column="2" Text="Kč/h" FontWeight="Bold" VerticalAlignment="Center" />
                         
             <!-- // -->

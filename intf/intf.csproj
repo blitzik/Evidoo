@@ -86,7 +86,6 @@
     <Compile Include="BaseViewModels\BaseConductorOneActive.cs" />
     <Compile Include="BaseViewModels\BaseScreen.cs" />
     <Compile Include="BaseViewModels\IViewModel.cs" />
-    <Compile Include="Behaviors\PositiveIntegersOnly.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\IntToMonthNameConverter.cs" />
     <Compile Include="Converters\IntToTimeConverter.cs" />
@@ -126,6 +125,7 @@
     <Compile Include="Subscribers\Messages\ListingSuccessfulySavedMessage.cs" />
     <Compile Include="Subscribers\Messages\SettingsSuccessfullySavedMessage.cs" />
     <Compile Include="Subscribers\SettingsSubscriber.cs" />
+    <Compile Include="Utils\IntegersOnlyUtils.cs" />
     <Compile Include="Views\Employers\EmployerDeletionView.xaml.cs">
       <DependentUpon>EmployerDeletionView.xaml</DependentUpon>
     </Compile>

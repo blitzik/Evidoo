@@ -11,6 +11,7 @@ using Common.EventAggregator.Messages;
 using intf.BaseViewModels;
 using intf.Subscribers.Messages;
 using intf.Behaviors;
+using intf.Utils;
 
 namespace intf.Views
 {
@@ -89,12 +90,12 @@ namespace intf.Views
 
 
         private int? _hourlyWage;
-        public int? HourlyWage
+        public string HourlyWage
         {
-            get { return _hourlyWage; }
+            get { return _hourlyWage.ToString(); }
             set
             {
-                Set(ref _hourlyWage, value);
+                Set(ref _hourlyWage, IntegersOnlyUtils.ConvertOnlyPositive(value, _hourlyWage, true));
             }
         }
 

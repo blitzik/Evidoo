@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using Common.EventAggregator.Messages;
 using intf.BaseViewModels;
 using intf.Subscribers.Messages;
+using intf.Utils;
 
 namespace intf.Views
 {
@@ -125,12 +126,12 @@ namespace intf.Views
 
 
         private int? _hourlyWage;
-        public int? HourlyWage
+        public string HourlyWage
         {
-            get { return _hourlyWage; }
+            get { return _hourlyWage.ToString(); }
             set
             {
-                Set(ref _hourlyWage, value);
+                Set(ref _hourlyWage, IntegersOnlyUtils.ConvertOnlyPositive(value, _hourlyWage, true));
             }
         }
 
@@ -311,7 +312,7 @@ namespace intf.Views
             }
 
             Name = listing.Name;
-            HourlyWage = listing.HourlyWage;
+            HourlyWage = listing.HourlyWage.ToString();
 
             Vacation = Listing.Vacation;
             Holiday = Listing.Holiday;
