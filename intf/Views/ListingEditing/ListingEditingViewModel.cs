@@ -130,7 +130,7 @@ namespace intf.Views
             get { return _hourlyWage; }
             set
             {
-                Set(ref _hourlyWage, value);             
+                Set(ref _hourlyWage, value);
             }
         }
 

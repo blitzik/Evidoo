@@ -11,40 +11,32 @@ using System.Windows.Interactivity;
 
 namespace intf.Behaviors
 {
-    public enum IntegersOnlyMode
+    public class PositiveIntegersOnly : DependencyObject
     {
-        ALL,
-        POSITIVE,
-        NEGATIVE
-    }
-
-
-    public class IntegersOnly : DependencyObject
-    {
-        public static IntegersOnlyMode GetMode(DependencyObject obj)
+        public static bool GetApply(DependencyObject obj)
         {
-            return (IntegersOnlyMode)obj.GetValue(ModeProperty);
+            return (bool)obj.GetValue(ApplyProperty);
         }
 
 
-        public static void SetMode(DependencyObject obj, IntegersOnlyMode value)
+        public static void SetApply(DependencyObject obj, bool value)
         {
-            obj.SetValue(ModeProperty, value);
+            obj.SetValue(ApplyProperty, value);
         }
 
 
-        public static readonly DependencyProperty ModeProperty =
+        public static readonly DependencyProperty ApplyProperty =
             DependencyProperty.RegisterAttached(
-                "Mode",
-                typeof(IntegersOnlyMode),
-                typeof(IntegersOnly),
-                new PropertyMetadata(default(IntegersOnlyMode), null, OnCoerceModePropertyChanged)
+                "Apply",
+                typeof(bool),
+                typeof(PositiveIntegersOnly),
+                new PropertyMetadata(false, OnApplyPropertyChanged, OnCoerceApplyPropertyChanged)
             );
 
 
-        private static object OnCoerceModePropertyChanged(DependencyObject d, object baseValue)
+        private static void OnApplyPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (!(d is TextBox tb)) return baseValue;
+            if (!(d is TextBox tb)) return;
 
             tb.PreviewTextInput -= Tb_PreviewTextInput;
             tb.PreviewKeyDown -= Tb_PreviewKeyDown;
@@ -53,15 +45,19 @@ namespace intf.Behaviors
             tb.PreviewTextInput += Tb_PreviewTextInput;
             tb.PreviewKeyDown += Tb_PreviewKeyDown;
             DataObject.AddPastingHandler(tb, OnDataPastedHandler);
+        }
 
-            return baseValue;            
+
+        private static object OnCoerceApplyPropertyChanged(DependencyObject d, object baseValue)
+        {
+            return false;            
         }
 
 
         private static void Tb_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             if (!(sender is TextBox tb)) return;
-
+            
             if (!int.TryParse(e.Text, out int result)) {
                 e.Handled = true;
                 return;
@@ -89,6 +85,11 @@ namespace intf.Behaviors
 
             string data = e.SourceDataObject.GetData(DataFormats.UnicodeText, true).ToString();
             if (!int.TryParse(data, out int result)) {
+                e.CancelCommand();
+                return;
+            }
+
+            if (result < 0) {
                 e.CancelCommand();
                 return;
             }

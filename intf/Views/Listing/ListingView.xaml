@@ -64,8 +64,7 @@
             </ComboBox>
 
             <TextBlock Grid.Row="4" Grid.Column="2" Margin="0 10 0 0" Text="Hodinová mzda" Style="{StaticResource LabelText}" />
-            <!-- Text="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(b:IntegersOnly.Text), UpdateSourceTrigger=PropertyChanged}" -->
-            <TextBox b:IntegersOnly.Mode="ALL" Grid.Row="5" Grid.Column="2" Text="{Binding HourlyWage, UpdateSourceTrigger=PropertyChanged}" MaxLength="60" Style="{StaticResource DefaultTextBox}" HorizontalContentAlignment="Right" />
+            <TextBox b:PositiveIntegersOnly.Apply="True" Grid.Row="5" Grid.Column="2" Text="{Binding HourlyWage, UpdateSourceTrigger=PropertyChanged}" MaxLength="60" Style="{StaticResource DefaultTextBox}" HorizontalContentAlignment="Right" />
             <TextBlock Grid.Row="5" Grid.Column="4" Text="Kč/h" FontWeight="Bold" VerticalAlignment="Center" />
         </Grid>
 

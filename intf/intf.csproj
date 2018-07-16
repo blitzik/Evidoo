@@ -86,7 +86,7 @@
     <Compile Include="BaseViewModels\BaseConductorOneActive.cs" />
     <Compile Include="BaseViewModels\BaseScreen.cs" />
     <Compile Include="BaseViewModels\IViewModel.cs" />
-    <Compile Include="Behaviors\IntegersOnly.cs" />
+    <Compile Include="Behaviors\PositiveIntegersOnly.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\IntToMonthNameConverter.cs" />
     <Compile Include="Converters\IntToTimeConverter.cs" />

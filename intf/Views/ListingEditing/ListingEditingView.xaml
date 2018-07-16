@@ -82,7 +82,7 @@
             </ComboBox>
 
             <TextBlock Grid.Row="4" Grid.Column="0" Text="Hodinová mzda" Style="{StaticResource LabelText}" />
-            <TextBox b:IntegersOnly.Mode="ALL" Grid.Row="5" Grid.Column="0" Text="{Binding HourlyWage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="60" Style="{StaticResource DefaultTextBox}" HorizontalContentAlignment="Right" />
+            <TextBox b:PositiveIntegersOnly.Apply="True" Grid.Row="5" Grid.Column="0" Text="{Binding HourlyWage, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBox}" MaxLength="60" HorizontalContentAlignment="Right" />
             <TextBlock Grid.Row="5" Grid.Column="2" Text="Kč/h" FontWeight="Bold" VerticalAlignment="Center" />
                         
             <!-- // -->
