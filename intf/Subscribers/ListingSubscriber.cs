@@ -13,10 +13,10 @@ using System.Threading.Tasks;
 
 namespace intf.Subscribers
 {
-    public class ListingSubscriber : 
-        BaseSubscriber,
+    public class ListingSubscriber : BaseSubscriber,
         IHandle<ListingSuccessfulySavedMessage>,
-        IHandle<ListingSuccessfullyDeletedMessage>
+        IHandle<ListingSuccessfullyDeletedMessage>,
+        IHandle<ListingPdfSuccessfullyGeneratedMessage>
     {
         public ListingSubscriber(IEventAggregator eventAggregator, IFlashMessagesManager flashMessagesManager) : base(eventAggregator, flashMessagesManager)
         {
@@ -34,6 +34,12 @@ namespace intf.Subscribers
         {
             _flashMessagesManager.DisplayFlashMessage("Výčetka byla úspěšně odstraněna.", Common.FlashMessages.Type.SUCCESS);
             _eventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingsOverviewViewModel>());
+        }
+
+
+        public void Handle(ListingPdfSuccessfullyGeneratedMessage message)
+        {
+            _flashMessagesManager.DisplayFlashMessage("Váš PDF dokument byl úspěšně uložen", Common.FlashMessages.Type.SUCCESS);
         }
     }
 }

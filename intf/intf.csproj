@@ -121,6 +121,7 @@
     <Compile Include="Subscribers\Messages\BaseEmployerMessage.cs" />
     <Compile Include="Subscribers\Messages\EmployerSuccessfullyDeletedMessage.cs" />
     <Compile Include="Subscribers\Messages\EmployerSuccessfullySavedMessage.cs" />
+    <Compile Include="Subscribers\Messages\ListingPdfSuccessfullyGeneratedMessage.cs" />
     <Compile Include="Subscribers\Messages\ListingSuccessfullyDeletedMessage.cs" />
     <Compile Include="Subscribers\Messages\ListingSuccessfulySavedMessage.cs" />
     <Compile Include="Subscribers\Messages\SettingsSuccessfullySavedMessage.cs" />

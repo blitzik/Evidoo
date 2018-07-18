@@ -9,8 +9,7 @@ using intf.Subscribers.Messages;
 
 namespace intf.Subscribers
 {
-    public class EmployerSubscriber : 
-        BaseSubscriber,
+    public class EmployerSubscriber : BaseSubscriber,
         IHandle<EmployerSuccessfullyDeletedMessage>,
         IHandle<EmployerSuccessfullySavedMessage>
     {

@@ -9,7 +9,8 @@ using intf.Subscribers.Messages;
 
 namespace intf.Subscribers
 {
-    public class SettingsSubscriber : BaseSubscriber, IHandle<SettingsSuccessfullySavedMessage>
+    public class SettingsSubscriber : BaseSubscriber,
+        IHandle<SettingsSuccessfullySavedMessage>
     {
         public SettingsSubscriber(IEventAggregator eventAggregator, IFlashMessagesManager flashMessagesManager) : base(eventAggregator, flashMessagesManager)
         {

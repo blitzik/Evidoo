@@ -13,6 +13,7 @@ using Common.Commands;
 using Caliburn.Micro;
 using System.Windows.Forms;
 using intf.BaseViewModels;
+using intf.Subscribers.Messages;
 
 namespace intf.Views
 {
@@ -88,7 +89,7 @@ namespace intf.Views
                 return;
             }
 
-            ProgressBarWindowViewModel pb = new ProgressBarWindowViewModel();
+            ProgressBarWindowViewModel pb = PrepareViewModel<ProgressBarWindowViewModel>();
             Task.Run(async () => {
                 List<Listing> list = new List<Listing>();
                 for (int month = 0; month < 12; month++) {
@@ -102,6 +103,7 @@ namespace intf.Views
                 await Task.Delay(pb.ResultIconDelay);
 
                 pb.TryClose();
+                EventAggregator.PublishOnUIThread(new ListingPdfSuccessfullyGeneratedMessage());
             });
 
             _windowManager.ShowDialog(pb);

@@ -2,6 +2,7 @@
 using Common.Commands;
 using intf.BaseViewModels;
 using intf.Messages;
+using intf.Subscribers.Messages;
 using MigraDoc.DocumentObjectModel;
 using prjt.Domain;
 using prjt.Facades;
@@ -147,6 +148,7 @@ namespace intf.Views
                 await Task.Delay(pb.ResultIconDelay);
 
                 pb.TryClose();
+                EventAggregator.PublishOnUIThread(new ListingPdfSuccessfullyGeneratedMessage());
             });
             
             _windowManager.ShowDialog(pb);
