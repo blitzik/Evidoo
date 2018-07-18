@@ -38,9 +38,14 @@ namespace prjt.Facades
         }
 
 
-        public List<Listing> FindListings(int year, string order = "DESC")
+        public List<Listing> FindListings(int year, int month, string order = "DESC")
         {
-            var listings = from Listing l in Root().Listings where l.Year == year orderby l.Month descending select l;
+            IEnumerable<Listing> listings;
+            if (month < 1 || month > 12) {
+                listings = from Listing l in Root().Listings where l.Year == year orderby l.Month descending select l;
+            } else {
+                listings = from Listing l in Root().Listings where l.Year == year && l.Month == month orderby l.Month descending select l;
+            }
 
             return new List<Listing>(listings);
         }

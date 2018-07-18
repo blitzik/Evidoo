@@ -43,14 +43,14 @@ namespace intf.Views
         }
 
 
-        private List<int> _years = Date.GetYears(2010, "DESC");
+        private List<int> _years;
         public List<int> Years
         {
             get { return _years; }
         }
 
 
-        private List<string> _months = new List<string>(Date.Months);
+        private List<string> _months;
         public List<string> Months
         {
             get { return _months; }
@@ -64,29 +64,44 @@ namespace intf.Views
             set
             {
                 Set(ref _selectedYear, value);
+                LoadListings(SelectedYear, SelectedMonth);
+            }
+        }
 
-                LoadListings(SelectedYear);
+
+        private int _selectedMonth;
+        public int SelectedMonth
+        {
+            get { return _selectedMonth; }
+            set
+            {
+                Set(ref _selectedMonth, value);
+                LoadListings(SelectedYear, SelectedMonth);
             }
         }
 
 
         private readonly ListingFacade _listingFacade;
 
-
         public ListingsOverviewViewModel(
             ListingFacade listingFacade
         ) {
             BaseWindowTitle = "Přehled výčetek";
             _listingFacade = listingFacade;
-            Listings = CollectionViewSource.GetDefaultView(listingFacade.FindListings(DateTime.Now.Year));
+            
+            _years = Date.GetYears(2010, "DESC");
+            _months = new List<string>(Date.Months);
+            _months.Reverse();
+            _months.Insert(0, "Celý rok");
 
-            _selectedYear = DateTime.Now.Year;
+            SelectedYear = DateTime.Now.Year;
+            SelectedMonth = DateTime.Now.Month;
         }
 
 
-        private void LoadListings(int year)
+        private void LoadListings(int year, int month)
         {
-            Listings = CollectionViewSource.GetDefaultView(_listingFacade.FindListings(year));
+            Listings = CollectionViewSource.GetDefaultView(_listingFacade.FindListings(year, month));
         }
 
 
@@ -103,7 +118,7 @@ namespace intf.Views
         {
             base.OnActivate();
 
-            LoadListings(SelectedYear);
+            LoadListings(SelectedYear, SelectedMonth);
         }
     }
 }

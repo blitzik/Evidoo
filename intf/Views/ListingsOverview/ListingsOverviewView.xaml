@@ -19,12 +19,19 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <ComboBox Grid.Row="0"
-                  Width="150"
-                  HorizontalAlignment="Left"
-                  ItemsSource="{Binding Years}"
-                  SelectedItem="{Binding SelectedYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <ComboBox Width="150"
+                      HorizontalAlignment="Left"
+                      ItemsSource="{Binding Years}"
+                      SelectedItem="{Binding SelectedYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
+            <ComboBox Width="150"
+                      Margin="10 0 0 0"
+                      HorizontalAlignment="Left"
+                      ItemsSource="{Binding Months}"
+                      SelectedIndex="{Binding SelectedMonth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
+        
         <ScrollViewer Grid.Row="2" Padding="0 0 10 0" VerticalScrollBarVisibility="Auto" Template="{StaticResource ScrollViewerControlTemplate}">
             <ItemsControl ItemsSource="{Binding Listings}" HorizontalContentAlignment="Stretch">
                 <ItemsControl.Style>
