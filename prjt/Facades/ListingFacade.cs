@@ -38,7 +38,7 @@ namespace prjt.Facades
         }
 
 
-        public List<Listing> FindListings(int year, int month, string order = "DESC")
+        public List<Listing> FindListings(int year, int month)
         {
             IEnumerable<Listing> listings;
             if (month < 1 || month > 12) {
