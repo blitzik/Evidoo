@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:intf.FlashMessages"
              xmlns:flashMessages="clr-namespace:Common.FlashMessages;assembly=Common"
+             xmlns:b="clr-namespace:intf.Behaviors"
+             xmlns:c="http://www.caliburnproject.org"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
@@ -15,9 +17,17 @@
         <Path x:Key="InfoIcon" Fill="#FFF" Data="M255,0C114.75,0,0,114.75,0,255s114.75,255,255,255s255-114.75,255-255S395.25,0,255,0z M280.5,382.5h-51v-153h51V382.5z M280.5,178.5h-51v-51h51V178.5z" />
     </UserControl.Resources>
 
-    <ItemsControl VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 20 0 0" ItemsSource="{Binding FlashMessagesManager.FlashMessages}">
-        <ItemsControl.ItemContainerStyle>
+    <ItemsControl VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 20 0 0" ItemsSource="{Binding FlashMessagesManager.Items}">
+        <!--<ItemsControl.ItemContainerStyle>
             <Style TargetType="{x:Type FrameworkElement}">
+                <Setter Property="b:AnimateableItemRemoval.Storyboard">
+                    <Setter.Value>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleX" To="0" Duration="0:0:.15"/>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:.15" />
+                        </Storyboard>
+                    </Setter.Value>
+                </Setter>
                 <Setter Property="LayoutTransform">
                     <Setter.Value>
                         <ScaleTransform />
@@ -30,18 +40,17 @@
                                 <Storyboard>
                                     <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:.25" />
                                     <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleY" From="0" Duration="0:0:.25"/>
-                                    <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleX" To="0" BeginTime="0:0:3" Duration="0:0:.15"/>
-                                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" BeginTime="0:0:3" Duration="0:0:.15" />
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger.Actions>
                     </EventTrigger>
                 </Style.Triggers>
             </Style>
-        </ItemsControl.ItemContainerStyle>
+        </ItemsControl.ItemContainerStyle>-->
         <ItemsControl.ItemTemplate>
             <DataTemplate>
-                <Border Name="ItemBorder">
+                <ContentControl c:View.Model="{Binding }" />
+                <!--<Border Name="ItemBorder">
                     <Border.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="Background" Value="#3498db" />
@@ -108,7 +117,7 @@
                         </Rectangle>
                         <TextBlock Grid.Column="2" Text="{Binding ElementName=ItemBorder, Path=DataContext.Message}" TextAlignment="Right" TextWrapping="Wrap" Foreground="#FFF" FontSize="14" />
                     </Grid>
-                </Border>
+                </Border>-->
             </DataTemplate>
         </ItemsControl.ItemTemplate>
     </ItemsControl>

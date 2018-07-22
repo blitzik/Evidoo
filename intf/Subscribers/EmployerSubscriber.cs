@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Caliburn.Micro;
 using Common.FlashMessages;
+using intf.FlashMessages;
 using intf.Subscribers.Messages;
 
 namespace intf.Subscribers
@@ -20,13 +21,13 @@ namespace intf.Subscribers
 
         public void Handle(EmployerSuccessfullyDeletedMessage message)
         {
-            _flashMessagesManager.DisplayFlashMessage("Zaměstnavatel byl úspěšně odstraněn.", Common.FlashMessages.Type.SUCCESS);
+            _flashMessagesManager.DisplayFlashMessage(new SuccessFlashMessage("Zaměstnavatel byl úspěšně odstraněn."));
         }
 
 
         public void Handle(EmployerSuccessfullySavedMessage message)
         {
-            _flashMessagesManager.DisplayFlashMessage("Zaměstnavatel byl úspěšně uložen.", Common.FlashMessages.Type.SUCCESS);
+            _flashMessagesManager.DisplayFlashMessage(new SuccessFlashMessage("Zaměstnavatel byl úspěšně uložen."));
         }
     }
 }

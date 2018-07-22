@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Caliburn.Micro;
 using Common.FlashMessages;
+using intf.FlashMessages;
 using intf.Subscribers.Messages;
 
 namespace intf.Subscribers
@@ -19,7 +20,7 @@ namespace intf.Subscribers
 
         public void Handle(SettingsSuccessfullySavedMessage message)
         {
-            _flashMessagesManager.DisplayFlashMessage("Nastavení bylo uloženo.", Common.FlashMessages.Type.SUCCESS);
+            _flashMessagesManager.DisplayFlashMessage(new SuccessFlashMessage("Nastavení bylo uloženo."));
         }
     }
 }

@@ -1,25 +1,31 @@
 ﻿namespace Common.FlashMessages
 {
-    public class FlashMessage
+    public abstract class FlashMessage : IFlashMessage
     {
-        private string _message;
+        protected string _message;
         public string Message
         {
             get { return _message; }
         }
 
 
-        private Type _type;
+        protected Type _type;
         public Type Type
         {
             get { return _type; }
         }
 
 
-        public FlashMessage(string message, Type type)
+        protected IFlashMessageViewModel _viewModel;
+        public IFlashMessageViewModel ViewModel
+        {
+            get { return _viewModel; }
+        }
+
+
+        public FlashMessage(string message)
         {
             _message = message;
-            _type = type;
         }
     }
 }

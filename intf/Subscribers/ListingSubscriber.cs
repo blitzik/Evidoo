@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using intf.FlashMessages;
 
 namespace intf.Subscribers
 {
@@ -24,7 +25,7 @@ namespace intf.Subscribers
 
         public void Handle(ListingSuccessfulySavedMessage message)
         {
-            _flashMessagesManager.DisplayFlashMessage("Výčetka byla úspěšně uložena.", Common.FlashMessages.Type.SUCCESS);
+            _flashMessagesManager.DisplayFlashMessage(new SuccessFlashMessage("Výčetka byla úspěšně uložena."));
 
             _eventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingDetailViewModel>(x => x.Listing = message.Listing));
         }
@@ -32,14 +33,14 @@ namespace intf.Subscribers
 
         public void Handle(ListingSuccessfullyDeletedMessage message)
         {
-            _flashMessagesManager.DisplayFlashMessage("Výčetka byla úspěšně odstraněna.", Common.FlashMessages.Type.SUCCESS);
+            _flashMessagesManager.DisplayFlashMessage(new SuccessFlashMessage("Výčetka byla úspěšně odstraněna."));
             _eventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingsOverviewViewModel>());
         }
 
 
         public void Handle(ListingPdfSuccessfullyGeneratedMessage message)
         {
-            _flashMessagesManager.DisplayFlashMessage("Váš PDF dokument byl úspěšně uložen", Common.FlashMessages.Type.SUCCESS);
+            _flashMessagesManager.DisplayFlashMessage(new SuccessFlashMessage("Váš PDF dokument byl úspěšně uložen"));
         }
     }
 }
