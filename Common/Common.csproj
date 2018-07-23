@@ -57,8 +57,10 @@
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="EventAggregator\Messages\IChangeViewMessage.cs" />
     <Compile Include="FlashMessages\FlashMessage.cs" />
+    <Compile Include="FlashMessages\FlashMessageDecorator.cs" />
     <Compile Include="FlashMessages\FlashMessagesCollection.cs" />
     <Compile Include="FlashMessages\FlashMessagesManager.cs" />
+    <Compile Include="FlashMessages\IFlashMessage.cs" />
     <Compile Include="FlashMessages\IFlashMessagesManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validation\IDelegateRuleSet.cs" />

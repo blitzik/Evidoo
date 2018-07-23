@@ -18,10 +18,8 @@ namespace Common.FlashMessages
     public interface IFlashMessagesManager
     {
         bool IsEmpty { get; }
-        ObservableCollection<FlashMessage> FlashMessages { get; }
+        ObservableCollection<FlashMessageDecorator> FlashMessages { get; }
 
-        IFlashMessagesManager AddFlashMessage(string message, Type type);
-        void DisplayFlashMessages();
         void DisplayFlashMessage(string message, Type type);
         void ClearFlashMessages();        
     }

@@ -30,12 +30,20 @@
                                 <Storyboard>
                                     <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:.25" />
                                     <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleY" From="0" Duration="0:0:.25"/>
-                                    <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleX" To="0" BeginTime="0:0:3" Duration="0:0:.15"/>
-                                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" BeginTime="0:0:3" Duration="0:0:.15" />
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger.Actions>
                     </EventTrigger>
+                    <DataTrigger Binding="{Binding CanBeDisposed}" Value="True">
+                        <DataTrigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleX" To="0" Duration="0:0:.15"/>
+                                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:.15" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.EnterActions>
+                    </DataTrigger>
                 </Style.Triggers>
             </Style>
         </ItemsControl.ItemContainerStyle>
@@ -106,7 +114,7 @@
                                 </Style>
                             </Rectangle.Style>
                         </Rectangle>
-                        <TextBlock Grid.Column="2" Text="{Binding ElementName=ItemBorder, Path=DataContext.Message}" TextAlignment="Right" TextWrapping="Wrap" Foreground="#FFF" FontSize="14" />
+                        <TextBlock Grid.Column="2" Text="{Binding ElementName=ItemBorder, Path=DataContext.FlashMessage.Message}" TextAlignment="Right" TextWrapping="Wrap" Foreground="#FFF" FontSize="14" />
                     </Grid>
                 </Border>
             </DataTemplate>

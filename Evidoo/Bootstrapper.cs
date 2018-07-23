@@ -53,6 +53,7 @@ namespace Evidoo
 
 
             _container = new SimpleContainer();
+            _container.Instance(_container);
 
             _container.Singleton<IWindowManager, WindowManager>();
             _container.Singleton<IEventAggregator, EventAggregator>();
@@ -102,8 +103,6 @@ namespace Evidoo
             _container.Singleton<ListingSubscriber>().GetInstance<ListingSubscriber>();
             _container.Singleton<EmployerSubscriber>().GetInstance<EmployerSubscriber>();
             _container.Singleton<SettingsSubscriber>().GetInstance<SettingsSubscriber>();
-
-            _container.Instance(_container);
         }
 
 
