@@ -81,7 +81,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Behaviors\AnimateableItemRemoval.cs" />
     <Compile Include="Behaviors\AnimateableVisibility.cs" />
     <Compile Include="BaseViewModels\BaseConductorAllActive.cs" />
     <Compile Include="BaseViewModels\BaseConductorOneActive.cs" />
@@ -98,14 +97,9 @@
     <Compile Include="Converters\TimeToIntConverter.cs" />
     <Compile Include="Converters\TimeToTimeInWordsConverter.cs" />
     <Compile Include="Converters\ViewModelToBooleanConverter.cs" />
-    <Compile Include="FlashMessages\ErrorFlashMessage.cs" />
-    <Compile Include="FlashMessages\FlashMessageBaseViewModel.cs" />
     <Compile Include="FlashMessages\FlashMessages.xaml.cs">
       <DependentUpon>FlashMessages.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FlashMessages\InfoFlashMessage.cs" />
-    <Compile Include="FlashMessages\SuccessFlashMessage.cs" />
-    <Compile Include="FlashMessages\WarningFlashMessage.cs" />
     <Compile Include="Messages\ChangeViewMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -155,22 +149,6 @@
       <DependentUpon>EmptyListingsGenerationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EmptyListingsGeneration\EmptyListingsGenerationViewModel.cs" />
-    <Compile Include="Views\FlashMessageError\FlashMessageErrorView.xaml.cs">
-      <DependentUpon>FlashMessageErrorView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\FlashMessageError\FlashMessageErrorViewModel.cs" />
-    <Compile Include="Views\FlashMessageInfo\FlashMessageInfoViewModel.cs" />
-    <Compile Include="Views\FlashMessageInfo\FlashMessageInfoView.xaml.cs">
-      <DependentUpon>FlashMessageInfoView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\FlashMessageSuccess\FlashMessageSuccessView.xaml.cs">
-      <DependentUpon>FlashMessageSuccessView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\FlashMessageSuccess\FlashMessageSuccessViewModel.cs" />
-    <Compile Include="Views\FlashMessageWarning\FlashMessageWarningView.xaml.cs">
-      <DependentUpon>FlashMessageWarningView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\FlashMessageWarning\FlashMessageWarningViewModel.cs" />
     <Compile Include="Views\ListingDeletion\ListingDeletionView.xaml.cs">
       <DependentUpon>ListingDeletionView.xaml</DependentUpon>
     </Compile>
@@ -287,22 +265,6 @@
     <Page Include="Views\EmptyListingsGeneration\EmptyListingsGenerationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\FlashMessageError\FlashMessageErrorView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\FlashMessageInfo\FlashMessageInfoView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\FlashMessageSuccess\FlashMessageSuccessView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\FlashMessageWarning\FlashMessageWarningView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ListingDeletion\ListingDeletionView.xaml">
       <Generator>MSBuild:Compile</Generator>

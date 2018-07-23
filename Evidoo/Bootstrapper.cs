@@ -22,7 +22,6 @@ using Perst;
 using intf.BaseViewModels;
 using intf.Factories.Employers;
 using intf.Subscribers;
-using intf.FlashMessages;
 
 namespace Evidoo
 {
@@ -68,9 +67,9 @@ namespace Evidoo
             _container.Singleton<IMultipleListingReportFactory, MultipleListingReportFactory>();
             _container.Singleton<IListingReportGenerator, ListingReportGenerator>();
             _container.Singleton<IBackupImport, BackupImport>();
+            _container.Singleton<IFlashMessagesManager, FlashMessagesManager>();
             _container.PerRequest<IValidationObject, ValidationObject>();
             _container.Singleton<IEmployerViewModelsFactory, EmployerViewModelsFactory>();
-            _container.Singleton<IFlashMessagesManager, FlashMessagesManager>();
 
             _container.Singleton<IEmployerFactory, EmployerFactory>();
             _container.Singleton<IListingFactory, ListingFactory>();
@@ -98,11 +97,6 @@ namespace Evidoo
             _container.Singleton<EmptyListingsGenerationViewModel>(typeof(EmptyListingsGenerationViewModel).FullName);
             _container.PerRequest<WorkedTimeSettingViewModel>(typeof(WorkedTimeSettingViewModel).FullName);
             _container.PerRequest<ProgressBarWindowViewModel>(typeof(ProgressBarWindowViewModel).FullName);
-            _container.PerRequest<FlashMessageInfoViewModel>(typeof(FlashMessageInfoViewModel).FullName);
-            _container.PerRequest<FlashMessageSuccessViewModel>(typeof(FlashMessageSuccessViewModel).FullName);
-            _container.PerRequest<FlashMessageWarningViewModel>(typeof(FlashMessageWarningViewModel).FullName);
-            _container.PerRequest<FlashMessageErrorViewModel>(typeof(FlashMessageErrorViewModel).FullName);
-
 
             // Subscribers
             _container.Singleton<ListingSubscriber>().GetInstance<ListingSubscriber>();
@@ -129,11 +123,13 @@ namespace Evidoo
                 _container.BuildUp(vm);
                 _container.GetInstance<IWindowManager>().ShowWindow(vm);
 
-            } catch (StorageError ex) {
+            }
+            catch (StorageError ex) {
                 ro = new ResultObject(false);
                 ro.AddMessage("Nelze načíst Vaše data.");
 
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 ro = new ResultObject(false);
                 ro.AddMessage("Při spouštění aplikace došlo k neočekávané chybě");
             }

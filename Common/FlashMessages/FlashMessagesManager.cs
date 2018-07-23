@@ -1,5 +1,4 @@
 ﻿using Caliburn.Micro;
-using Common.ViewModelResolver;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,10 +12,10 @@ namespace Common.FlashMessages
 {
     public class FlashMessagesManager : PropertyChangedBase, IFlashMessagesManager
     {
-        private ObservableCollection<IFlashMessageViewModel> _items;
-        public ObservableCollection<IFlashMessageViewModel> Items
+        private ObservableCollection<FlashMessage> _flashMessages;
+        public ObservableCollection<FlashMessage> FlashMessages
         {
-            get { return _items; }
+            get { return _flashMessages; }
         }
 
 
@@ -33,32 +32,56 @@ namespace Common.FlashMessages
 
 
         private DispatcherTimer _dispatcherTimer;
+        private FlashMessagesCollection _sourceCollection;
 
         public FlashMessagesManager()
         {
+            _sourceCollection = new FlashMessagesCollection();
             _dispatcherTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(300) };
-            
-            _items = new ObservableCollection<IFlashMessageViewModel>();
+            _dispatcherTimer.Tick += (o, e) => {
+                if (_sourceCollection.IsEmpty) {
+                    _dispatcherTimer.Stop();
+                    return;
+                }
+                _flashMessages.Add(_sourceCollection.CutFirst());
+            };
+            _flashMessages = new ObservableCollection<FlashMessage>();
             IsEmpty = true;
         }
 
 
-        public void DisplayFlashMessage(IFlashMessage flashMessage)
+        public void DisplayFlashMessages()
         {
-            //_viewModelResolver.BuildUp(flashMessage.ViewModel);
-            Items.Add(flashMessage.ViewModel);
+            _dispatcherTimer.Start();
         }
 
 
-        public void ClearFlashMessage(IFlashMessageViewModel vm)
+        public IFlashMessagesManager AddFlashMessage(string message, Type type)
         {
-            //Items.Remove(vm);
+            if (_dispatcherTimer.IsEnabled) {
+                _dispatcherTimer.Stop();
+                ClearFlashMessages();
+            }
+            _sourceCollection.Add(message, type);
+            IsEmpty = false;
+
+            return this;
+        }
+
+
+        public void DisplayFlashMessage(string message, Type type)
+        {
+            ClearFlashMessages();
+            IsEmpty = false;
+            _flashMessages.Add(new FlashMessage(message, type));
         }
 
 
         public void ClearFlashMessages()
         {
-            
+            _sourceCollection.Clear();
+            _flashMessages.Clear();
+            IsEmpty = true;
         }
     }
 }
