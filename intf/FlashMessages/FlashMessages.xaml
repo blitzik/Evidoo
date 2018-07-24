@@ -38,8 +38,8 @@
                         <DataTrigger.EnterActions>
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleX" To="0" Duration="0:0:.15"/>
                                     <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:.15" />
+                                    <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleY" To="0" Duration="0:0:.15"/>
                                 </Storyboard>
                             </BeginStoryboard>
                         </DataTrigger.EnterActions>

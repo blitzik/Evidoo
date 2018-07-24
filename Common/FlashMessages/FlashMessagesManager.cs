@@ -19,27 +19,14 @@ namespace Common.FlashMessages
         }
 
 
-        private bool _isEmpty;
-        public bool IsEmpty
-        {
-            get { return _isEmpty; }
-            set
-            {
-                _isEmpty = value;
-                NotifyOfPropertyChange(() => IsEmpty);
-            }
-        }
-
-
         private DispatcherTimer _dispatcherTimer;
 
         public FlashMessagesManager()
         {
-            _dispatcherTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(500) };
+            _dispatcherTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(100) };
             _dispatcherTimer.Tick += OnTick;
 
             _flashMessages = new ObservableCollection<FlashMessageDecorator>();
-            IsEmpty = true;
         }
 
 
@@ -56,15 +43,17 @@ namespace Common.FlashMessages
                 if (fmd.CanBeDisposed == false) {
                     fmd.MarkFlashMessageAsDisposable();
                 } else {
-                    FlashMessages.Remove(fmd);
+                    if (fmd.CanBeRemoved(now)) {
+                        FlashMessages.Remove(fmd);
+                    }
                 }
             }
         }
 
 
-        public void DisplayFlashMessage(string message, Type type)
+        public void DisplayFlashMessage(string message, Type type, TimeSpan? lifespan = null)
         {
-            FlashMessage fm = new FlashMessage(message, type);
+            FlashMessage fm = new FlashMessage(message, type, lifespan);
             FlashMessages.Add(new FlashMessageDecorator(fm));
 
             if (!_dispatcherTimer.IsEnabled) {
@@ -75,6 +64,13 @@ namespace Common.FlashMessages
 
         public void ClearFlashMessages()
         {
+            _dispatcherTimer.Stop();
+
+            foreach (var fmd in FlashMessages) {
+                fmd.MarkFlashMessageAsDisposable();
+            }
+
+            _dispatcherTimer.Start();
         }
     }
 }

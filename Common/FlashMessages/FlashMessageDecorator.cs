@@ -49,5 +49,10 @@ namespace Common.FlashMessages
             NotifyOfPropertyChange(() => CanBeDisposed);
         }
 
+
+        public bool CanBeRemoved(long now)
+        {
+            return (_disposeAt + 2000) <= now;
+        }
     }
 }
