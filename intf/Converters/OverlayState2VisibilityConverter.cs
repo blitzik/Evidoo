@@ -20,7 +20,7 @@ namespace intf.Converters
                     return Visibility.Visible;
 
                 default:
-                    return Visibility.Collapsed;
+                    return Visibility.Hidden;
             }
         }
 
