@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using Common.Commands;
 using intf.BaseViewModels;
+using intf.Messages;
 using intf.Subscribers.Messages;
 using prjt.Domain;
 using prjt.EventArguments;
@@ -272,35 +273,23 @@ namespace intf.Views
                 return;
             }
 
-            ProgressBarWindowViewModel pb = new ProgressBarWindowViewModel();
-            Task.Run(async () => {
+            EventAggregator.PublishOnUIThread(new DisplayOverlayMessage(PrepareViewModel<ProgressViewModel>()));
+            Task.Run(() => {
                 ResultObject ro = _settingFacade.BackupData(filePath);
-
-                pb.Success = ro.Success;
-                await Task.Delay(pb.ResultIconDelay);
-
-                pb.TryClose();
+                EventAggregator.PublishOnUIThread(new HideOverlayMessage());
             });
-
-            _windowManager.ShowDialog(pb);
         }
 
 
         private async void ImportBackup()
         {
-            ProgressBarWindowViewModel pb = new ProgressBarWindowViewModel();
-            Task<ResultObject> t = Task<ResultObject>.Run(async () => {
+            EventAggregator.PublishOnUIThread(new DisplayOverlayMessage(PrepareViewModel<ProgressViewModel>()));
+            Task<ResultObject> t = Task<ResultObject>.Run(() => {
                 ResultObject r = _settingFacade.ImportBackup(BackupFilePath);
 
-                pb.Success = r.Success;
-                await Task.Delay(pb.ResultIconDelay);
-
-                pb.TryClose();
-
+                EventAggregator.PublishOnUIThread(new HideOverlayMessage());
                 return r;
             });
-
-            _windowManager.ShowDialog(pb);
 
             ResultObject ro = await t;
 

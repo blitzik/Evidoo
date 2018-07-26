@@ -139,19 +139,14 @@ namespace intf.Views
                 return;
             }
 
-            ProgressBarWindowViewModel pb = PrepareViewModel<ProgressBarWindowViewModel>();
-            Task.Run(async () => {
+            EventAggregator.PublishOnUIThread(new DisplayOverlayMessage(PrepareViewModel<ProgressViewModel>()));
+            Task.Run(() => {
                 Document doc = _listingPdfDocumentFactory.Create(Listing, _pdfSetting);
                 _listingReportGenerator.Save(filePath, doc);
 
-                pb.Success = true;
-                await Task.Delay(pb.ResultIconDelay);
-
-                pb.TryClose();
+                EventAggregator.PublishOnUIThread(new HideOverlayMessage());
                 EventAggregator.PublishOnUIThread(new ListingPdfSuccessfullyGeneratedMessage());
             });
-            
-            _windowManager.ShowDialog(pb);
         }
 
 

@@ -14,6 +14,7 @@ using Caliburn.Micro;
 using System.Windows.Forms;
 using intf.BaseViewModels;
 using intf.Subscribers.Messages;
+using intf.Messages;
 
 namespace intf.Views
 {
@@ -89,8 +90,8 @@ namespace intf.Views
                 return;
             }
 
-            ProgressBarWindowViewModel pb = PrepareViewModel<ProgressBarWindowViewModel>();
-            Task.Run(async () => {
+            EventAggregator.PublishOnUIThread(new DisplayOverlayMessage(PrepareViewModel<ProgressViewModel>()));
+            Task.Run(() => {
                 List<Listing> list = new List<Listing>();
                 for (int month = 0; month < 12; month++) {
                     list.Add(_listingFactory.Create(SelectedYear, month + 1));
@@ -99,14 +100,9 @@ namespace intf.Views
                 Document doc = _multipleListingReportFactory.Create(list, new DefaultListingPdfReportSetting());
                 _listingReportGenerator.Save(filePath, doc);
 
-                pb.Success = true;
-                await Task.Delay(pb.ResultIconDelay);
-
-                pb.TryClose();
+                EventAggregator.PublishOnUIThread(new HideOverlayMessage());
                 EventAggregator.PublishOnUIThread(new ListingPdfSuccessfullyGeneratedMessage());
             });
-
-            _windowManager.ShowDialog(pb);
         }
 
     }

@@ -2,16 +2,16 @@
 using prjt.Domain;
 using intf.Messages;
 using System.Reflection;
-using Common.Commands;
 using Common.EventAggregator.Messages;
-using Common.ViewModels;
 using intf.BaseViewModels;
 
 namespace intf.Views
 {
     public class MainWindowViewModel :
         BaseConductorOneActive,
-        IHandle<IChangeViewMessage<BaseViewModels.IViewModel>>
+        IHandle<IChangeViewMessage<BaseViewModels.IViewModel>>,
+        IHandle<DisplayOverlayMessage>,
+        IHandle<HideOverlayMessage>
     {
         private PageTitle _title = new PageTitle();
         public PageTitle Title
@@ -37,14 +37,29 @@ namespace intf.Views
         }
 
 
+        // -----
+
+
         protected override void OnInitialize()
         {
             base.OnInitialize();
 
             EventAggregator.Subscribe(this);
 
+            OverlayState = OverlayState.HIDDEN;
             DisplayListingsOverview();
         }
+
+
+        public override void ActivateItem(BaseViewModels.IViewModel item)
+        {
+            Title = item.WindowTitle;
+
+            base.ActivateItem(item);
+        }
+
+
+        // -----
 
 
         public void DisplayListingsOverview()
@@ -94,11 +109,36 @@ namespace intf.Views
         // -----
 
 
-        public override void ActivateItem(BaseViewModels.IViewModel item)
+        private BaseViewModels.IViewModel _overlayWindowViewModel;
+        public BaseViewModels.IViewModel OverlayWindowViewModel
         {
-            Title = item.WindowTitle;
+            get { return _overlayWindowViewModel; }
+            set { Set(ref _overlayWindowViewModel, value); }
+        }
 
-            base.ActivateItem(item);
+
+        private OverlayState _overlayState;
+        public OverlayState OverlayState
+        {
+            get { return _overlayState; }
+            set { Set(ref _overlayState, value); }
+        }
+
+
+        public void Handle(DisplayOverlayMessage message)
+        {
+            OverlayState = OverlayState.VISIBLE;
+            if (message.ViewModel != null) {
+                OverlayWindowViewModel = message.ViewModel;
+            } else {
+                OverlayWindowViewModel = GetViewModel(message.Type);
+            }
+        }
+
+
+        public void Handle(HideOverlayMessage message)
+        {
+            OverlayState = OverlayState.HIDDEN;
         }
     }
 }

@@ -92,6 +92,7 @@
     <Compile Include="Converters\InverseBooleansToBooleanConverter.cs" />
     <Compile Include="Converters\IsNullConverter.cs" />
     <Compile Include="Converters\NegateBoolConverter.cs" />
+    <Compile Include="Converters\OverlayState2VisibilityConverter.cs" />
     <Compile Include="Converters\TimeToHoursAndMinutesConverter.cs" />
     <Compile Include="Converters\TimeToHoursAndMinutesRangeConverter.cs" />
     <Compile Include="Converters\TimeToIntConverter.cs" />
@@ -101,6 +102,8 @@
       <DependentUpon>FlashMessages.xaml</DependentUpon>
     </Compile>
     <Compile Include="Messages\ChangeViewMessage.cs" />
+    <Compile Include="Messages\DisplayOverlayMessage.cs" />
+    <Compile Include="Messages\HideOverlayMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -185,22 +188,10 @@
       <DependentUpon>MainWindowView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Main\MainWindowViewModel.cs" />
-    <Compile Include="Views\ProgressBar\FailureView.xaml.cs">
-      <DependentUpon>FailureView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ProgressBar\FailureViewModel.cs" />
-    <Compile Include="Views\ProgressBar\ProgressBarWindowView.xaml.cs">
-      <DependentUpon>ProgressBarWindowView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ProgressBar\ProgressBarWindowViewModel.cs" />
     <Compile Include="Views\ProgressBar\ProgressView.xaml.cs">
       <DependentUpon>ProgressView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProgressBar\ProgressViewModel.cs" />
-    <Compile Include="Views\ProgressBar\SuccessView.xaml.cs">
-      <DependentUpon>SuccessView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ProgressBar\SuccessViewModel.cs" />
     <Compile Include="Views\Settings\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
@@ -302,19 +293,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\ProgressBar\FailureView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\ProgressBar\ProgressBarWindowView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\ProgressBar\ProgressView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\ProgressBar\SuccessView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

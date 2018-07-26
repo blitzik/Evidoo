@@ -6,11 +6,15 @@
         xmlns:local="clr-namespace:intf.Views"
         xmlns:converters="clr-namespace:intf.Converters"
         xmlns:flashMessages="clr-namespace:intf.FlashMessages"
+        xmlns:messages="clr-namespace:intf.Messages"
+        xmlns:c="http://www.caliburnproject.org"
+        xmlns:b="clr-namespace:intf.Behaviors"
         mc:Ignorable="d"
         Title="Evidoo - Evidence odpracovaných hodin" Height="700" Width="1200" MinWidth="1200" MinHeight="700" Background="#F0F0F0">
 
     <Window.Resources>
         <converters:ViewModelToBooleanConverter x:Key="ViewModelToBooleanConverter" />
+        <converters:OverlayState2VisibilityConverter x:Key="OverlayState2VisibilityConverter" />
     </Window.Resources>
     
     <Grid>
@@ -23,6 +27,26 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
+
+        <Grid b:AnimateableVisibility.Visibility="{Binding OverlayState, Converter={StaticResource OverlayState2VisibilityConverter}}"
+              b:AnimateableVisibility.Duration="150"
+              Grid.Row="0"
+              Grid.RowSpan="2"
+              Grid.Column="0"
+              Grid.ColumnSpan="2"
+              Panel.ZIndex="1000">
+            <Grid.Resources>
+                <Style TargetType="{x:Type Grid}">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="#000" Opacity=".35" />
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Grid.Resources>
+            <ContentControl Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" c:View.Model="{Binding OverlayWindowViewModel, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+        
 
         <Border Grid.Row="0" Grid.Column="0" Background="#3498db">
             <TextBlock Text="Evidoo" FontSize="19" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF" />

@@ -97,7 +97,6 @@ namespace Evidoo
             _container.Singleton<SettingsViewModel>(typeof(SettingsViewModel).FullName);
             _container.Singleton<EmptyListingsGenerationViewModel>(typeof(EmptyListingsGenerationViewModel).FullName);
             _container.PerRequest<WorkedTimeSettingViewModel>(typeof(WorkedTimeSettingViewModel).FullName);
-            _container.PerRequest<ProgressBarWindowViewModel>(typeof(ProgressBarWindowViewModel).FullName);
 
             // Subscribers
             _container.Singleton<ListingSubscriber>().GetInstance<ListingSubscriber>();
