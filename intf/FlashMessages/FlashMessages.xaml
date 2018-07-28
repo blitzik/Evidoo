@@ -120,7 +120,7 @@
                                 </Style>
                             </Rectangle.Style>
                         </Rectangle>
-                        <TextBlock Grid.Column="2" Text="{Binding ElementName=ItemBorder, Path=DataContext.FlashMessage.Message}" TextAlignment="Right" TextWrapping="Wrap" Foreground="#FFF" FontSize="14" />
+                        <TextBlock Grid.Column="2" Text="{Binding ElementName=ItemBorder, Path=DataContext.FlashMessage.Message}" TextWrapping="Wrap" Foreground="#FFF" FontSize="14" />
                     </Grid>
                 </Border>
             </DataTemplate>

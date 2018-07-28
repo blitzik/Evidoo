@@ -1,4 +1,5 @@
-﻿using prjt.Domain;
+﻿using Common.Utils.ResultObject;
+using prjt.Domain;
 using prjt.Services;
 using prjt.Services.Backup;
 using System.IO;
@@ -16,15 +17,15 @@ namespace prjt.Facades
         }
 
 
-        public ResultObject CreateDefaultSettings(string identifier)
+        public ResultObject<DefaultSettings> CreateDefaultSettings(string identifier)
         {
             DefaultSettings ds = new DefaultSettings(identifier);
-            ResultObject ro;
+            ResultObject<DefaultSettings> ro;
             if (Root().DefaultSettings.Put(ds) == false) {
-                ro = new ResultObject(false);
+                ro = new ResultObject<DefaultSettings>(false);
                 ro.AddMessage(string.Format("Nastavení s názem \"{0}\" již existuje.", identifier));
             } else {
-                ro = new ResultObject(true, ds);
+                ro = new ResultObject<DefaultSettings>(true, ds);
                 Storage().Commit();
             }
 
@@ -43,7 +44,7 @@ namespace prjt.Facades
         {
             DefaultSettings ds = Root().DefaultSettings.Get(DefaultSettings.MAIN_SETTINGS_ID);
             if (ds == null) {
-                ResultObject ro = CreateDefaultSettings(DefaultSettings.MAIN_SETTINGS_ID);
+                ResultObject<DefaultSettings> ro = CreateDefaultSettings(DefaultSettings.MAIN_SETTINGS_ID);
                 if (ro.Success) {
                     ds = (DefaultSettings)ro.Result;
                 } // todo
@@ -53,16 +54,16 @@ namespace prjt.Facades
         }
 
 
-        public ResultObject BackupData(string filePath)
+        public ResultObject<object> BackupData(string filePath)
         {
-            ResultObject ro;
+            ResultObject<object> ro;
             try {
                 Storage().Backup(new FileStream(filePath, FileMode.Create));
-                ro = new ResultObject(true);
-                ro.AddMessage("Záloha databáze proběhla úspěšně!");
+                ro = new ResultObject<object>(true);
+                ro.AddMessage("Záloha databáze proběhla úspěšně!", ResultObjectMessageSeverity.SUCCESS);
 
             } catch (IOException e) {
-                ro = new ResultObject(false);
+                ro = new ResultObject<object>(false);
                 ro.AddMessage("Zálohu databáze nelze dokončit. Došlo k chybě.");
             }
 
@@ -70,7 +71,7 @@ namespace prjt.Facades
         }
 
 
-        public ResultObject ImportBackup(string filePath)
+        public ResultObject<object> ImportBackup(string filePath)
         {
             return _backupImport.Import(filePath, PerstStorageFactory.GetDatabaseDirectoryPath(), PerstStorageFactory.MAIN_DATABASE_NAME, PerstStorageFactory.DATABASE_EXTENSION);
         }

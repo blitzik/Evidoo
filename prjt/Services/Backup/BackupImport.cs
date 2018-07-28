@@ -3,6 +3,7 @@ using Perst;
 using System;
 using System.IO;
 using System.Reflection;
+using Common.Utils.ResultObject;
 
 namespace prjt.Services.Backup
 {
@@ -19,23 +20,23 @@ namespace prjt.Services.Backup
         }
 
 
-        public ResultObject Import(string importFilePath, string appDBDirectory, string activeDBName, string activeDBExtension)
+        public ResultObject<object> Import(string importFilePath, string appDBDirectory, string activeDBName, string activeDBExtension)
         {
-            ResultObject ro;
+            ResultObject<object> ro;
             try {
                 Storage importedDb = StorageFactory.Instance.CreateStorage();
                 importedDb.Open(importFilePath, 4 * 1024 * 1024);
                 importedDb.Close();
 
-                ro = new ResultObject(true);
-                ro.AddMessage("Import dat proběhl úspěšně!");
+                ro = new ResultObject<object>(true);
+                ro.AddMessage("Import dat proběhl úspěšně!", ResultObjectMessageSeverity.SUCCESS);
 
             } catch (StorageError e) {
-                ro = new ResultObject(false);
-                ro.AddMessage("Ze zvoleného souboru nelze importovat data.");
+                ro = new ResultObject<object>(false);
+                ro.AddMessage("Ze zvoleného souboru nelze importovat data.", ResultObjectMessageSeverity.WARNING);
 
             } catch (Exception e) {
-                ro = new ResultObject(false);
+                ro = new ResultObject<object>(false);
                 ro.AddMessage("Při importu dat došlo k chybě.");
             }
 

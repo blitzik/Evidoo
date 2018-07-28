@@ -86,7 +86,6 @@
     <Compile Include="Domain\ListingItem.cs" />
     <Compile Include="Domain\PageTitle.cs" />
     <Compile Include="Domain\Persistent.cs" />
-    <Compile Include="Domain\ResultObject.cs" />
     <Compile Include="Domain\TimeSetting.cs" />
     <Compile Include="Domain\Week.cs" />
     <Compile Include="EventArguments\ListingArgs.cs" />

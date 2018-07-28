@@ -22,6 +22,7 @@ using Perst;
 using intf.BaseViewModels;
 using intf.Factories.Employers;
 using intf.Subscribers;
+using Common.Utils.ResultObject;
 
 namespace Evidoo
 {
@@ -111,7 +112,7 @@ namespace Evidoo
                 System.Windows.Application.Current.Shutdown();
             }*/
 
-            ResultObject ro = new ResultObject(true);
+            ResultObject<object> ro = new ResultObject<object>(true);
             try {
                 Storage db = _container.GetInstance<PerstStorageFactory>().OpenConnection(PerstStorageFactory.MAIN_DATABASE_NAME);
                 StoragePool sp = _container.GetInstance<StoragePool>();
@@ -123,18 +124,18 @@ namespace Evidoo
 
             }
             catch (StorageError ex) {
-                ro = new ResultObject(false);
+                ro = new ResultObject<object>(false);
                 ro.AddMessage("Nelze načíst Vaše data.");
 
             }
             catch (Exception ex) {
-                ro = new ResultObject(false);
+                ro = new ResultObject<object>(false);
                 ro.AddMessage("Při spouštění aplikace došlo k neočekávané chybě");
             }
 
             if (!ro.Success) {
                 StartupErrorWindowViewModel errw = _container.GetInstance<StartupErrorWindowViewModel>();
-                errw.Text = ro.GetLastMessage();
+                errw.Text = ro.GetLastMessage().Text;
                 _container.GetInstance<IWindowManager>().ShowDialog(errw);
             }
         }

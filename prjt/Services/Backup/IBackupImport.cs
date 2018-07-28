@@ -1,4 +1,5 @@
-﻿using prjt.Domain;
+﻿using Common.Utils.ResultObject;
+using prjt.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace prjt.Services.Backup
 {
     public interface IBackupImport
     {
-        ResultObject Import(string importFilePath, string appDBDirectory, string activeDBName, string activeDBExtension);
+        ResultObject<object> Import(string importFilePath, string appDBDirectory, string activeDBName, string activeDBExtension);
     }
 }

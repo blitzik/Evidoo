@@ -220,7 +220,6 @@
 
                         <StackPanel Grid.Column="0">
                             <TextBlock Margin="0 0 0 0" Text="Import dat" Style="{StaticResource LabelText}" />
-                            <TextBlock Text="{Binding ImportDataResultMessage, UpdateSourceTrigger=PropertyChanged}" />
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />

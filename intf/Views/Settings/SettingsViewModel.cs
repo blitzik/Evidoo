@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using Common.Commands;
+using Common.Utils.ResultObject;
 using intf.BaseViewModels;
 using intf.Messages;
 using intf.Subscribers.Messages;
@@ -103,18 +104,6 @@ namespace intf.Views
         }
 
 
-        private string _importDataResultMessage;
-        public string ImportDataResultMessage
-        {
-            get { return _importDataResultMessage; }
-            set
-            {
-                _importDataResultMessage = value;
-                NotifyOfPropertyChange(() => ImportDataResultMessage);
-            }
-        }
-
-
         private DelegateCommand<object> _importDataCommand;
         public DelegateCommand<object> ImportDataCommand
         {
@@ -195,8 +184,6 @@ namespace intf.Views
             }
             _workedTimeViewModel.SetTime(_defaultSetting.Time);
             _workedTimeViewModel.SelectedTimeTickInMinutes = _defaultSetting.TimeTickInMinutes;
-
-            ImportDataResultMessage = null;
         }
 
 
@@ -275,8 +262,9 @@ namespace intf.Views
 
             EventAggregator.PublishOnUIThread(new DisplayOverlayMessage(PrepareViewModel<ProgressViewModel>()));
             Task.Run(() => {
-                ResultObject ro = _settingFacade.BackupData(filePath);
+                ResultObject<object> ro = _settingFacade.BackupData(filePath);
                 EventAggregator.PublishOnUIThread(new HideOverlayMessage());
+                EventAggregator.PublishOnUIThread(new BackupSuccessfullyCreatedMessage());
             });
         }
 
@@ -284,20 +272,20 @@ namespace intf.Views
         private async void ImportBackup()
         {
             EventAggregator.PublishOnUIThread(new DisplayOverlayMessage(PrepareViewModel<ProgressViewModel>()));
-            Task<ResultObject> t = Task<ResultObject>.Run(() => {
-                ResultObject r = _settingFacade.ImportBackup(BackupFilePath);
+            Task<ResultObject<object>> t = Task.Run(() => {
+                ResultObject<object> r = _settingFacade.ImportBackup(BackupFilePath);
 
                 EventAggregator.PublishOnUIThread(new HideOverlayMessage());
                 return r;
             });
 
-            ResultObject ro = await t;
+            ResultObject<object> ro = await t;
+            EventAggregator.PublishOnUIThread(new BackupImportedMessage(ro));
 
             _defaultSetting = _settingFacade.GetDefaultSettings();
             Reset();
 
-            BackupFilePath = null;
-            ImportDataResultMessage = ro.GetLastMessage();
+            BackupFilePath = null;            
         }
 
 

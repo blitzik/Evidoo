@@ -119,6 +119,8 @@
     <Compile Include="Subscribers\BaseSubscriber.cs" />
     <Compile Include="Subscribers\EmployerSubscriber.cs" />
     <Compile Include="Subscribers\ListingSubscriber.cs" />
+    <Compile Include="Subscribers\Messages\BackupSuccessfullyCreatedMessage.cs" />
+    <Compile Include="Subscribers\Messages\BackupImportedMessage.cs" />
     <Compile Include="Subscribers\Messages\BaseListingMessage.cs" />
     <Compile Include="Subscribers\Messages\BaseEmployerMessage.cs" />
     <Compile Include="Subscribers\Messages\EmployerSuccessfullyDeletedMessage.cs" />
