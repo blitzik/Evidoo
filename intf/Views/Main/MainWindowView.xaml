@@ -160,7 +160,13 @@
         </Border>
 
         <Border Grid.Row="1" Grid.Column="1" Padding="10">
-            <ContentControl x:Name="ActiveItem" />
+            <ContentControl x:Name="ActiveItem">
+                <b:ContentControlExtension.Storyboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From=".5" To="1" Duration="0:0:.20" />
+                    </Storyboard>
+                </b:ContentControlExtension.Storyboard>
+            </ContentControl>
         </Border>
 
         <flashMessages:FlashMessages Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" />

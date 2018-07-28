@@ -46,7 +46,6 @@
                             <Setter Property="b:AnimatedItemRemovalBehavior.Storyboard">
                                 <Setter.Value>
                                     <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:.15" />
                                         <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleY" From="1" To="0" Duration="0:0:.15"/>
                                     </Storyboard>
                                 </Setter.Value>
@@ -58,7 +57,6 @@
                                     <EventTrigger.Actions>
                                         <BeginStoryboard>
                                             <Storyboard>
-                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:.15" />
                                                 <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleY" From="0" Duration="0:0:.15"/>
                                             </Storyboard>
                                         </BeginStoryboard>
