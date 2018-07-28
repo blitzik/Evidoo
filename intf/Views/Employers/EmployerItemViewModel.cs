@@ -9,6 +9,28 @@ namespace intf.Views
 {
     public class EmployerItemViewModel : BaseConductorOneActive
     {
+        private bool _canBeRemoved;
+        public bool CanBeRemoved
+        {
+            get { return _canBeRemoved; }
+            set { Set(ref _canBeRemoved, value); }
+        }
+
+
+        private DelegateCommand<EmployerItemViewModel> _removeEmployerCommand;
+        public DelegateCommand<EmployerItemViewModel> RemoveEmployerCommand
+        {
+            get
+            {
+                if (_removeEmployerCommand == null) {
+                    _removeEmployerCommand = new DelegateCommand<EmployerItemViewModel>(p => RemoveEmployer(p));
+                }
+                return _removeEmployerCommand;
+            }
+        }
+
+
+
         private EmployerDetailViewModel _employerDetailViewModel;
         private EmployerDeletionViewModel _employerDeletionViewModel;
 
@@ -23,6 +45,8 @@ namespace intf.Views
             _employerVMFactory = employerVMFactory;
             _employerFacade = employerFacade;
 
+            CanBeRemoved = false;
+
             _employerDetailViewModel = (EmployerDetailViewModel)_employerVMFactory.Create(employer, EmployerViewModel.DETAIL);
             _employerDetailViewModel.OnDeletionClicked += (object sender, EventArgs e) =>
             {
@@ -34,8 +58,8 @@ namespace intf.Views
                     };
                     _employerDeletionViewModel.OnDeletedEmployer += (object s, EventArgs ea) =>
                     {
+                        CanBeRemoved = true;
                         ActivateItem(_employerDetailViewModel);
-                        OnDeletedEmployer?.Invoke(this, EventArgs.Empty);
                     };
                 }
                 ActivateItem(_employerDeletionViewModel);
@@ -44,6 +68,10 @@ namespace intf.Views
         }
 
 
+        private void RemoveEmployer(EmployerItemViewModel p)
+        {
+            OnDeletedEmployer?.Invoke(this, EventArgs.Empty);
+        }
 
     }
 }

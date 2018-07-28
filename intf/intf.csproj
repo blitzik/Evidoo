@@ -86,6 +86,7 @@
     <Compile Include="BaseViewModels\BaseConductorOneActive.cs" />
     <Compile Include="BaseViewModels\BaseScreen.cs" />
     <Compile Include="BaseViewModels\IViewModel.cs" />
+    <Compile Include="Behaviors\AnimatedItemRemovalBehavior.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\IntToMonthNameConverter.cs" />
     <Compile Include="Converters\IntToTimeConverter.cs" />

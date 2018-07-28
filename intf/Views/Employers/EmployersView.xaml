@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:intf.Views"
+             xmlns:b="clr-namespace:intf.Behaviors"
              xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="1000">
@@ -35,6 +36,37 @@
 
             <ScrollViewer Grid.Row="2" Padding="0 0 10 0" Name="ScrollViewer" VerticalScrollBarVisibility="Auto" Template="{StaticResource ScrollViewerControlTemplate}">
                 <ItemsControl ItemsSource="{Binding Employers, UpdateSourceTrigger=PropertyChanged}">
+                    <ItemsControl.ItemContainerStyle>
+                        <Style TargetType="{x:Type FrameworkElement}">
+                            <Setter Property="LayoutTransform">
+                                <Setter.Value>
+                                    <ScaleTransform />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="b:AnimatedItemRemovalBehavior.Storyboard">
+                                <Setter.Value>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:.15" />
+                                        <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleY" From="1" To="0" Duration="0:0:.15"/>
+                                    </Storyboard>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="b:AnimatedItemRemovalBehavior.IsMarkedForDelete" Value="{Binding CanBeRemoved}" />
+                            <Setter Property="b:AnimatedItemRemovalBehavior.PerformRemoval" Value="{Binding RemoveEmployerCommand}" />
+                            <Style.Triggers>
+                                <EventTrigger RoutedEvent="Loaded">
+                                    <EventTrigger.Actions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:.15" />
+                                                <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleY" From="0" Duration="0:0:.15"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger.Actions>
+                                </EventTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <ContentControl cal:View.Model="{Binding}" />
