@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using Common.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,19 @@ namespace Common.FlashMessages
         }
 
 
+        private DelegateCommand<object> _disposeCommand;
+        public DelegateCommand<object> DisposeCommand
+        {
+            get
+            {
+                if (_disposeCommand == null) {
+                    _disposeCommand = new DelegateCommand<object>(p => Dispose());
+                }
+                return _disposeCommand;
+            }
+        }
+
+
         public FlashMessageDecorator(IFlashMessage flashMessage)
         {
             _flashMessage = flashMessage;
@@ -53,6 +67,12 @@ namespace Common.FlashMessages
         public bool CanBeRemoved(long now)
         {
             return (_disposeAt + 2000) <= now;
+        }
+
+
+        private void Dispose()
+        {
+            MarkFlashMessageAsDisposable();
         }
     }
 }

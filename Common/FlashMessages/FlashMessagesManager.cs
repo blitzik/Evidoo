@@ -53,8 +53,8 @@ namespace Common.FlashMessages
 
         public void DisplayFlashMessage(string message, Type type, TimeSpan? lifespan = null)
         {
-            FlashMessage fm = new FlashMessage(message, type, lifespan);
-            FlashMessages.Add(new FlashMessageDecorator(fm));
+            var d = new FlashMessageDecorator(new FlashMessage(message, type, lifespan));
+            FlashMessages.Add(d);
 
             if (!_dispatcherTimer.IsEnabled) {
                 _dispatcherTimer.Start();
