@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using Common.EventAggregator.Messages;
 using intf.BaseViewModels;
 using intf.Subscribers.Messages;
-using intf.Behaviors;
 using intf.Utils;
 
 namespace intf.Views

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Animation;
 
-namespace intf.Behaviors
+namespace Common.Behaviors
 {
     public class AnimateableVisibility : DependencyObject
     {

@@ -8,7 +8,7 @@
         xmlns:flashMessages="clr-namespace:intf.FlashMessages"
         xmlns:messages="clr-namespace:intf.Messages"
         xmlns:c="http://www.caliburnproject.org"
-        xmlns:b="clr-namespace:intf.Behaviors"
+        xmlns:b="clr-namespace:Common.Behaviors;assembly=Common"
         mc:Ignorable="d"
         Title="Evidoo - Evidence odpracovaných hodin" Height="700" Width="1200" MinWidth="1200" MinHeight="700" Background="#F0F0F0">
 

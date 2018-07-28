@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 
-namespace intf.Behaviors
+namespace Common.Behaviors
 {
     public class ContentControlExtension : DependencyObject
     {
