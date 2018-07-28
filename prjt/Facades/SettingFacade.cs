@@ -57,7 +57,7 @@ namespace prjt.Facades
         {
             ResultObject ro;
             try {
-                Storage().Backup(new FileStream(filePath, FileMode.Open));
+                Storage().Backup(new FileStream(filePath, FileMode.Create));
                 ro = new ResultObject(true);
                 ro.AddMessage("Záloha databáze proběhla úspěšně!");
 

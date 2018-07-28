@@ -30,7 +30,6 @@ namespace prjt.Services.Backup
                 ro = new ResultObject(true);
                 ro.AddMessage("Import dat proběhl úspěšně!");
 
-
             } catch (StorageError e) {
                 ro = new ResultObject(false);
                 ro.AddMessage("Ze zvoleného souboru nelze importovat data.");
