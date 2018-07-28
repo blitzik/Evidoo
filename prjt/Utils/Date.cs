@@ -17,7 +17,7 @@ namespace prjt.Utils
         };
         public static List<string> Months
         {
-            get { return _months; }
+            get { return new List<string>(_months); }
         }
 
 
@@ -26,7 +26,7 @@ namespace prjt.Utils
         };
         public static List<string> DaysOfWeek
         {
-            get { return _daysOfWeek; }
+            get { return new List<string>(_daysOfWeek); }
         }
 
 

@@ -99,6 +99,14 @@ namespace intf.Views
         }
 
 
+        protected override void OnActivate()
+        {
+            base.OnActivate();
+
+            LoadListings(SelectedYear, SelectedMonth);
+        }
+
+
         private void LoadListings(int year, int month)
         {
             Listings = CollectionViewSource.GetDefaultView(_listingFacade.FindListings(year, month));
@@ -108,17 +116,6 @@ namespace intf.Views
         private void OpenListing(Listing listing)
         {
             EventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingDetailViewModel>(x => { x.Listing = listing; }));
-        }
-
-
-        // -----
-
-
-        protected override void OnActivate()
-        {
-            base.OnActivate();
-
-            LoadListings(SelectedYear, SelectedMonth);
         }
     }
 }
