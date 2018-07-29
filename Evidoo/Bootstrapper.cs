@@ -91,7 +91,6 @@ namespace Evidoo
             _container.Singleton<ListingViewModel>(typeof(ListingViewModel).FullName);
             _container.Singleton<ListingDeletionViewModel>(typeof(ListingDeletionViewModel).FullName);
             _container.Singleton<ListingDetailViewModel>(typeof(ListingDetailViewModel).FullName);
-            _container.Singleton<ListingDetailNavigationViewModel>(typeof(ListingDetailNavigationViewModel).FullName);
             _container.Singleton<ListingEditingViewModel>(typeof(ListingEditingViewModel).FullName);
             _container.Singleton<ListingItemViewModel>(typeof(ListingItemViewModel).FullName);
             _container.Singleton<ListingPdfGenerationViewModel>(typeof(ListingPdfGenerationViewModel).FullName);

@@ -161,10 +161,6 @@
       <DependentUpon>ListingDetailView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ListingDetail\ListingDetailViewModel.cs" />
-    <Compile Include="Views\ListingDetail\Navigation\ListingDetailNavigationView.xaml.cs">
-      <DependentUpon>ListingDetailNavigationView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ListingDetail\Navigation\ListingDetailNavigationViewModel.cs" />
     <Compile Include="Views\ListingEditing\ListingEditingView.xaml.cs">
       <DependentUpon>ListingEditingView.xaml</DependentUpon>
     </Compile>
@@ -265,10 +261,6 @@
     <Page Include="Views\ListingDetail\ListingDetailView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\ListingDetail\Navigation\ListingDetailNavigationView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ListingEditing\ListingEditingView.xaml">
       <Generator>MSBuild:Compile</Generator>

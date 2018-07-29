@@ -97,11 +97,17 @@ namespace intf.Views
 
         public void Handle(IChangeViewMessage<BaseViewModels.IViewModel> message)
         {
+            IViewModel vm;
             if (message.ViewModel != null) {
-                ActivateItem(message.ViewModel);
+                vm = message.ViewModel;
             } else {
-                ActivateItem(GetViewModel(message.Type));
+                vm = GetViewModel(message.Type);
             }
+
+            if (vm == ActiveItem) {
+                return;
+            }
+            ActivateItem(vm);
             message.Apply(ActiveItem);
         }
 
