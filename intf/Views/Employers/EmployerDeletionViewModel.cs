@@ -59,7 +59,7 @@ namespace intf.Views
         public event Action<object, EventArgs> OnDeletedEmployer;
         private void DeleteEmployer()
         {
-            _employerFacade.Delete(Employer);
+            //_employerFacade.Delete(Employer);
 
             EventAggregator.PublishOnUIThread(new EmployerSuccessfullyDeletedMessage(Employer));
             OnDeletedEmployer?.Invoke(this, EventArgs.Empty);
