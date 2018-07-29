@@ -61,7 +61,7 @@
                             <Setter Property="Background" Value="#3498db" />
                             <Setter Property="BorderBrush" Value="#3498db" />
                             <Setter Property="Padding" Value="15" />
-                            <Setter Property="Margin" Value="0 5 0 0" />
+                            <Setter Property="Margin" Value="0 2 0 0" />
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding Type}" Value="{x:Static flashMessages:Type.SUCCESS}">
                                     <Setter Property="Background" Value="#27ae60" />
