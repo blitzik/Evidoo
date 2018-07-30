@@ -213,7 +213,7 @@ namespace prjt.Domain
                 if (_localities == null) {
                     _localities = new List<string>();
                     foreach (ListingItem i in Items.Values) {
-                        if (!string.IsNullOrEmpty(i.Locality)) {
+                        if (!string.IsNullOrEmpty(i.Locality) && !_localities.Contains(i.Locality)) {
                             _localities.Add(i.Locality);
                         }
                     }
@@ -356,7 +356,9 @@ namespace prjt.Domain
             OtherHours += newItem.TimeSetting.OtherHours;
             TotalWorkedHours += newItem.TimeSetting.TotalWorkedHours;
 
-            Localities.Add(locality);
+            if (!Localities.Contains(locality)) {
+                Localities.Add(locality);
+            }
 
             return newItem;
         }
@@ -368,8 +370,6 @@ namespace prjt.Domain
         }
 
 
-        public delegate void ReplaceItemHandler(object sender, ListingItemArgs oldListingItemArgs);
-        public event ReplaceItemHandler OnReplacedListingItem;
         public ListingItem ReplaceItem(int day, string locality, Time start, Time end, Time lunchStart, Time lunchEnd, Time otherHours)
         {
             if (!_items.ContainsKey(day)) {
@@ -377,10 +377,6 @@ namespace prjt.Domain
             }
 
             ListingItem oldItem = GetItemByDay(day);
-            ReplaceItemHandler handler = OnReplacedListingItem;
-            if (handler != null) {
-                handler(this, new ListingItemArgs(oldItem));
-            }
 
             ListingItem newItem = new ListingItem(this, day, locality, start, end, lunchStart, lunchEnd, otherHours);
 
@@ -391,7 +387,9 @@ namespace prjt.Domain
 
             _items[day] = newItem;
 
-            Localities.Add(locality);
+            if (!Localities.Contains(locality)) {
+                Localities.Add(locality);
+            }
 
             return newItem;
         }
@@ -403,8 +401,6 @@ namespace prjt.Domain
         }
 
 
-        public delegate void RemoveItemHandler(object sender, ListingItemArgs oldListingItemArgs);
-        public event RemoveItemHandler OnRemovedListingItem;
         public void RemoveItemByDay(int day)
         {
             if (!_items.ContainsKey(day)) {
@@ -419,11 +415,6 @@ namespace prjt.Domain
             TotalWorkedHours -= item.TimeSetting.TotalWorkedHours;
 
             _items.Remove(day);
-
-            RemoveItemHandler handler = OnRemovedListingItem;
-            if (handler != null) {
-                handler(this, new ListingItemArgs(item));
-            }
         }
 
 
