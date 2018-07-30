@@ -99,6 +99,7 @@ namespace intf.Views
         }
 
 
+        private TimeSetting _lastNoLunchSetTime;
         private bool _noLunch;
         public bool NoLunch
         {
@@ -108,12 +109,12 @@ namespace intf.Views
                 Set(ref _noLunch, value);
 
                 if (value == true) {
-                    _lastSetTime = new TimeSetting(_startTime, _endTime, _lunchStart, _lunchEnd, _otherHours);
+                    _lastNoLunchSetTime = new TimeSetting(_startTime, _endTime, _lunchStart, _lunchEnd, _otherHours);
                     _lunchStart = 0;
                     _lunchEnd = 0;
 
                 } else {
-                    SetTime(_lastSetTime);
+                    SetTime(_lastNoLunchSetTime);
                 }
 
                 NotifyOfPropertyChange(() => LunchStart);
@@ -125,7 +126,8 @@ namespace intf.Views
             }
         }
 
-        
+
+        private TimeSetting _lastNoTimeSetTime;
         private bool _noTime;
         public bool NoTime
         {
@@ -134,7 +136,7 @@ namespace intf.Views
             {
                 Set(ref _noTime, value);
                 if (value == true) {
-                    _lastSetTime = new TimeSetting(_startTime, _endTime, _lunchStart, _lunchEnd, _otherHours);
+                    _lastNoTimeSetTime = new TimeSetting(_startTime, _endTime, _lunchStart, _lunchEnd, _otherHours);
                     SetTime(new TimeSetting());
                     _noLunch = false;
 
@@ -142,10 +144,10 @@ namespace intf.Views
                     UpdateCommandsCanExecute();
 
                 } else {
-                    if (_lastSetTime.HasNoTime) {
+                    if (_lastNoTimeSetTime.HasNoTime) {
                         SetDefaultTimes();
                     } else {
-                        SetTime(_lastSetTime);
+                        SetTime(_lastNoTimeSetTime);
                     }
                 }
 
@@ -355,15 +357,13 @@ namespace intf.Views
         public event Action<object, EventArgs> OnTimeTickChanged;
 
 
-        private TimeSetting _lastSetTime;
-
-
         private TimeSetting _defaultTimeSettings;
 
         public WorkedTimeSettingViewModel(TimeSetting defaultTimeSettings, TimeSetting timeSetting, int timeTickInMinutes)
         {
             _defaultTimeSettings = defaultTimeSettings;
-            _lastSetTime = timeSetting;
+            _lastNoTimeSetTime = timeSetting;
+            _lastNoLunchSetTime = timeSetting;
 
             _startTime = timeSetting.Start.TotalSeconds;
             _endTime = timeSetting.End.TotalSeconds;
