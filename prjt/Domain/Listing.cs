@@ -205,15 +205,15 @@ namespace prjt.Domain
 
 
         [NonSerialized()]
-        private List<string> _localities;
-        public List<string> Localities
+        private HashSet<string> _localities;
+        public HashSet<string> Localities
         {
             get
             {
                 if (_localities == null) {
-                    _localities = new List<string>();
+                    _localities = new HashSet<string>();
                     foreach (ListingItem i in Items.Values) {
-                        if (!string.IsNullOrEmpty(i.Locality) && !_localities.Contains(i.Locality)) {
+                        if (!string.IsNullOrEmpty(i.Locality)) {
                             _localities.Add(i.Locality);
                         }
                     }
@@ -356,9 +356,7 @@ namespace prjt.Domain
             OtherHours += newItem.TimeSetting.OtherHours;
             TotalWorkedHours += newItem.TimeSetting.TotalWorkedHours;
 
-            if (!Localities.Contains(locality)) {
-                Localities.Add(locality);
-            }
+            Localities.Add(locality);
 
             return newItem;
         }
@@ -387,9 +385,7 @@ namespace prjt.Domain
 
             _items[day] = newItem;
 
-            if (!Localities.Contains(locality)) {
-                Localities.Add(locality);
-            }
+            Localities.Add(locality);
 
             return newItem;
         }

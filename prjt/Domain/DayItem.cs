@@ -130,7 +130,7 @@ namespace prjt.Domain
         }
 
 
-        public List<string> Localities
+        public HashSet<string> Localities
         {
             get { return _listing.Localities; }
         }
