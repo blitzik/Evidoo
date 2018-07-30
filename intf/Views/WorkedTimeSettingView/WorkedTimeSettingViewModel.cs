@@ -108,12 +108,12 @@ namespace intf.Views
                 Set(ref _noLunch, value);
 
                 if (value == true) {
+                    _lastSetTime = new TimeSetting(_startTime, _endTime, _lunchStart, _lunchEnd, _otherHours);
                     _lunchStart = 0;
                     _lunchEnd = 0;
 
                 } else {
-                    _lunchStart = StartTime;
-                    _lunchEnd = EndTime;
+                    SetTime(_lastSetTime);
                 }
 
                 NotifyOfPropertyChange(() => LunchStart);
@@ -125,7 +125,7 @@ namespace intf.Views
             }
         }
 
-
+        
         private bool _noTime;
         public bool NoTime
         {
@@ -351,16 +351,14 @@ namespace intf.Views
         }
 
 
-        public delegate void TimeChangedHandler(object sender, WorkedTimeEventArgs args);
-        public event TimeChangedHandler OnTimeChanged;
+        public event Action<object, WorkedTimeEventArgs> OnTimeChanged;
+        public event Action<object, EventArgs> OnTimeTickChanged;
 
-        public delegate void TimeTickChangedHandler(object sender, EventArgs args);
-        public event TimeTickChangedHandler OnTimeTickChanged;
-        
 
-        private TimeSetting _defaultTimeSettings;
         private TimeSetting _lastSetTime;
 
+
+        private TimeSetting _defaultTimeSettings;
 
         public WorkedTimeSettingViewModel(TimeSetting defaultTimeSettings, TimeSetting timeSetting, int timeTickInMinutes)
         {
