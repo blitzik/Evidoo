@@ -42,10 +42,6 @@ namespace Common.FlashMessages
             foreach (var fmd in disposableFlashMessages) {
                 if (fmd.CanBeDisposed == false) {
                     fmd.MarkFlashMessageAsDisposable();
-                } else {
-                    if (fmd.CanBeRemoved(now)) {
-                        FlashMessages.Remove(fmd);
-                    }
                 }
             }
         }
@@ -54,6 +50,7 @@ namespace Common.FlashMessages
         public void DisplayFlashMessage(string message, Type type, TimeSpan? lifespan = null)
         {
             var d = new FlashMessageDecorator(new FlashMessage(message, type, lifespan));
+            d.OnDisposal += (o, e) => { FlashMessages.Remove(e); };
             FlashMessages.Add(d);
 
             if (!_dispatcherTimer.IsEnabled) {

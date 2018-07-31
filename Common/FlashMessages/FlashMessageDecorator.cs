@@ -37,6 +37,19 @@ namespace Common.FlashMessages
         }
 
 
+        private DelegateCommand<FlashMessageDecorator> _removeCommand;
+        public DelegateCommand<FlashMessageDecorator> RemoveCommand
+        {
+            get
+            {
+                if (_removeCommand == null) {
+                    _removeCommand = new DelegateCommand<FlashMessageDecorator>(p => Remove(p));
+                }
+                return _removeCommand;
+            }
+        }
+
+
         private DelegateCommand<object> _disposeCommand;
         public DelegateCommand<object> DisposeCommand
         {
@@ -64,15 +77,16 @@ namespace Common.FlashMessages
         }
 
 
-        public bool CanBeRemoved(long now)
-        {
-            return (_disposeAt + 2000) <= now;
-        }
-
-
         private void Dispose()
         {
             MarkFlashMessageAsDisposable();
+        }
+
+
+        public event Action<object, FlashMessageDecorator> OnDisposal;
+        private void Remove(FlashMessageDecorator p)
+        {
+            OnDisposal?.Invoke(this, this);
         }
     }
 }
