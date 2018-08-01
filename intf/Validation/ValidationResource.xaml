@@ -7,7 +7,27 @@
             <Setter.Value>
                 <ControlTemplate>
                     <StackPanel>
-                        <AdornedElementPlaceholder />
+                        <Border>
+                            <Border.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ErrorContent.Severity}" Value="{x:Static validation:Severity.INFO}">
+                                            <Setter Property="BorderThickness" Value="1" />
+                                            <Setter Property="BorderBrush" Value="#3498db" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ErrorContent.Severity}" Value="{x:Static validation:Severity.WARNING}">
+                                            <Setter Property="BorderThickness" Value="1" />
+                                            <Setter Property="BorderBrush" Value="#f39c12" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ErrorContent.Severity}" Value="{x:Static validation:Severity.ERROR}">
+                                            <Setter Property="BorderThickness" Value="1" />
+                                            <Setter Property="BorderBrush" Value="#e74c3c" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Resources>
+                            <AdornedElementPlaceholder />
+                        </Border>
                         <ItemsControl ItemsSource="{Binding}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>

@@ -15,18 +15,18 @@ namespace Common.Validation
         }
 
 
-        private Func<T, bool> _action;
+        private Func<T, bool> _rule;
 
-        public Rule(string message, Severity severity, Func<T, bool> action)
+        public Rule(Func<T, bool> rule, string message, Severity severity)
         {
-            _action = action;
+            _rule = rule;
             _error = new ValidationMessage(message, severity);    
         }
 
 
         public bool Check(T obj)
         {
-            if (!_action.Invoke(obj)) {
+            if (!_rule.Invoke(obj)) {
                 return true;
             }
             return false;

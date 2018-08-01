@@ -24,9 +24,9 @@ namespace Common.Validation
         }
 
 
-        public RuleSet<T> AddRule(string message, Severity severity, Func<T, bool> action)
+        public RuleSet<T> AddRule(Func<T, bool> rule, string message, Severity severity = Severity.WARNING)
         {
-            _rules.Add(new Rule<T>(message, severity, action));
+            _rules.Add(new Rule<T>(rule, message, severity));
             return this;
         }
 
