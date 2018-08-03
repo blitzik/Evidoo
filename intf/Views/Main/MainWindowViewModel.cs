@@ -44,8 +44,6 @@ namespace intf.Views
 
             EventAggregator.Subscribe(this);
 
-            bool b = Overlay.IsActive;
-
             DisplayListingsOverview();
         }
 

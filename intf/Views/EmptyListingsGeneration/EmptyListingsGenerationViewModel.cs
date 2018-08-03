@@ -99,6 +99,7 @@ namespace intf.Views
                 }
 
                 Document doc = _multipleListingReportFactory.Create(list, new DefaultListingPdfReportSetting());
+
                 _listingReportGenerator.Save(filePath, doc);
 
                 ot.HideOverlay();

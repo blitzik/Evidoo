@@ -40,6 +40,9 @@ namespace Common.Overlay
         {
             IOverlayToken token = new OverlayToken(content);
             token.OnOverlayHide += (s) => {
+                if (s != Token) { // only current token can disable overlay
+                    return;
+                }
                 _token = null;
                 NotifyOfPropertyChange(() => Token);
                 NotifyOfPropertyChange(() => IsActive);
