@@ -91,7 +91,6 @@
     <Compile Include="Converters\InverseBooleansToBooleanConverter.cs" />
     <Compile Include="Converters\IsNullConverter.cs" />
     <Compile Include="Converters\NegateBoolConverter.cs" />
-    <Compile Include="Converters\OverlayState2VisibilityConverter.cs" />
     <Compile Include="Converters\TimeToHoursAndMinutesConverter.cs" />
     <Compile Include="Converters\TimeToHoursAndMinutesRangeConverter.cs" />
     <Compile Include="Converters\TimeToIntConverter.cs" />
@@ -101,8 +100,6 @@
       <DependentUpon>FlashMessages.xaml</DependentUpon>
     </Compile>
     <Compile Include="Messages\ChangeViewMessage.cs" />
-    <Compile Include="Messages\DisplayOverlayMessage.cs" />
-    <Compile Include="Messages\HideOverlayMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

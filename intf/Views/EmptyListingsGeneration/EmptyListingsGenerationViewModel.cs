@@ -15,6 +15,7 @@ using System.Windows.Forms;
 using intf.BaseViewModels;
 using intf.Subscribers.Messages;
 using intf.Messages;
+using Common.Overlay;
 
 namespace intf.Views
 {
@@ -90,7 +91,7 @@ namespace intf.Views
                 return;
             }
 
-            EventAggregator.PublishOnUIThread(new DisplayOverlayMessage(PrepareViewModel<ProgressViewModel>()));
+            IOverlayToken ot = Overlay.DisplayOverlay(PrepareViewModel<ProgressViewModel>());
             Task.Run(() => {
                 List<Listing> list = new List<Listing>();
                 for (int month = 0; month < 12; month++) {
@@ -100,7 +101,7 @@ namespace intf.Views
                 Document doc = _multipleListingReportFactory.Create(list, new DefaultListingPdfReportSetting());
                 _listingReportGenerator.Save(filePath, doc);
 
-                EventAggregator.PublishOnUIThread(new HideOverlayMessage());
+                ot.HideOverlay();
                 EventAggregator.PublishOnUIThread(new ListingPdfSuccessfullyGeneratedMessage());
             });
         }

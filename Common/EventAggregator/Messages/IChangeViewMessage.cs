@@ -12,6 +12,5 @@ namespace Common.EventAggregator.Messages
         T ViewModel { get; }
 
         void Apply(T viewModel);
-        void Apply(IEnumerable<T> viewModels);
     }
 }

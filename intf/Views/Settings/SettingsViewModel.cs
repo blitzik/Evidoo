@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using Common.Commands;
+using Common.Overlay;
 using Common.Utils.ResultObject;
 using intf.BaseViewModels;
 using intf.Messages;
@@ -260,10 +261,11 @@ namespace intf.Views
                 return;
             }
 
-            EventAggregator.PublishOnUIThread(new DisplayOverlayMessage(PrepareViewModel<ProgressViewModel>()));
+            IOverlayToken ot = Overlay.DisplayOverlay(PrepareViewModel<ProgressViewModel>());
             Task.Run(() => {
                 ResultObject<object> ro = _settingFacade.BackupData(filePath);
-                EventAggregator.PublishOnUIThread(new HideOverlayMessage());
+
+                ot.HideOverlay();
                 EventAggregator.PublishOnUIThread(new BackupSuccessfullyCreatedMessage());
             });
         }
@@ -271,11 +273,11 @@ namespace intf.Views
 
         private async void ImportBackup()
         {
-            EventAggregator.PublishOnUIThread(new DisplayOverlayMessage(PrepareViewModel<ProgressViewModel>()));
+            IOverlayToken ot = Overlay.DisplayOverlay(PrepareViewModel<ProgressViewModel>());
             Task<ResultObject<object>> t = Task.Run(() => {
                 ResultObject<object> r = _settingFacade.ImportBackup(BackupFilePath);
 
-                EventAggregator.PublishOnUIThread(new HideOverlayMessage());
+                ot.HideOverlay();
                 return r;
             });
 

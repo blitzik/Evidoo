@@ -42,16 +42,6 @@ namespace intf.Messages
         }
 
 
-        public void Apply(IEnumerable<IViewModel> viewModels)
-        {
-            if (_action != null) {
-                foreach (IViewModel vm in viewModels) {
-                    _action?.Invoke((T)vm);
-                }
-            }
-        }
-
-
         public void Apply(IViewModel viewModel)
         {
             _action?.Invoke((T)viewModel);

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Common.ViewModels;
+using Common.Overlay;
 
 namespace Common.ViewModels
 {
@@ -37,6 +38,15 @@ namespace Common.ViewModels
         {
             get { return _flashMessagesManager; }
             set { _flashMessagesManager = value; }
+        }
+
+
+        // property injection
+        private IOverlay _overlay;
+        public IOverlay Overlay
+        {
+            get { return _overlay; }
+            set { _overlay = value; }
         }
 
 

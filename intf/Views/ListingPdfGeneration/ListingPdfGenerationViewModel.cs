@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using Common.Commands;
+using Common.Overlay;
 using intf.BaseViewModels;
 using intf.Messages;
 using intf.Subscribers.Messages;
@@ -139,12 +140,12 @@ namespace intf.Views
                 return;
             }
 
-            EventAggregator.PublishOnUIThread(new DisplayOverlayMessage(PrepareViewModel<ProgressViewModel>()));
+            IOverlayToken ot = Overlay.DisplayOverlay(PrepareViewModel<ProgressViewModel>());
             Task.Run(() => {
                 Document doc = _listingPdfDocumentFactory.Create(Listing, _pdfSetting);
                 _listingReportGenerator.Save(filePath, doc);
 
-                EventAggregator.PublishOnUIThread(new HideOverlayMessage());
+                ot.HideOverlay();
                 EventAggregator.PublishOnUIThread(new ListingPdfSuccessfullyGeneratedMessage());
             });
         }

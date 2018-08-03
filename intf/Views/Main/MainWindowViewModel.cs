@@ -9,9 +9,7 @@ namespace intf.Views
 {
     public class MainWindowViewModel :
         BaseConductorOneActive,
-        IHandle<IChangeViewMessage<BaseViewModels.IViewModel>>,
-        IHandle<DisplayOverlayMessage>,
-        IHandle<HideOverlayMessage>
+        IHandle<IChangeViewMessage<BaseViewModels.IViewModel>>
     {
         private PageTitle _title = new PageTitle();
         public PageTitle Title
@@ -46,7 +44,8 @@ namespace intf.Views
 
             EventAggregator.Subscribe(this);
 
-            OverlayState = OverlayState.HIDDEN;
+            bool b = Overlay.IsActive;
+
             DisplayListingsOverview();
         }
 
@@ -107,44 +106,8 @@ namespace intf.Views
             if (vm == ActiveItem) {
                 return;
             }
+            message.Apply(vm);
             ActivateItem(vm);
-            message.Apply(ActiveItem);
-        }
-
-
-        // -----
-
-
-        private BaseViewModels.IViewModel _overlayWindowViewModel;
-        public BaseViewModels.IViewModel OverlayWindowViewModel
-        {
-            get { return _overlayWindowViewModel; }
-            set { Set(ref _overlayWindowViewModel, value); }
-        }
-
-
-        private OverlayState _overlayState;
-        public OverlayState OverlayState
-        {
-            get { return _overlayState; }
-            set { Set(ref _overlayState, value); }
-        }
-
-
-        public void Handle(DisplayOverlayMessage message)
-        {
-            OverlayState = OverlayState.VISIBLE;
-            if (message.ViewModel != null) {
-                OverlayWindowViewModel = message.ViewModel;
-            } else {
-                OverlayWindowViewModel = GetViewModel(message.Type);
-            }
-        }
-
-
-        public void Handle(HideOverlayMessage message)
-        {
-            OverlayState = OverlayState.HIDDEN;
         }
     }
 }

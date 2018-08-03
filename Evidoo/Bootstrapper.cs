@@ -23,6 +23,7 @@ using intf.BaseViewModels;
 using intf.Factories.Employers;
 using intf.Subscribers;
 using Common.Utils.ResultObject;
+using Common.Overlay;
 
 namespace Evidoo
 {
@@ -72,6 +73,7 @@ namespace Evidoo
             _container.Singleton<IFlashMessagesManager, FlashMessagesManager>();
             _container.PerRequest<IValidationObject, ValidationObject>();
             _container.Singleton<IEmployerViewModelsFactory, EmployerViewModelsFactory>();
+            _container.Singleton<IOverlay, Overlay>();
 
             _container.Singleton<IEmployerFactory, EmployerFactory>();
             _container.Singleton<IListingFactory, ListingFactory>();

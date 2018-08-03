@@ -14,7 +14,7 @@
 
     <Window.Resources>
         <converters:ViewModelToBooleanConverter x:Key="ViewModelToBooleanConverter" />
-        <converters:OverlayState2VisibilityConverter x:Key="OverlayState2VisibilityConverter" />
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     </Window.Resources>
     
     <Grid>
@@ -28,7 +28,7 @@
         </Grid.ColumnDefinitions>
 
 
-        <Grid b:AnimateableVisibility.Visibility="{Binding OverlayState, Converter={StaticResource OverlayState2VisibilityConverter}}"
+        <Grid b:AnimateableVisibility.Visibility="{Binding Overlay.IsActive, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=reversed}"
               b:AnimateableVisibility.Duration="150"
               Grid.Row="0"
               Grid.RowSpan="2"
@@ -44,7 +44,7 @@
                     </Setter>
                 </Style>
             </Grid.Resources>
-            <ContentControl Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" c:View.Model="{Binding OverlayWindowViewModel, UpdateSourceTrigger=PropertyChanged}" />
+            <ContentControl Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" c:View.Model="{Binding Overlay.Token.Content, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
         
 
