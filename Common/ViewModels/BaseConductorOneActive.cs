@@ -124,7 +124,13 @@ namespace Common.ViewModels
         public IValidationObject Validation
         {
             get { return _validation; }
-            set { _validation = value; }
+            set
+            {
+                _validation = value;
+                _validation.ErrorsChanged += (object sender, DataErrorsChangedEventArgs e) => {
+                    ErrorsChanged?.Invoke(this, e);
+                };
+            }
         }
 
 
