@@ -88,17 +88,17 @@ namespace Evidoo
             _container.PerRequest<StartupErrorWindowViewModel>();
 
             // ViewModels
-            _container.Singleton<ListingsOverviewViewModel>(typeof(ListingsOverviewViewModel).FullName);
-            _container.Singleton<EmployersViewModel>(typeof(EmployersViewModel).FullName);
-            _container.Singleton<ListingViewModel>(typeof(ListingViewModel).FullName);
-            _container.Singleton<ListingDeletionViewModel>(typeof(ListingDeletionViewModel).FullName);
-            _container.Singleton<ListingDetailViewModel>(typeof(ListingDetailViewModel).FullName);
-            _container.Singleton<ListingEditingViewModel>(typeof(ListingEditingViewModel).FullName);
-            _container.Singleton<ListingItemViewModel>(typeof(ListingItemViewModel).FullName);
-            _container.Singleton<ListingPdfGenerationViewModel>(typeof(ListingPdfGenerationViewModel).FullName);
-            _container.Singleton<SettingsViewModel>(typeof(SettingsViewModel).FullName);
-            _container.Singleton<EmptyListingsGenerationViewModel>(typeof(EmptyListingsGenerationViewModel).FullName);
-            _container.PerRequest<WorkedTimeSettingViewModel>(typeof(WorkedTimeSettingViewModel).FullName);
+            _container.Singleton<ListingsOverviewViewModel>();
+            _container.Singleton<EmployersViewModel>();
+            _container.Singleton<ListingViewModel>();
+            _container.Singleton<ListingDeletionViewModel>();
+            _container.Singleton<ListingDetailViewModel>();
+            _container.Singleton<ListingEditingViewModel>();
+            _container.Singleton<ListingItemViewModel>();
+            _container.Singleton<ListingPdfGenerationViewModel>();
+            _container.Singleton<SettingsViewModel>();
+            _container.Singleton<EmptyListingsGenerationViewModel>();
+            _container.PerRequest<WorkedTimeSettingViewModel>();
 
             // Subscribers
             _container.Singleton<ListingSubscriber>().GetInstance<ListingSubscriber>();

@@ -66,14 +66,20 @@ namespace intf.Views
             IListingReportGenerator listingReportGenerator,
             IListingFactory listingFactory
         ) {
-            BaseWindowTitle = "Generování prázných výčetek";
-            SelectedYear = DateTime.Now.Year;
-
             _windowManager = windowManager;
             _filePathDialogService = filePathDialogService;
             _multipleListingReportFactory = multipleListingReportFactory;
             _listingReportGenerator = listingReportGenerator;
-            _listingFactory = listingFactory;
+            _listingFactory = listingFactory;            
+        }
+
+
+        protected override void OnInitialize()
+        {
+            base.OnInitialize();
+
+            BaseWindowTitle = "Generování prázných výčetek";
+            SelectedYear = DateTime.Now.Year;
 
             _years = Date.GetYears(2010, "DESC");
             _years.Insert(0, _years[0] + 1);

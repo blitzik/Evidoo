@@ -225,12 +225,8 @@ namespace intf.Views
         
         public ListingEditingViewModel(ListingFacade listingFacade, EmployerFacade employerFacade)
         {
-            BaseWindowTitle = "Úprava výčetky";
-
             _listingFacade = listingFacade;
             _employerFacade = employerFacade;
-
-            _selectedEmployer = _promptEmployer;
         }
 
 
@@ -239,6 +235,9 @@ namespace intf.Views
             base.OnInitialize();
 
             EventAggregator.Subscribe(this);
+
+            BaseWindowTitle = "Úprava výčetky";
+            _selectedEmployer = _promptEmployer;
         }
 
 

@@ -17,7 +17,7 @@ namespace Common.ViewModelResolver
 
         public VM Resolve<VM>(System.Type viewModel) where VM : IViewModel
         {
-            VM vm = (VM)_container.GetInstance(viewModel, viewModel.FullName);
+            VM vm = (VM)_container.GetInstance(viewModel, null);
             if (vm != null) {
                 _container.BuildUp(vm);
             }

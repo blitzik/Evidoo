@@ -164,8 +164,8 @@ namespace intf.Views
         public ListingDetailViewModel(
             ListingFacade listingFacade
         ) {
-            _dayItems = new List<DayItem>();
             _listingFacade = listingFacade;
+            _dayItems = new List<DayItem>();
         }
 
 

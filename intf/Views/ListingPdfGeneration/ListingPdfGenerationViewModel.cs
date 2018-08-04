@@ -98,18 +98,11 @@ namespace intf.Views
             IListingPdfDocumentFactory listingPdfDocumentFactory,
             IListingReportGenerator listingReportGenerator
         ) {
-            BaseWindowTitle = "Generování PDF dokumentu";
-
             _settingFacade = settingFacade;
             _windowManager = windowManager;
             _filePathDialogService = filePathDialogService;
             _listingPdfDocumentFactory = listingPdfDocumentFactory;
             _listingReportGenerator = listingReportGenerator;
-
-            _defaultSettings = settingFacade.GetDefaultSettings();
-
-            PdfSetting = new DefaultListingPdfReportSetting(_defaultSettings.Pdfsetting);
-            PdfSetting.OnSettingPropertyChanged += (object sender, EventArgs args) => { ResetSettingsCommand.RaiseCanExecuteChanged(); };
         }
 
 
@@ -118,6 +111,13 @@ namespace intf.Views
             base.OnInitialize();
 
             EventAggregator.Subscribe(this);
+
+            BaseWindowTitle = "Generování PDF dokumentu";
+
+            _defaultSettings = _settingFacade.GetDefaultSettings();
+
+            PdfSetting = new DefaultListingPdfReportSetting(_defaultSettings.Pdfsetting);
+            PdfSetting.OnSettingPropertyChanged += (object sender, EventArgs args) => { ResetSettingsCommand.RaiseCanExecuteChanged(); };
         }
 
 

@@ -80,8 +80,6 @@ namespace intf.Views
 
         public ListingDeletionViewModel(ListingFacade listingFacade)
         {
-            BaseWindowTitle = "Odstranění výčetky";
-
             _listingFacade = listingFacade;            
         }
 
@@ -91,6 +89,8 @@ namespace intf.Views
             base.OnInitialize();
 
             EventAggregator.Subscribe(this);
+
+            BaseWindowTitle = "Odstranění výčetky";
         }
 
 

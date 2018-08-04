@@ -152,6 +152,13 @@ namespace intf.Views
             _windowManager = windowManager;
             _settingFacade = settingFacade;
             _filePathDialogService = filePathDialogService;
+        }
+
+
+        protected override void OnInitialize()
+        {
+            base.OnInitialize();
+
             BaseWindowTitle = "Nastavení";
         }
 

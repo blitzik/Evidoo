@@ -86,9 +86,16 @@ namespace intf.Views
         public ListingsOverviewViewModel(
             ListingFacade listingFacade
         ) {
-            BaseWindowTitle = "Přehled výčetek";
             _listingFacade = listingFacade;
-            
+        }
+
+
+        protected override void OnInitialize()
+        {
+            base.OnInitialize();
+
+            BaseWindowTitle = "Přehled výčetek";
+
             _years = Date.GetYears(2010, "DESC");
             _months = new List<string>(Date.Months);
             _months.Reverse();

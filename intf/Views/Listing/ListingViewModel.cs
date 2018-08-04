@@ -125,11 +125,25 @@ namespace intf.Views
             _listingFacade = listingFacade;
             _employerFacade = employerFacade;
             _listingFactory = listingFactory;
+        }
+
+
+        protected override void OnInitialize()
+        {
+            base.OnInitialize();
 
             BaseWindowTitle = "Nová výčetka";
 
             SelectedYear = DateTime.Now.Year;
             SelectedMonth = DateTime.Now.Month;
+
+            Reset();
+        }
+
+
+        protected override void OnActivate()
+        {
+            base.OnActivate();
 
             Reset();
         }
@@ -176,17 +190,5 @@ namespace intf.Views
 
             EventAggregator.PublishOnUIThread(new ListingSuccessfulySavedMessage(newListing));
         }
-
-
-        // -----
-
-
-        protected override void OnActivate()
-        {
-            base.OnActivate();
-
-            Reset();
-        }
-
     }
 }
