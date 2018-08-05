@@ -58,19 +58,6 @@ namespace intf.Views
         }
 
 
-        private DelegateCommand<object> _returnBackCommand;
-        public DelegateCommand<object> ReturnBackCommand
-        {
-            get
-            {
-                if (_returnBackCommand == null) {
-                    _returnBackCommand = new DelegateCommand<object>(p => ReturnBack());
-                }
-                return _returnBackCommand;
-            }
-        }
-
-
         private DefaultListingPdfReportSetting _pdfSetting;
         public DefaultListingPdfReportSetting PdfSetting
         {
@@ -154,12 +141,6 @@ namespace intf.Views
         private void ResetSettings()
         {
             PdfSetting.UpdateBy(_defaultSettings.Pdfsetting);
-        }
-
-
-        private void ReturnBack()
-        {
-            EventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingDetailViewModel>());
         }
     }
 }

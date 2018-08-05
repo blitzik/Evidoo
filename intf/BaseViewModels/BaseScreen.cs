@@ -30,5 +30,23 @@ namespace intf.BaseViewModels
                 WindowTitle.Text = value;
             }
         }
+
+
+        protected ISecondNavigationViewModel _secondNavigation; 
+        public ISecondNavigationViewModel SecondNavigation
+        {
+            get { return _secondNavigation; }
+            set
+            {
+                Set(ref _secondNavigation, value);
+                NotifyOfPropertyChange(() => IsSecondNavigationActive);
+            }
+        }
+
+
+        public bool IsSecondNavigationActive
+        {
+            get { return SecondNavigation != null; }
+        }
     }
 }

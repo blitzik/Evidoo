@@ -4,6 +4,7 @@ using intf.Messages;
 using System.Reflection;
 using Common.EventAggregator.Messages;
 using intf.BaseViewModels;
+using Common.Commands;
 
 namespace intf.Views
 {
@@ -53,6 +54,11 @@ namespace intf.Views
             Title = item.WindowTitle;
 
             base.ActivateItem(item);
+
+            SecondNavigation = item.SecondNavigation;
+            if (SecondNavigation != null) {
+                SecondNavigation.CurrentlyActivatedItem = ActiveItem;
+            }
         }
 
 

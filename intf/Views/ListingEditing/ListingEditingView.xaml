@@ -13,8 +13,6 @@
     </UserControl.Resources>
 
     <StackPanel>
-        <Button Grid.Row="9" Grid.Column="0" Content="Zpět na detail výčetky" Command="{Binding ReturnBackCommand}" Margin="0 0 0 30" Width="200" HorizontalAlignment="Left" Style="{StaticResource DefaultButton}" />
-        
         <Grid Margin="0 0 0 15">
             <Grid.Resources>
                 <Style x:Key="LabelText" TargetType="TextBlock" BasedOn="{StaticResource LabelText}">

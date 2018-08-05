@@ -20,20 +20,12 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
-            <RowDefinition Height="10" />
             <RowDefinition Height="50" />
             <RowDefinition Height="10" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Button Content="Generovat PDF" Command="{Binding GeneratePdfCommand}" Margin="0 0 10 0" Style="{StaticResource DefaultButton}" />
-            <Button Content="Upravit výčetku" Command="{Binding ListingEditCommand}" Margin="0 0 10 0" Style="{StaticResource DefaultButton}" />
-            <Button Content="Odstranit výčetku" Command="{Binding ListingDeletionCommand}" Style="{StaticResource CriticalButton}" />
-        </StackPanel>
-
-        <Border Grid.Row="2">
+        <Border Grid.Row="0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50" />
@@ -94,7 +86,7 @@
         </Border>
         
         
-        <ScrollViewer Name="ScrollViewer" Grid.Row="4" Padding="0 0 10 0" VerticalScrollBarVisibility="Auto" Template="{StaticResource ScrollViewerControlTemplate}">
+        <ScrollViewer Name="ScrollViewer" Grid.Row="2" Padding="0 0 10 0" VerticalScrollBarVisibility="Auto" Template="{StaticResource ScrollViewerControlTemplate}">
             <ItemsControl ItemsSource="{Binding DisplayableItems, UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>

@@ -84,6 +84,7 @@
     <Compile Include="BaseViewModels\BaseConductorAllActive.cs" />
     <Compile Include="BaseViewModels\BaseConductorOneActive.cs" />
     <Compile Include="BaseViewModels\BaseScreen.cs" />
+    <Compile Include="BaseViewModels\ISecondNavigationViewModel.cs" />
     <Compile Include="BaseViewModels\IViewModel.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\IntToMonthNameConverter.cs" />
@@ -154,6 +155,10 @@
       <DependentUpon>ListingDeletionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ListingDeletion\ListingDeletionViewModel.cs" />
+    <Compile Include="Views\ListingDetail\ListingDetailNavigationView.xaml.cs">
+      <DependentUpon>ListingDetailNavigationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ListingDetail\ListingDetailNavigationViewModel.cs" />
     <Compile Include="Views\ListingDetail\ListingDetailView.xaml.cs">
       <DependentUpon>ListingDetailView.xaml</DependentUpon>
     </Compile>
@@ -254,6 +259,10 @@
     <Page Include="Views\ListingDeletion\ListingDeletionView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ListingDetail\ListingDetailNavigationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ListingDetail\ListingDetailView.xaml">
       <Generator>MSBuild:Compile</Generator>

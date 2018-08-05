@@ -56,19 +56,6 @@ namespace intf.Views
         }
 
 
-        private DelegateCommand<object> _returnBackToListingDetailCommand;
-        public DelegateCommand<object> ReturnBackToListingDetailCommand
-        {
-            get
-            {
-                if (_returnBackToListingDetailCommand == null) {
-                    _returnBackToListingDetailCommand = new DelegateCommand<object>(p => ReturnBackToListingDetail());
-                }
-                return _returnBackToListingDetailCommand;
-            }
-        }
-
-
         private DelegateCommand<object> _saveListingItemCommand;
         public DelegateCommand<object> SaveListingItemCommand
         {
@@ -180,12 +167,6 @@ namespace intf.Views
 
             DayItem.Update(newItem);
 
-            EventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingDetailViewModel>());
-        }
-
-
-        private void ReturnBackToListingDetail()
-        {
             EventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingDetailViewModel>());
         }
     }

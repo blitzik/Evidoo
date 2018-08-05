@@ -62,19 +62,6 @@ namespace intf.Views
         }
 
 
-        private DelegateCommand<object> _listingDeletionCommand;
-        public DelegateCommand<object> ListingDeletionCommand
-        {
-            get
-            {
-                if (_listingDeletionCommand == null) {
-                    _listingDeletionCommand = new DelegateCommand<object>(p => DisplayListingDeletion());
-                }
-                return _listingDeletionCommand;
-            }
-        }
-
-
         private DelegateCommand<int> _openListingItemDetailCommand;
         public DelegateCommand<int> OpenListingItemDetailCommand
         {
@@ -84,32 +71,6 @@ namespace intf.Views
                     _openListingItemDetailCommand = new DelegateCommand<int>(p => OpenListingItemDetail(p));
                 }
                 return _openListingItemDetailCommand;
-            }
-        }
-
-
-        private DelegateCommand<object> _generatePdfCommand;
-        public DelegateCommand<object> GeneratePdfCommand
-        {
-            get
-            {
-                if (_generatePdfCommand == null) {
-                    _generatePdfCommand = new DelegateCommand<object>(p => DisplayPdfGenerationPage());
-                }
-                return _generatePdfCommand;
-            }
-        }
-
-
-        private DelegateCommand<object> _listingEditCommand;
-        public DelegateCommand<object> ListingEditCommand
-        {
-            get
-            {
-                if (_listingEditCommand == null) {
-                    _listingEditCommand = new DelegateCommand<object>(p => OpenEditing());
-                }
-                return _listingEditCommand;
             }
         }
 
@@ -177,27 +138,20 @@ namespace intf.Views
         }
 
 
-        private void OpenEditing()
+        protected override void OnActivate()
         {
-            EventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingEditingViewModel>(x => { x.Listing = Listing; }));
+            base.OnActivate();
+
+            _secondNavigation = PrepareViewModel(() => { return new ListingDetailNavigationViewModel(Listing); });
         }
 
 
         private void OpenListingItemDetail(int day)
         {
-            EventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingItemViewModel>(x => { x.DayItem = _dayItems[day - 1]; }));
-        }
-
-
-        private void DisplayListingDeletion()
-        {
-            EventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingDeletionViewModel>(x => { x.Listing = Listing; }));
-        }
-
-
-        private void DisplayPdfGenerationPage()
-        {
-            EventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingPdfGenerationViewModel>(x => { x.Listing = Listing; }));
+            EventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingItemViewModel>(x => {
+                x.DayItem = _dayItems[day - 1];
+                x.SecondNavigation = _secondNavigation;
+            }));
         }
 
 

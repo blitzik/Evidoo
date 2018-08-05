@@ -10,11 +10,12 @@
         xmlns:c="http://www.caliburnproject.org"
         xmlns:b="clr-namespace:Common.Behaviors;assembly=Common"
         mc:Ignorable="d"
-        Title="Evidoo - Evidence odpracovaných hodin" Height="700" Width="1200" MinWidth="1200" MinHeight="700" Background="#F0F0F0">
+        Title="Evidoo - Evidence odpracovaných hodin" Height="725" Width="1200" MinWidth="1200" MinHeight="700" Background="#F0F0F0">
 
     <Window.Resources>
         <converters:ViewModelToBooleanConverter x:Key="ViewModelToBooleanConverter" />
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <converters:NegateBoolConverter x:Key="NegateBoolConverter" />
     </Window.Resources>
     
     <Grid>
@@ -28,6 +29,7 @@
         </Grid.ColumnDefinitions>
 
 
+        <!-- Overlay -->
         <Grid b:AnimateableVisibility.Visibility="{Binding Overlay.IsActive, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=reversed}"
               b:AnimateableVisibility.Duration="150"
               Grid.Row="0"
@@ -46,19 +48,23 @@
             </Grid.Resources>
             <ContentControl Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" c:View.Model="{Binding Overlay.Token.Content, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
-        
 
+
+        <!-- APP's name -->
         <Border Grid.Row="0" Grid.Column="0" Background="#3498db">
             <TextBlock Text="Evidoo" FontSize="19" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF" />
         </Border>
 
+
+        <!-- Navigation -->
         <Grid Grid.Row="1" Grid.Column="0" Background="#263238">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="40" />
             </Grid.RowDefinitions>
-            
-            <StackPanel Grid.Row="0">
+
+            <!-- Main navigation -->
+            <StackPanel Grid.Row="0" Name="MainNavigation">
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type RadioButton}">
                         <Setter Property="Background" Value="#263238" />
@@ -98,6 +104,15 @@
                             </Setter.Value>
                         </Setter>
                     </Style>
+                    <Style TargetType="{x:Type StackPanel}">
+                        <Setter Property="LayoutTransform">
+                            <Setter.Value>
+                                <ScaleTransform />
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Width" Value="200" />
+                        <Setter Property="HorizontalAlignment" Value="Left" />
+                    </Style>
                 </StackPanel.Resources>
 
                 <RadioButton x:Name="DisplayListingsOverview" Grid.Row="0" IsChecked="{Binding ActiveItem, Converter={StaticResource ViewModelToBooleanConverter}, ConverterParameter=ListingsOverviewViewModel}">
@@ -107,7 +122,7 @@
                                 <VisualBrush Stretch="Fill" Visual="{StaticResource ListIcon}" />
                             </Rectangle.OpacityMask>
                         </Rectangle>
-                        <TextBlock Margin="10 2 0 0" Text="Přehled výčetek" />
+                        <TextBlock Margin="15 2 0 0" Text="Přehled výčetek" />
                     </StackPanel>
                 </RadioButton>
                 <RadioButton x:Name="DisplayListingCreation" Grid.Row="1" IsChecked="{Binding ActiveItem, Converter={StaticResource ViewModelToBooleanConverter}, ConverterParameter=ListingViewModel}">
@@ -117,7 +132,7 @@
                                 <VisualBrush Stretch="Fill" Visual="{StaticResource NewFileIcon}" />
                             </Rectangle.OpacityMask>
                         </Rectangle>
-                        <TextBlock Margin="10 3 0 0" Text="Nová výčetka" />
+                        <TextBlock Margin="15 3 0 0" Text="Nová výčetka" />
                     </StackPanel>
                 </RadioButton>
                 <RadioButton x:Name="DisplayEmployersList" Grid.Row="2" IsChecked="{Binding ActiveItem, Converter={StaticResource ViewModelToBooleanConverter}, ConverterParameter=EmployersViewModel}">
@@ -127,7 +142,7 @@
                                 <VisualBrush Stretch="Fill" Visual="{StaticResource MoneyIcon}" />
                             </Rectangle.OpacityMask>
                         </Rectangle>
-                        <TextBlock Margin="10 3 0 0" Text="Správa zaměstnavatelů" />
+                        <TextBlock Margin="15 3 0 0" Text="Správa zaměstnavatelů" />
                     </StackPanel>
                 </RadioButton>
                 <RadioButton x:Name="DisplaySettings" Grid.Row="3" IsChecked="{Binding ActiveItem, Converter={StaticResource ViewModelToBooleanConverter}, ConverterParameter=SettingsViewModel}">
@@ -137,7 +152,7 @@
                                 <VisualBrush Stretch="Fill" Visual="{StaticResource SettingsIcon}" />
                             </Rectangle.OpacityMask>
                         </Rectangle>
-                        <TextBlock Margin="10 1 0 0" Text="Nastavení" />
+                        <TextBlock Margin="15 1 0 0" Text="Nastavení" />
                     </StackPanel>
                 </RadioButton>
                 <RadioButton x:Name="DisplayEmptyListingsGeneration" Grid.Row="3" IsChecked="{Binding ActiveItem, Converter={StaticResource ViewModelToBooleanConverter}, ConverterParameter=EmptyListingsGenerationViewModel}">
@@ -147,23 +162,64 @@
                                 <VisualBrush Stretch="Fill" Visual="{StaticResource EmptyFileIcon}" />
                             </Rectangle.OpacityMask>
                         </Rectangle>
-                        <TextBlock Margin="10 1 0 0" Text="Prázdné výčetky" />
+                        <TextBlock Margin="15 1 0 0" Text="Prázdné výčetky" />
                     </StackPanel>
                 </RadioButton>
             </StackPanel>
 
+            
+            <!-- Second Navigation -->
+            <Grid Grid.Row="0" Margin="38 0 0 0">
+                <Grid.Resources>
+                    <Style TargetType="{x:Type Grid}">
+                        <Setter Property="RenderTransform">
+                            <Setter.Value>
+                                <ScaleTransform />
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="RenderTransformOrigin" Value="0,0" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsSecondNavigationActive}" Value="True">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush EndPoint="1,1.7" StartPoint="0.5,0">
+                                            <GradientStop Color="#485f6b" Offset="0"/>
+                                            <GradientStop Color="#263238" Offset="0.55"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="0" To="1" Duration="0:0:.25" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Resources>
+                <ContentControl c:View.Model="{Binding SecondNavigation, UpdateSourceTrigger=PropertyChanged}" />
+            </Grid>
+            
+
+            <!-- App version -->
             <TextBlock Grid.Row="1" Margin="10 0 0 0" Text="{Binding AppVersion, StringFormat={} ver. {0}}" VerticalAlignment="Center" Foreground="#676f73" />
         </Grid>
-        
+
+
+        <!-- Title -->
         <Border Grid.Row="0" Grid.Column="1" Padding="0 10 5 10" Margin="10 0 10 0" BorderBrush="#ccc" BorderThickness="0 0 0 1">
             <TextBlock Text="{Binding Title.Text, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontSize="23" Foreground="#333" FontWeight="Medium" VerticalAlignment="Center" />
         </Border>
 
+
+        <!-- Content -->
         <Border Grid.Row="1" Grid.Column="1" Padding="10">
             <ContentControl x:Name="ActiveItem">
                 <b:ContentControlExtension.Storyboard>
                     <Storyboard>
-                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From=".5" To="1" Duration="0:0:.20" />
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From=".5" To="1" Duration="0:0:.25" />
                     </Storyboard>
                 </b:ContentControlExtension.Storyboard>
             </ContentControl>

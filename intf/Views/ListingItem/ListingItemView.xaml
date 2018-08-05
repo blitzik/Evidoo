@@ -16,8 +16,6 @@
     </UserControl.Resources>
 
     <StackPanel Width="875" HorizontalAlignment="Left">
-        <Button Grid.Column="0" Content="Zpět na detail výčetky" Command="{Binding ReturnBackToListingDetailCommand}" Margin="0 0 0 30" Width="200" HorizontalAlignment="Left" Style="{StaticResource DefaultButton}" />
-
         <ContentControl Content="{Binding WorkedTimeViewModel}">
             <ContentControl.Resources>
                 <DataTemplate DataType="{x:Type local:WorkedTimeSettingViewModel}">

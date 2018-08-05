@@ -206,19 +206,6 @@ namespace intf.Views
         }
 
 
-        private DelegateCommand<object> _returnBackCommand;
-        public DelegateCommand<object> ReturnBackCommand
-        {
-            get
-            {
-                if (_returnBackCommand == null) {
-                    _returnBackCommand = new DelegateCommand<object>(p => ReturnBack());
-                }
-                return _returnBackCommand;
-            }
-        }
-
-
         private ListingFacade _listingFacade;
         private EmployerFacade _employerFacade;
 
@@ -280,12 +267,6 @@ namespace intf.Views
             }
 
             EventAggregator.PublishOnUIThread(new ListingSuccessfulySavedMessage(Listing));
-        }
-
-
-        private void ReturnBack()
-        {
-            EventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingDetailViewModel>());
         }
 
 
