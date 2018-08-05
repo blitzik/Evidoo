@@ -10,7 +10,7 @@
         xmlns:c="http://www.caliburnproject.org"
         xmlns:b="clr-namespace:Common.Behaviors;assembly=Common"
         mc:Ignorable="d"
-        Title="Evidoo - Evidence odpracovaných hodin" Height="725" Width="1200" MinWidth="1200" MinHeight="700" Background="#F0F0F0">
+        Title="Evidoo - Evidence odpracovaných hodin" Height="725" Width="1200" MinWidth="1200" MinHeight="725" Background="#F0F0F0">
 
     <Window.Resources>
         <converters:ViewModelToBooleanConverter x:Key="ViewModelToBooleanConverter" />
@@ -177,28 +177,29 @@
                                 <ScaleTransform />
                             </Setter.Value>
                         </Setter>
-                        <Setter Property="RenderTransformOrigin" Value="0,0" />
+                        <Setter Property="RenderTransformOrigin" Value=".5,.5" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsSecondNavigationActive}" Value="True">
                                 <Setter Property="Background">
                                     <Setter.Value>
-                                        <LinearGradientBrush EndPoint="1,1.7" StartPoint="0.5,0">
+                                        <LinearGradientBrush>
                                             <GradientStop Color="#485f6b" Offset="0"/>
-                                            <GradientStop Color="#263238" Offset="0.55"/>
+                                            <GradientStop Color="#263238" Offset="0.8"/>
                                         </LinearGradientBrush>
                                     </Setter.Value>
                                 </Setter>
                                 <DataTrigger.EnterActions>
-                                    <BeginStoryboard>
+                                    <BeginStoryboard Name="DisplaySecondNavAnim">
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="0" To="1" Duration="0:0:.25" />
+                                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From=".4" To="1" Duration="0:0:.2" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </DataTrigger.EnterActions>
-                            </DataTrigger>
+                            </DataTrigger>                            
                         </Style.Triggers>
                     </Style>
                 </Grid.Resources>
+                
                 <ContentControl c:View.Model="{Binding SecondNavigation, UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
             

@@ -55,16 +55,16 @@
             </Style>            
         </StackPanel.Resources>
 
-        <RadioButton x:Name="DisplayListingDetail" Grid.Row="0" IsChecked="{Binding CurrentlyActivatedItem, Converter={StaticResource ViewModelToBooleanConverter}, ConverterParameter=ListingDetailViewModel}">
+        <RadioButton x:Name="DisplayListingDetail" IsChecked="{Binding CurrentlyActivatedItem, Converter={StaticResource ViewModelToBooleanConverter}, ConverterParameter=ListingDetailViewModel}">
             <TextBlock Margin="10 2 0 0" Text="Detail výčetky" />
         </RadioButton>
-        <RadioButton x:Name="DisplayPDFGeneration" Grid.Row="0" IsChecked="{Binding CurrentlyActivatedItem, Converter={StaticResource ViewModelToBooleanConverter}, ConverterParameter=ListingPdfGenerationViewModel}">
+        <RadioButton x:Name="DisplayPDFGeneration" IsChecked="{Binding CurrentlyActivatedItem, Converter={StaticResource ViewModelToBooleanConverter}, ConverterParameter=ListingPdfGenerationViewModel}">
             <TextBlock Margin="10 2 0 0" Text="Generovat PDF" />
         </RadioButton>
-        <RadioButton x:Name="DisplayListingEditing" Grid.Row="1" IsChecked="{Binding CurrentlyActivatedItem, Converter={StaticResource ViewModelToBooleanConverter}, ConverterParameter=ListingEditingViewModel}">
+        <RadioButton x:Name="DisplayListingEditing" IsChecked="{Binding CurrentlyActivatedItem, Converter={StaticResource ViewModelToBooleanConverter}, ConverterParameter=ListingEditingViewModel}">
             <TextBlock Margin="10 3 0 0" Text="Upravit výčetku" />
         </RadioButton>
-        <RadioButton x:Name="DisplayListingDeletion" Grid.Row="2" IsChecked="{Binding CurrentlyActivatedItem, Converter={StaticResource ViewModelToBooleanConverter}, ConverterParameter=ListingDeletionViewModel}">
+        <RadioButton x:Name="DisplayListingDeletion" IsChecked="{Binding CurrentlyActivatedItem, Converter={StaticResource ViewModelToBooleanConverter}, ConverterParameter=ListingDeletionViewModel}">
             <TextBlock Margin="10 3 0 0" Text="Odstranit výčetku" />
         </RadioButton>        
     </StackPanel>
