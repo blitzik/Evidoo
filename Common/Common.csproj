@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behavior\AnimateableVisibility.cs" />
-    <Compile Include="Behavior\AnimatedItemRemovalBehavior.cs" />
+    <Compile Include="Behavior\ActionAfterAnimation.cs" />
     <Compile Include="Behavior\ContentControlExtension.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="EventAggregator\Messages\IChangeViewMessage.cs" />

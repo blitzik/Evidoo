@@ -43,15 +43,15 @@
                                     <ScaleTransform />
                                 </Setter.Value>
                             </Setter>
-                            <Setter Property="b:AnimatedItemRemovalBehavior.Storyboard">
+                            <Setter Property="b:ActionAfterAnimation.Storyboard">
                                 <Setter.Value>
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleY" From="1" To="0" Duration="0:0:.2" />
                                     </Storyboard>
                                 </Setter.Value>
                             </Setter>
-                            <Setter Property="b:AnimatedItemRemovalBehavior.IsMarkedForDelete" Value="{Binding CanBeRemoved}" />
-                            <Setter Property="b:AnimatedItemRemovalBehavior.PerformRemoval" Value="{Binding RemoveEmployerCommand}" />
+                            <Setter Property="b:ActionAfterAnimation.CanAnimationStart" Value="{Binding CanBeRemoved}" />
+                            <Setter Property="b:ActionAfterAnimation.PerformAction" Value="{Binding RemoveEmployerCommand}" />
                             <Style.Triggers>
                                 <EventTrigger RoutedEvent="Loaded">
                                     <EventTrigger.Actions>

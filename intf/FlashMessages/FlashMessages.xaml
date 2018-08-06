@@ -25,9 +25,9 @@
                         <ScaleTransform />
                     </Setter.Value>
                 </Setter>
-                <Setter Property="b:AnimatedItemRemovalBehavior.IsMarkedForDelete" Value="{Binding CanBeDisposed}" />
-                <Setter Property="b:AnimatedItemRemovalBehavior.PerformRemoval" Value="{Binding RemoveCommand}" />
-                <Setter Property="b:AnimatedItemRemovalBehavior.Storyboard">
+                <Setter Property="b:ActionAfterAnimation.CanAnimationStart" Value="{Binding CanBeDisposed}" />
+                <Setter Property="b:ActionAfterAnimation.PerformAction" Value="{Binding RemoveCommand}" />
+                <Setter Property="b:ActionAfterAnimation.Storyboard">
                     <Setter.Value>
                         <Storyboard>
                             <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:.25" />

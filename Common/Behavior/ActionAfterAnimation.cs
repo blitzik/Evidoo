@@ -9,30 +9,30 @@ using System.Windows.Media.Animation;
 
 namespace Common.Behaviors
 {
-    public class AnimatedItemRemovalBehavior : DependencyObject
+    public class ActionAfterAnimation : DependencyObject
     {
-        public static bool GetIsMarkedForDelete(DependencyObject obj)
+        public static bool GetCanAnimationStart(DependencyObject obj)
         {
-            return (bool)obj.GetValue(IsMarkedForDeleteProperty);
+            return (bool)obj.GetValue(CanAnimationStartProperty);
         }
 
 
-        public static void SetIsMarkedForDelete(DependencyObject obj, bool value)
+        public static void SetCanAnimationStart(DependencyObject obj, bool value)
         {
-            obj.SetValue(IsMarkedForDeleteProperty, value);
+            obj.SetValue(CanAnimationStartProperty, value);
         }
 
 
-        public static readonly DependencyProperty IsMarkedForDeleteProperty =
+        public static readonly DependencyProperty CanAnimationStartProperty =
             DependencyProperty.RegisterAttached(
-                "IsMarkedForDelete",
+                "CanAnimationStart",
                 typeof(bool),
-                typeof(AnimatedItemRemovalBehavior),
-                new PropertyMetadata(false, new PropertyChangedCallback(OnIsMarkedForDeletePropertyChange))
+                typeof(ActionAfterAnimation),
+                new PropertyMetadata(false, new PropertyChangedCallback(OnCanAnimationStartPropertyChange))
             );
 
 
-        private static void OnIsMarkedForDeletePropertyChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnCanAnimationStartPropertyChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (!(d is FrameworkElement el)) return;
 
@@ -45,7 +45,7 @@ namespace Common.Behaviors
                 throw new Exception("A Storyboard must be delcared!");
             }
 
-            ICommand c = GetPerformRemoval(d);
+            ICommand c = GetPerformAction(d);
             if (c == null) {
                 throw new Exception("An action (ICommand) must be declared");
             }
@@ -86,7 +86,7 @@ namespace Common.Behaviors
             DependencyProperty.RegisterAttached(
                 "Storyboard",
                 typeof(Storyboard),
-                typeof(AnimatedItemRemovalBehavior),
+                typeof(ActionAfterAnimation),
                 null
             );
 
@@ -94,23 +94,23 @@ namespace Common.Behaviors
         // -----
 
 
-        public static ICommand GetPerformRemoval(DependencyObject obj)
+        public static ICommand GetPerformAction(DependencyObject obj)
         {
-            return (ICommand)obj.GetValue(PerformRemovalProperty);
+            return (ICommand)obj.GetValue(PerformActionProperty);
         }
 
 
-        public static void SetPerformRemoval(DependencyObject obj, ICommand value)
+        public static void SetPerformAction(DependencyObject obj, ICommand value)
         {
-            obj.SetValue(PerformRemovalProperty, value);
+            obj.SetValue(PerformActionProperty, value);
         }
 
         
-        public static readonly DependencyProperty PerformRemovalProperty =
+        public static readonly DependencyProperty PerformActionProperty =
             DependencyProperty.RegisterAttached(
-                "PerformRemoval",
+                "PerformAction",
                 typeof(ICommand),
-                typeof(AnimatedItemRemovalBehavior),
+                typeof(ActionAfterAnimation),
                 null
             );
 
