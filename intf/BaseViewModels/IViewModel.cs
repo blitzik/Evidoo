@@ -13,6 +13,6 @@ namespace intf.BaseViewModels
         PageTitle WindowTitle { get; set; }
 
         ISecondNavigationViewModel SecondNavigation { get; set; }
-        bool IsSecondNavigationActive { get; }
+        bool IsSecondNavigationActive { get; set; }
     }
 }

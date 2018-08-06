@@ -169,7 +169,9 @@
 
             
             <!-- Second Navigation -->
-            <Grid Grid.Row="0" Margin="38 0 0 0">
+            <Grid Grid.Row="0" Margin="38 0 0 0"
+                  b:AnimateableVisibility.Visibility="{Binding IsSecondNavigationActive, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=reversed}"
+                  b:AnimateableVisibility.Duration="300">
                 <Grid.Resources>
                     <Style TargetType="{x:Type Grid}">
                         <Setter Property="RenderTransform">
@@ -177,24 +179,31 @@
                                 <ScaleTransform />
                             </Setter.Value>
                         </Setter>
-                        <Setter Property="RenderTransformOrigin" Value=".5,.5" />
+                        <Setter Property="RenderTransformOrigin" Value="1,1" />
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <LinearGradientBrush>
+                                    <GradientStop Color="#485f6b" Offset="0"/>
+                                    <GradientStop Color="#263238" Offset="0.8"/>
+                                </LinearGradientBrush>
+                            </Setter.Value>
+                        </Setter>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsSecondNavigationActive}" Value="True">
-                                <Setter Property="Background">
-                                    <Setter.Value>
-                                        <LinearGradientBrush>
-                                            <GradientStop Color="#485f6b" Offset="0"/>
-                                            <GradientStop Color="#263238" Offset="0.8"/>
-                                        </LinearGradientBrush>
-                                    </Setter.Value>
-                                </Setter>
                                 <DataTrigger.EnterActions>
-                                    <BeginStoryboard Name="DisplaySecondNavAnim">
+                                    <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From=".4" To="1" Duration="0:0:.2" />
+                                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From=".4" To="1" Duration="0:0:.3" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1" To="0" Duration="0:0:.3" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.ExitActions>
                             </DataTrigger>                            
                         </Style.Triggers>
                     </Style>

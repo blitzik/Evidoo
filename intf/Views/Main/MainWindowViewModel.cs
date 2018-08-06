@@ -5,6 +5,7 @@ using System.Reflection;
 using Common.EventAggregator.Messages;
 using intf.BaseViewModels;
 using Common.Commands;
+using System.Threading.Tasks;
 
 namespace intf.Views
 {
@@ -55,9 +56,20 @@ namespace intf.Views
 
             base.ActivateItem(item);
 
-            SecondNavigation = item.SecondNavigation;
-            if (SecondNavigation != null) {
-                SecondNavigation.CurrentlyActivatedItem = ActiveItem;
+            bool wasActive = SecondNavigation != null;
+            if (wasActive == true && item.SecondNavigation == null) {
+                IsSecondNavigationActive = false;
+                Task.Factory.StartNew(async () => {
+                    await Task.Delay(325);
+                    SecondNavigation = null;
+                });
+
+            } else {
+                SecondNavigation = item.SecondNavigation;
+                if (SecondNavigation != null) {
+                    IsSecondNavigationActive = true;
+                    SecondNavigation.CurrentlyActivatedItem = ActiveItem;
+                }
             }
         }
 

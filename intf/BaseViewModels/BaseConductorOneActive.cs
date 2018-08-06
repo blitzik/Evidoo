@@ -40,14 +40,15 @@ namespace intf.BaseViewModels
             set
             {
                 Set(ref _secondNavigation, value);
-                NotifyOfPropertyChange(() => IsSecondNavigationActive);
             }
         }
 
 
+        private bool _isSecondNavigationActive;
         public bool IsSecondNavigationActive
         {
-            get { return SecondNavigation != null; }
+            get { return _isSecondNavigationActive; }
+            set { Set(ref _isSecondNavigationActive, value); }
         }
     }
 }
