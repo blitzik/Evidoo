@@ -60,7 +60,7 @@ namespace intf.Views
             if (wasActive == true && item.SecondNavigation == null) {
                 IsSecondNavigationActive = false;
                 Task.Factory.StartNew(async () => {
-                    await Task.Delay(325);
+                    await Task.Delay(125);
                     SecondNavigation = null;
                 });
 

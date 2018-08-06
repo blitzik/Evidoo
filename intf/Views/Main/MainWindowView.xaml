@@ -171,7 +171,7 @@
             <!-- Second Navigation -->
             <Grid Grid.Row="0" Margin="38 0 0 0"
                   b:AnimateableVisibility.Visibility="{Binding IsSecondNavigationActive, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=reversed}"
-                  b:AnimateableVisibility.Duration="300">
+                  b:AnimateableVisibility.Duration="350">
                 <Grid.Resources>
                     <Style TargetType="{x:Type Grid}">
                         <Setter Property="RenderTransform">
@@ -193,14 +193,14 @@
                                 <DataTrigger.EnterActions>
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From=".4" To="1" Duration="0:0:.3" />
+                                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From=".6" To="1" Duration="0:0:.2" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </DataTrigger.EnterActions>
                                 <DataTrigger.ExitActions>
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1" To="0" Duration="0:0:.3" />
+                                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1" To="0" Duration="0:0:.125" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </DataTrigger.ExitActions>
@@ -208,8 +208,14 @@
                         </Style.Triggers>
                     </Style>
                 </Grid.Resources>
-                
-                <ContentControl c:View.Model="{Binding SecondNavigation, UpdateSourceTrigger=PropertyChanged}" />
+
+                <ContentControl c:View.Model="{Binding SecondNavigation, UpdateSourceTrigger=PropertyChanged}">
+                    <b:ContentControlExtension.Storyboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From=".4" To="1" Duration="0:0:.350" />
+                        </Storyboard>
+                    </b:ContentControlExtension.Storyboard>
+                </ContentControl>
             </Grid>
             
 
