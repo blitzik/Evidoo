@@ -191,20 +191,24 @@
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsSecondNavigationActive}" Value="True">
                                 <DataTrigger.EnterActions>
-                                    <BeginStoryboard>
+                                    <StopStoryboard BeginStoryboardName="B" />
+                                    <BeginStoryboard Name="A">
                                         <Storyboard>
                                             <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From=".6" To="1" Duration="0:0:.2" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </DataTrigger.EnterActions>
-                                <DataTrigger.ExitActions>
-                                    <BeginStoryboard>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsSecondNavigationActive}" Value="False">
+                                <DataTrigger.EnterActions>
+                                    <StopStoryboard BeginStoryboardName="A" />
+                                    <BeginStoryboard Name="B">
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1" To="0" Duration="0:0:.125" />
+                                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1" To="0" Duration="0:0:.2" />
                                         </Storyboard>
                                     </BeginStoryboard>
-                                </DataTrigger.ExitActions>
-                            </DataTrigger>                            
+                                </DataTrigger.EnterActions>
+                            </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </Grid.Resources>

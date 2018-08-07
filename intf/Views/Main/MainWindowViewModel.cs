@@ -65,6 +65,9 @@ namespace intf.Views
                 });
 
             } else {
+                if (item.SecondNavigation == SecondNavigation) {
+                    return;
+                }
                 SecondNavigation = item.SecondNavigation;
                 if (SecondNavigation != null) {
                     IsSecondNavigationActive = true;

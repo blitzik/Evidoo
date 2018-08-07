@@ -21,6 +21,12 @@ namespace intf.Views
 
 
         private Listing _listing;
+        public Listing Listing
+        {
+            get { return _listing; }
+            set { Set(ref _listing, value); }
+        }
+
 
         public ListingDetailNavigationViewModel(Listing listing)
         {

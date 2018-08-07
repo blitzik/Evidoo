@@ -135,6 +135,8 @@ namespace intf.Views
             base.OnInitialize();
 
             EventAggregator.Subscribe(this);
+
+            SecondNavigation = PrepareViewModel(() => { return new ListingDetailNavigationViewModel(Listing); });
         }
 
 
@@ -142,7 +144,8 @@ namespace intf.Views
         {
             base.OnActivate();
 
-            _secondNavigation = PrepareViewModel(() => { return new ListingDetailNavigationViewModel(Listing); });
+            ListingDetailNavigationViewModel s = SecondNavigation as ListingDetailNavigationViewModel;
+            s.Listing = Listing;
         }
 
 
