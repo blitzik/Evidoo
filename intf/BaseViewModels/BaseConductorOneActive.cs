@@ -37,14 +37,11 @@ namespace intf.BaseViewModels
         public ISecondNavigationViewModel SecondNavigation
         {
             get { return _secondNavigation; }
-            set
-            {
-                Set(ref _secondNavigation, value);
-            }
+            set { Set(ref _secondNavigation, value); }
         }
 
 
-        private bool _isSecondNavigationActive;
+        protected bool _isSecondNavigationActive;
         public bool IsSecondNavigationActive
         {
             get { return _isSecondNavigationActive; }

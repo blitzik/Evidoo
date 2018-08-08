@@ -11,8 +11,7 @@ using System.Threading.Tasks;
 namespace intf.Views
 {
     public class MainNavigationViewModel : BaseScreen
-    {       
-
+    {
         private IViewModel _activeItem;
         public IViewModel ActiveItem
         {
@@ -21,57 +20,20 @@ namespace intf.Views
             {
                 Set(ref _activeItem, value);
                 
-                bool wasActive = SecondNavigation != null;
-                if (wasActive == true && value.SecondNavigation == null) { // todo
-                    CanHide = true;
-                    IsSecondNavigationActive = false;
-                    Task.Factory.StartNew(async () => {
-                        await Task.Delay(125);
-                        SecondNavigation = null;
-                    });
+                if (value.SecondNavigation != null) {
+                    SecondNavigation = value.SecondNavigation;
+                    SecondNavigation.CurrentlyActivatedItem = value;
+                    IsSecondNavigationActive = true;
 
                 } else {
-                    if (value.SecondNavigation == SecondNavigation) {
-                        return;
-                    }
-                    SecondNavigation = value.SecondNavigation;
-                    if (SecondNavigation != null) {
-                        IsSecondNavigationActive = true;
-                        SecondNavigation.CurrentlyActivatedItem = ActiveItem;
-                    }
+                    IsSecondNavigationActive = false;
                 }
-                
-            }
-        }
-
-
-        private bool _canHide;
-        public bool CanHide
-        {
-            get { return _canHide; }
-            set { Set(ref _canHide, value); }
-        }
-
-
-        private DelegateCommand<MainNavigationViewModel> _hideNavCommand;
-        public DelegateCommand<MainNavigationViewModel> HideNavCommand
-        {
-            get
-            {
-                if (_hideNavCommand == null) {
-                    _hideNavCommand = new DelegateCommand<MainNavigationViewModel>(p => {
-                        SecondNavigation = null;
-                        CanHide = false;
-                    });
-                }
-                return _hideNavCommand;
             }
         }
 
 
         public MainNavigationViewModel()
         {
-
         }
 
 
@@ -82,14 +44,6 @@ namespace intf.Views
             EventAggregator.Subscribe(this);
 
             DisplayListingsOverview();
-        }
-
-
-        protected override void OnActivate()
-        {
-            base.OnActivate();
-
-
         }
 
 
