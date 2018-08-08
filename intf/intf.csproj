@@ -183,6 +183,10 @@
       <DependentUpon>ListingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Listing\ListingViewModel.cs" />
+    <Compile Include="Views\Main\MainNavigationView.xaml.cs">
+      <DependentUpon>MainNavigationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\MainNavigationViewModel.cs" />
     <Compile Include="Views\Main\MainWindowView.xaml.cs">
       <DependentUpon>MainWindowView.xaml</DependentUpon>
     </Compile>
@@ -287,6 +291,10 @@
     <Page Include="Views\Listing\ListingView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\MainNavigationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Main\MainWindowView.xaml">
       <Generator>MSBuild:Compile</Generator>

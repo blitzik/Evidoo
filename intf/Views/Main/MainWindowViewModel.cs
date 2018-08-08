@@ -31,6 +31,13 @@ namespace intf.Views
         }
 
 
+        private MainNavigationViewModel _mainNavigationViewModel;
+        public MainNavigationViewModel MainNavigationViewModel
+        {
+            get { return _mainNavigationViewModel; }
+        }
+
+
         public MainWindowViewModel()
         {
             _version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
@@ -46,8 +53,10 @@ namespace intf.Views
 
             EventAggregator.Subscribe(this);
 
-            DisplayListingsOverview();
-        }
+            _mainNavigationViewModel = PrepareViewModel(() => { return new MainNavigationViewModel(); });
+            _mainNavigationViewModel.ConductWith(this);
+            NotifyOfPropertyChange(() => MainNavigationViewModel);
+        }       
 
 
         public override void ActivateItem(BaseViewModels.IViewModel item)
@@ -56,57 +65,7 @@ namespace intf.Views
 
             base.ActivateItem(item);
 
-            bool wasActive = SecondNavigation != null;
-            if (wasActive == true && item.SecondNavigation == null) {
-                IsSecondNavigationActive = false;
-                Task.Factory.StartNew(async () => {
-                    await Task.Delay(125);
-                    SecondNavigation = null;
-                });
-
-            } else {
-                if (item.SecondNavigation == SecondNavigation) {
-                    return;
-                }
-                SecondNavigation = item.SecondNavigation;
-                if (SecondNavigation != null) {
-                    IsSecondNavigationActive = true;
-                    SecondNavigation.CurrentlyActivatedItem = ActiveItem;
-                }
-            }
-        }
-
-
-        // -----
-
-
-        public void DisplayListingsOverview()
-        {
-            Handle(new ChangeViewMessage<ListingsOverviewViewModel>());
-        }
-
-
-        public void DisplayListingCreation()
-        {
-            Handle(new ChangeViewMessage<ListingViewModel>());
-        }
-
-
-        public void DisplayEmployersList()
-        {
-            Handle(new ChangeViewMessage<EmployersViewModel>());
-        }
-
-
-        public void DisplaySettings()
-        {
-            Handle(new ChangeViewMessage<SettingsViewModel>());
-        }
-
-
-        public void DisplayEmptyListingsGeneration()
-        {
-            Handle(new ChangeViewMessage<EmptyListingsGenerationViewModel>());
+            _mainNavigationViewModel.ActiveItem = item;
         }
 
 
