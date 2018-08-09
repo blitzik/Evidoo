@@ -21,7 +21,11 @@ namespace intf.Converters
             Time start = (Time)values[0];
             Time end = (Time)values[1];
 
-            return string.Format("{0} - {1}", start != 0 ? start.HoursAndMinutes : "", end != 0 ? end.HoursAndMinutes : "");
+            if (start == 0 && end == 0) {
+                return "-";
+            }
+
+            return string.Format("{0} - {1}", start.HoursAndMinutes, end.HoursAndMinutes);
         }
 
 
