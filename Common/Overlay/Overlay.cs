@@ -26,13 +26,7 @@ namespace Common.Overlay
 
         public bool IsActive
         {
-            get
-            {
-                if (_token == null) {
-                    return false;
-                }
-                return true;
-            }
+            get { return _token != null; }
         }
 
 
