@@ -147,6 +147,19 @@ namespace prjt.Utils
         }
 
 
+        public override bool Equals(object obj)
+        {
+            Time t = (Time)obj;
+            return this.TotalSeconds == t.TotalSeconds;
+        }
+
+
+        public override int GetHashCode()
+        {
+            return this.TotalSeconds;
+        }
+
+
         public static Time operator +(Time a, Time b)
         {
             return new Time(a.TotalSeconds + b.TotalSeconds);
@@ -304,10 +317,7 @@ namespace prjt.Utils
         public static bool operator !=(int a, Time b)
         {
             return a != b.TotalSeconds;
-        }
-
-
-        
+        }        
 
     }
 
