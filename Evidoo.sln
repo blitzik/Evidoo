@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "intf", "intf\intf.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "prjt", "prjt\prjt.csproj", "{DEA96E3A-77B2-4919-8559-626C6F63BD8E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "prjtTests", "prjtTests\prjtTests.csproj", "{C5DB2989-ADEC-4FC1-9D15-D361F1E75E3F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{DEA96E3A-77B2-4919-8559-626C6F63BD8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEA96E3A-77B2-4919-8559-626C6F63BD8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEA96E3A-77B2-4919-8559-626C6F63BD8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5DB2989-ADEC-4FC1-9D15-D361F1E75E3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5DB2989-ADEC-4FC1-9D15-D361F1E75E3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5DB2989-ADEC-4FC1-9D15-D361F1E75E3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5DB2989-ADEC-4FC1-9D15-D361F1E75E3F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
