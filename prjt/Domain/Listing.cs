@@ -328,7 +328,7 @@ namespace prjt.Domain
         // -----
 
 
-        public Listing() { }
+        private Listing() { }
 
 
         public Listing(Storage storage, int year, int month)

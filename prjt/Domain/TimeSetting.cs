@@ -84,7 +84,6 @@ namespace prjt.Domain
 
         public TimeSetting() { }
 
-
         public TimeSetting(TimeSetting timeSetting)
         {
             _start = new Time(timeSetting.Start);

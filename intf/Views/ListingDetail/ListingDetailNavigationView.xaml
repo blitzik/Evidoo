@@ -16,6 +16,12 @@
     <StackPanel Grid.Row="0">
         <StackPanel.Resources>
             <Style TargetType="{x:Type RadioButton}">
+                <Style.Resources>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Margin" Value="10 2 0 0" />
+                    </Style>
+                </Style.Resources>
+                
                 <Setter Property="Background" Value="#485f6b" />
                 <Setter Property="BorderThickness" Value="0" />
                 <Setter Property="Foreground" Value="#FFF" />
@@ -56,16 +62,16 @@
         </StackPanel.Resources>
 
         <RadioButton x:Name="DisplayListingDetail" IsChecked="{Binding CurrentlyActivatedItem, Converter={StaticResource ViewModelToBooleanConverter}, ConverterParameter=ListingDetailViewModel}">
-            <TextBlock Margin="10 2 0 0" Text="Detail výčetky" />
+            <TextBlock Text="Detail výčetky" />
         </RadioButton>
         <RadioButton x:Name="DisplayPDFGeneration" IsChecked="{Binding CurrentlyActivatedItem, Converter={StaticResource ViewModelToBooleanConverter}, ConverterParameter=ListingPdfGenerationViewModel}">
-            <TextBlock Margin="10 2 0 0" Text="Generovat PDF" />
+            <TextBlock Text="Generovat PDF" />
         </RadioButton>
         <RadioButton x:Name="DisplayListingEditing" IsChecked="{Binding CurrentlyActivatedItem, Converter={StaticResource ViewModelToBooleanConverter}, ConverterParameter=ListingEditingViewModel}">
-            <TextBlock Margin="10 3 0 0" Text="Upravit výčetku" />
+            <TextBlock Text="Upravit výčetku" />
         </RadioButton>
         <RadioButton x:Name="DisplayListingDeletion" IsChecked="{Binding CurrentlyActivatedItem, Converter={StaticResource ViewModelToBooleanConverter}, ConverterParameter=ListingDeletionViewModel}">
-            <TextBlock Margin="10 3 0 0" Text="Odstranit výčetku" />
+            <TextBlock Text="Odstranit výčetku" />
         </RadioButton>        
     </StackPanel>
 </UserControl>

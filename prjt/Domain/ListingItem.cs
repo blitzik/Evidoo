@@ -40,6 +40,8 @@ namespace prjt.Domain
         }
 
 
+        private ListingItem() { }
+
         public ListingItem(Listing listing, int day, string locality, Time start, Time end, Time lunchStart, Time lunchEnd, Time otherHours)
         {
             _date = new DateTime(listing.Year, listing.Month, day);

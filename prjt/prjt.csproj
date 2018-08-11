@@ -78,14 +78,12 @@
   <ItemGroup>
     <Compile Include="Comparers\SortIntDescending.cs" />
     <Compile Include="Domain\DayItem.cs" />
-    <Compile Include="Domain\DbVersion.cs" />
     <Compile Include="Domain\DefaultListingPdfReportSetting.cs" />
     <Compile Include="Domain\DefaultSettings.cs" />
     <Compile Include="Domain\Employer.cs" />
     <Compile Include="Domain\Listing.cs" />
     <Compile Include="Domain\ListingItem.cs" />
     <Compile Include="Domain\PageTitle.cs" />
-    <Compile Include="Domain\Persistent.cs" />
     <Compile Include="Domain\TimeSetting.cs" />
     <Compile Include="Domain\Week.cs" />
     <Compile Include="EventArguments\ListingArgs.cs" />

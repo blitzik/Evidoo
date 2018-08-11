@@ -44,7 +44,7 @@ namespace prjt.Domain
         }
 
 
-        public DefaultSettings() { }
+        private DefaultSettings() { }
 
 
         public DefaultSettings(string identifier)
