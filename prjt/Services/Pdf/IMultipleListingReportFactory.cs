@@ -10,6 +10,6 @@ namespace prjt.Services.Pdf
 {
     public interface IMultipleListingReportFactory
     {
-        Document Create(List<Listing> listings, DefaultListingPdfReportSetting settings);
+        Document Create(IEnumerable<Listing> listings, DefaultListingPdfReportSetting settings);
     }
 }

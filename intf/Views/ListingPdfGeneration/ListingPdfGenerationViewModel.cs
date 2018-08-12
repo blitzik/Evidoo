@@ -33,6 +33,7 @@ namespace intf.Views
         public PdfGenerationSettingsViewModel PdfGenerationSettingsViewModel
         {
             get { return _pdfGenerationSettingsViewModel; }
+            private set { Set(ref _pdfGenerationSettingsViewModel, value); }
         }
 
 
@@ -95,11 +96,10 @@ namespace intf.Views
 
             _defaultSettings = _settingFacade.GetDefaultSettings();
 
-            _pdfGenerationSettingsViewModel = GetViewModel<PdfGenerationSettingsViewModel>();
-            _pdfGenerationSettingsViewModel.OnSettingsPropertyChanged += (s, arg) => {
+            PdfGenerationSettingsViewModel = GetViewModel<PdfGenerationSettingsViewModel>();
+            PdfGenerationSettingsViewModel.OnSettingsPropertyChanged += (s, arg) => {
                 ResetSettingsCommand.RaiseCanExecuteChanged();
             };
-            NotifyOfPropertyChange(() => PdfGenerationSettingsViewModel);
         }
 
 

@@ -57,24 +57,24 @@ namespace Evidoo
             _container = new SimpleContainer();
             _container.Instance(_container);
 
+            // Common
             _container.Singleton<IWindowManager, WindowManager>();
             _container.Singleton<IEventAggregator, EventAggregator>();
+            _container.Singleton<IViewModelResolver, ViewModelResolver>();
+            _container.Singleton<IFlashMessagesManager, FlashMessagesManager>();
+            _container.PerRequest<IValidationObject, ValidationObject>();
+            _container.Singleton<IOverlay, Overlay>();
 
             // Services
             _container.Singleton<PerstStorageFactory>();
             _container.Singleton<StoragePool>();
-            _container.Singleton<IViewModelResolver, ViewModelResolver>();
             _container.Singleton<IIODialogService, FilePathDialogService>();
             _container.Singleton<IListingSectionFactory, ListingSectionFactory>();
             _container.Singleton<IListingPdfDocumentFactory, DefaultListingPdfReportFactory>();
             _container.Singleton<IMultipleListingReportFactory, MultipleListingReportFactory>();
             _container.Singleton<IListingReportGenerator, ListingReportGenerator>();
             _container.Singleton<IBackupImport, BackupImport>();
-            _container.Singleton<IFlashMessagesManager, FlashMessagesManager>();
-            _container.PerRequest<IValidationObject, ValidationObject>();
             _container.Singleton<IEmployerViewModelsFactory, EmployerViewModelsFactory>();
-            _container.Singleton<IOverlay, Overlay>();
-
             _container.Singleton<IEmployerFactory, EmployerFactory>();
             _container.Singleton<IListingFactory, ListingFactory>();
 
@@ -100,6 +100,7 @@ namespace Evidoo
             _container.Singleton<SettingsViewModel>();
             _container.Singleton<EmptyListingsGenerationViewModel>();
             _container.PerRequest<WorkedTimeSettingViewModel>();
+            _container.Singleton<ListingsPdfGenerationViewModel>();
 
             // Subscribers
             _container.Singleton<ListingSubscriber>().GetInstance<ListingSubscriber>();

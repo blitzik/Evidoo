@@ -1,23 +1,14 @@
 ﻿using Caliburn.Micro;
 using Common.Commands;
+using intf.BaseViewModels;
+using intf.Messages;
 using prjt.Domain;
 using prjt.Facades;
-using intf.Messages;
 using prjt.Utils;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
-using Common.EventAggregator.Messages;
-using intf.BaseViewModels;
-using prjt.Services.IO;
-using prjt.Services.Pdf;
-using prjt.Services.Entities;
-using System.Windows.Forms;
-using Common.Overlay;
-using System.Threading.Tasks;
-using MigraDoc.DocumentObjectModel;
 
 namespace intf.Views
 {
@@ -37,20 +28,19 @@ namespace intf.Views
         }
 
 
-        private DelegateCommand<object> _generatePDFCommand;
-        public DelegateCommand<object> GeneratePDFCommand
+        private DelegateCommand<object> _displayListingsPdfGenerationCommand;
+        public DelegateCommand<object> DisplayListingsPdfGenerationCommand
         {
             get
             {
-                if (_generatePDFCommand == null) {
-                    _generatePDFCommand = new DelegateCommand<object>(p => GeneratePDF());
+                if (_displayListingsPdfGenerationCommand == null) {
+                    _displayListingsPdfGenerationCommand = new DelegateCommand<object>(p => DisplayListingsPdfGeneration());
                 }
-                return _generatePDFCommand;
+                return _displayListingsPdfGenerationCommand;
             }
         }
 
 
-        private List<Listing> _listingsList;
         private ICollectionView _listings;
         public ICollectionView Listings
         {
@@ -102,22 +92,12 @@ namespace intf.Views
         }
 
 
-        /*private IIODialogService _filePathDialogService;
-        private IMultipleListingReportFactory _multipleListingReportFactory;
-        private IListingReportGenerator _listingReportGenerator;*/
-
         private ListingFacade _listingFacade;
 
         public ListingsOverviewViewModel(
-            ListingFacade listingFacade/*,
-            IIODialogService filePathDialogService,
-            IMultipleListingReportFactory multipleListingReportFactory,
-            IListingReportGenerator listingReportGenerator*/
+            ListingFacade listingFacade
         ) {
             _listingFacade = listingFacade;
-            /*_filePathDialogService = filePathDialogService;
-            _multipleListingReportFactory = multipleListingReportFactory;
-            _listingReportGenerator = listingReportGenerator;*/
         }
 
 
@@ -132,8 +112,10 @@ namespace intf.Views
             _months.Reverse();
             _months.Insert(0, "Celý rok");
 
-            SelectedYear = DateTime.Now.Year;
-            SelectedMonth = DateTime.Now.Month;
+            _selectedYear = DateTime.Now.Year;
+            NotifyOfPropertyChange(() => SelectedYear);
+            _selectedMonth = DateTime.Now.Month;
+            NotifyOfPropertyChange(() => SelectedMonth);
         }
 
 
@@ -147,8 +129,7 @@ namespace intf.Views
 
         private void LoadListings(int year, int month)
         {
-            _listingsList = _listingFacade.FindListings(year, month);
-            Listings = CollectionViewSource.GetDefaultView(_listingsList);
+            Listings = CollectionViewSource.GetDefaultView(_listingFacade.FindListings(year, month));
         }
 
 
@@ -158,30 +139,11 @@ namespace intf.Views
         }
 
 
-        private void GeneratePDF()
+        private void DisplayListingsPdfGeneration()
         {
-            /*string fileName = SelectedMonth == 0 ?
-                              string.Format("Rok {0}", SelectedYear) :
-                              string.Format("{1} {0}", SelectedYear, Date.Months[12 - SelectedMonth]);
-
-            string filePath = _filePathDialogService.GetFilePath<SaveFileDialog>(
-                fileName,
-                d => { d.Filter = "PDF dokument (*.pdf)|*.pdf"; }
-            );
-
-            if (string.IsNullOrEmpty(filePath)) {
-                return;
-            }
-
-            IOverlayToken ot = Overlay.DisplayOverlay(PrepareViewModel<ProgressViewModel>());
-            Task.Factory.StartNew(() => {
-                Document doc = _multipleListingReportFactory.Create(_listingsList, new DefaultListingPdfReportSetting());
-
-                _listingReportGenerator.Save(filePath, doc);
-
-                ot.HideOverlay();
-                EventAggregator.PublishOnUIThread(new ListingPdfSuccessfullyGeneratedMessage());
-            });*/
+            EventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingsPdfGenerationViewModel>(x => {
+                x.SetDefaultPeriod(SelectedYear, SelectedMonth);
+            }));
         }
     }
 }

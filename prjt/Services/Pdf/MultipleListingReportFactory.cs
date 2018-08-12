@@ -19,7 +19,7 @@ namespace prjt.Services.Pdf
         }
 
 
-        public Document Create(List<Listing> listings, DefaultListingPdfReportSetting settings)
+        public Document Create(IEnumerable<Listing> listings, DefaultListingPdfReportSetting settings)
         {
             Document doc = new Document();
 

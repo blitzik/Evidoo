@@ -17,7 +17,7 @@
 
         <StackPanel Grid.Column="0">
             <TextBlock Text="Jméno" Style="{StaticResource LabelText}" />
-            <TextBox Text="{Binding PdfSetting.OwnerName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="30" Style="{StaticResource DefaultTextBox}" />
+            <TextBox Text="{Binding PdfGenerationSettingsViewModel.PdfSetting.OwnerName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="30" Style="{StaticResource DefaultTextBox}" />
 
             <Grid Margin="0 15 0 0">
                 <Grid.ColumnDefinitions>
