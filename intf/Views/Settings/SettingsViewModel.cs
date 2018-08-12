@@ -301,7 +301,7 @@ namespace intf.Views
         private DefaultListingPdfReportSetting CreateNewPdfSetting(DefaultListingPdfReportSetting oldSetting)
         {
             DefaultListingPdfReportSetting setting = new DefaultListingPdfReportSetting(oldSetting);
-            setting.OnSettingPropertyChanged += (object sender, EventArgs args) => {
+            setting.OnSettingPropertyChanged += (arg) => {
                 CancelChangesCommand.RaiseCanExecuteChanged();
                 SaveSettingsCommand.RaiseCanExecuteChanged();
             };

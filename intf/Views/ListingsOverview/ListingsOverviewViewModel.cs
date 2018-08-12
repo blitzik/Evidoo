@@ -11,6 +11,13 @@ using System.ComponentModel;
 using System.Windows.Data;
 using Common.EventAggregator.Messages;
 using intf.BaseViewModels;
+using prjt.Services.IO;
+using prjt.Services.Pdf;
+using prjt.Services.Entities;
+using System.Windows.Forms;
+using Common.Overlay;
+using System.Threading.Tasks;
+using MigraDoc.DocumentObjectModel;
 
 namespace intf.Views
 {
@@ -30,6 +37,20 @@ namespace intf.Views
         }
 
 
+        private DelegateCommand<object> _generatePDFCommand;
+        public DelegateCommand<object> GeneratePDFCommand
+        {
+            get
+            {
+                if (_generatePDFCommand == null) {
+                    _generatePDFCommand = new DelegateCommand<object>(p => GeneratePDF());
+                }
+                return _generatePDFCommand;
+            }
+        }
+
+
+        private List<Listing> _listingsList;
         private ICollectionView _listings;
         public ICollectionView Listings
         {
@@ -81,12 +102,22 @@ namespace intf.Views
         }
 
 
-        private readonly ListingFacade _listingFacade;
+        /*private IIODialogService _filePathDialogService;
+        private IMultipleListingReportFactory _multipleListingReportFactory;
+        private IListingReportGenerator _listingReportGenerator;*/
+
+        private ListingFacade _listingFacade;
 
         public ListingsOverviewViewModel(
-            ListingFacade listingFacade
+            ListingFacade listingFacade/*,
+            IIODialogService filePathDialogService,
+            IMultipleListingReportFactory multipleListingReportFactory,
+            IListingReportGenerator listingReportGenerator*/
         ) {
             _listingFacade = listingFacade;
+            /*_filePathDialogService = filePathDialogService;
+            _multipleListingReportFactory = multipleListingReportFactory;
+            _listingReportGenerator = listingReportGenerator;*/
         }
 
 
@@ -116,13 +147,41 @@ namespace intf.Views
 
         private void LoadListings(int year, int month)
         {
-            Listings = CollectionViewSource.GetDefaultView(_listingFacade.FindListings(year, month));
+            _listingsList = _listingFacade.FindListings(year, month);
+            Listings = CollectionViewSource.GetDefaultView(_listingsList);
         }
 
 
         private void OpenListing(Listing listing)
         {
             EventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingDetailViewModel>(x => { x.Listing = listing; }));
+        }
+
+
+        private void GeneratePDF()
+        {
+            /*string fileName = SelectedMonth == 0 ?
+                              string.Format("Rok {0}", SelectedYear) :
+                              string.Format("{1} {0}", SelectedYear, Date.Months[12 - SelectedMonth]);
+
+            string filePath = _filePathDialogService.GetFilePath<SaveFileDialog>(
+                fileName,
+                d => { d.Filter = "PDF dokument (*.pdf)|*.pdf"; }
+            );
+
+            if (string.IsNullOrEmpty(filePath)) {
+                return;
+            }
+
+            IOverlayToken ot = Overlay.DisplayOverlay(PrepareViewModel<ProgressViewModel>());
+            Task.Factory.StartNew(() => {
+                Document doc = _multipleListingReportFactory.Create(_listingsList, new DefaultListingPdfReportSetting());
+
+                _listingReportGenerator.Save(filePath, doc);
+
+                ot.HideOverlay();
+                EventAggregator.PublishOnUIThread(new ListingPdfSuccessfullyGeneratedMessage());
+            });*/
         }
     }
 }

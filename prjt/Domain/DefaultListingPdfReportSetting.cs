@@ -292,14 +292,11 @@ namespace prjt.Domain
         }
 
 
-        public delegate void PropertyChangedHandler(object sender, EventArgs args);
-        public event PropertyChangedHandler OnSettingPropertyChanged;
+        public event Action<DefaultListingPdfReportSetting> OnSettingPropertyChanged;
 
         private void ProcessOnPropertyChanged()
         {
-            if (OnSettingPropertyChanged != null) {
-                OnSettingPropertyChanged(this, EventArgs.Empty);
-            }
+            OnSettingPropertyChanged?.Invoke(this);
         }
 
 

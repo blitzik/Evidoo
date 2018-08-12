@@ -29,6 +29,13 @@ namespace intf.Views
         }
 
 
+        private PdfGenerationSettingsViewModel _pdfGenerationSettingsViewModel;
+        public PdfGenerationSettingsViewModel PdfGenerationSettingsViewModel
+        {
+            get { return _pdfGenerationSettingsViewModel; }
+        }
+
+
         private DelegateCommand<object> _generatePdfCommand;
         public DelegateCommand<object> GeneratePdfCommand
         {
@@ -50,7 +57,7 @@ namespace intf.Views
                 if (_resetSettingsCommand == null) {
                     _resetSettingsCommand = new DelegateCommand<object>(
                         p => ResetSettings(),
-                        p => !_defaultSettings.Pdfsetting.IsEqual(_pdfSetting)
+                        p => !_defaultSettings.Pdfsetting.IsEqual(_pdfGenerationSettingsViewModel.PdfSetting)
                     );
                 }
                 return _resetSettingsCommand;
@@ -58,35 +65,20 @@ namespace intf.Views
         }
 
 
-        private DefaultListingPdfReportSetting _pdfSetting;
-        public DefaultListingPdfReportSetting PdfSetting
-        {
-            get { return _pdfSetting; }
-            set
-            {
-                _pdfSetting = value;
-                NotifyOfPropertyChange(() => PdfSetting);
-            }
-        }
-
-
-        private readonly IIODialogService _filePathDialogService;
-        private readonly SettingFacade _settingFacade;
-        private readonly IWindowManager _windowManager;
-        private readonly IListingPdfDocumentFactory _listingPdfDocumentFactory;
-        private readonly IListingReportGenerator _listingReportGenerator;
+        private IIODialogService _filePathDialogService;
+        private SettingFacade _settingFacade;
+        private IListingPdfDocumentFactory _listingPdfDocumentFactory;
+        private IListingReportGenerator _listingReportGenerator;
 
         private DefaultSettings _defaultSettings;
 
         public ListingPdfGenerationViewModel(
             SettingFacade settingFacade,
-            IWindowManager windowManager,
             IIODialogService filePathDialogService,
             IListingPdfDocumentFactory listingPdfDocumentFactory,
             IListingReportGenerator listingReportGenerator
         ) {
             _settingFacade = settingFacade;
-            _windowManager = windowManager;
             _filePathDialogService = filePathDialogService;
             _listingPdfDocumentFactory = listingPdfDocumentFactory;
             _listingReportGenerator = listingReportGenerator;
@@ -103,8 +95,11 @@ namespace intf.Views
 
             _defaultSettings = _settingFacade.GetDefaultSettings();
 
-            PdfSetting = new DefaultListingPdfReportSetting(_defaultSettings.Pdfsetting);
-            PdfSetting.OnSettingPropertyChanged += (object sender, EventArgs args) => { ResetSettingsCommand.RaiseCanExecuteChanged(); };
+            _pdfGenerationSettingsViewModel = GetViewModel<PdfGenerationSettingsViewModel>();
+            _pdfGenerationSettingsViewModel.OnSettingsPropertyChanged += (s, arg) => {
+                ResetSettingsCommand.RaiseCanExecuteChanged();
+            };
+            NotifyOfPropertyChange(() => PdfGenerationSettingsViewModel);
         }
 
 
@@ -129,7 +124,7 @@ namespace intf.Views
 
             IOverlayToken ot = Overlay.DisplayOverlay(PrepareViewModel<ProgressViewModel>());
             Task.Run(() => {
-                Document doc = _listingPdfDocumentFactory.Create(Listing, _pdfSetting);
+                Document doc = _listingPdfDocumentFactory.Create(Listing, _pdfGenerationSettingsViewModel.PdfSetting);
                 _listingReportGenerator.Save(filePath, doc);
 
                 ot.HideOverlay();
@@ -140,7 +135,7 @@ namespace intf.Views
 
         private void ResetSettings()
         {
-            PdfSetting.UpdateBy(_defaultSettings.Pdfsetting);
+            _pdfGenerationSettingsViewModel.PdfSetting.UpdateBy(_defaultSettings.Pdfsetting);
         }
     }
 }

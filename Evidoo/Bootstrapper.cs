@@ -96,6 +96,7 @@ namespace Evidoo
             _container.Singleton<ListingEditingViewModel>();
             _container.Singleton<ListingItemViewModel>();
             _container.Singleton<ListingPdfGenerationViewModel>();
+            _container.Singleton<PdfGenerationSettingsViewModel>();
             _container.Singleton<SettingsViewModel>();
             _container.Singleton<EmptyListingsGenerationViewModel>();
             _container.PerRequest<WorkedTimeSettingViewModel>();

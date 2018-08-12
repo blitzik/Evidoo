@@ -52,21 +52,18 @@ namespace intf.Views
         }
 
 
-        private readonly IWindowManager _windowManager;
-        private readonly IIODialogService _filePathDialogService;
-        private readonly IMultipleListingReportFactory _multipleListingReportFactory;
-        private readonly IListingReportGenerator _listingReportGenerator;
-        private readonly IListingFactory _listingFactory;
+        private IIODialogService _filePathDialogService;
+        private IMultipleListingReportFactory _multipleListingReportFactory;
+        private IListingReportGenerator _listingReportGenerator;
+        private IListingFactory _listingFactory;
 
 
         public EmptyListingsGenerationViewModel(
-            IWindowManager windowManager,
             IIODialogService filePathDialogService,
             IMultipleListingReportFactory multipleListingReportFactory,
             IListingReportGenerator listingReportGenerator,
             IListingFactory listingFactory
         ) {
-            _windowManager = windowManager;
             _filePathDialogService = filePathDialogService;
             _multipleListingReportFactory = multipleListingReportFactory;
             _listingReportGenerator = listingReportGenerator;

@@ -1,0 +1,151 @@
+﻿<UserControl x:Class="intf.Views.PdfGenerationSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:intf.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Template="{StaticResource ScrollViewerControlTemplate}">
+        <StackPanel>
+            <StackPanel.Resources>
+                <Style TargetType="CheckBox">
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="Margin"  Value="0 5 0 0" />
+                </Style>
+                <Style x:Key="OutsideTextBlock" TargetType="TextBlock">
+                    <Setter Property="Margin" Value="0 -4 0 0" />
+                    <Setter Property="FontSize" Value="17" />
+                </Style>
+                <Style x:Key="InnerTextBlock" TargetType="TextBlock">
+                    <Setter Property="FontWeight" Value="Bold" />
+                </Style>
+            </StackPanel.Resources>
+
+            <TextBlock Text="Vlastník výčetky" Style="{StaticResource LabelText}" />
+            <Border BorderBrush="#CCC" BorderThickness="0 1 0 0" Padding="0 10 0 10" Margin="0 5 0 10">
+                <StackPanel>
+                    <CheckBox IsChecked="{Binding PdfSetting.IsEmployerVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBlock Style="{StaticResource OutsideTextBlock}">
+                            Zobrazit pole "<TextBlock Text="Zaměstnavatel" Style="{StaticResource InnerTextBlock}" />"
+                        </TextBlock>
+                    </CheckBox>
+
+                    <CheckBox IsChecked="{Binding PdfSetting.IsOwnerNameVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBlock Style="{StaticResource OutsideTextBlock}">
+                            Zobrazit pole "<TextBlock Text="Jméno" Style="{StaticResource InnerTextBlock}" />"
+                        </TextBlock>
+                    </CheckBox>
+                </StackPanel>
+            </Border>
+
+            <TextBlock Text="Hodiny" Style="{StaticResource LabelText}" />
+            <Border BorderBrush="#CCC" BorderThickness="0 1 0 0" Padding="0 10 0 10" Margin="0 5 0 10">
+                <StackPanel>
+                    <CheckBox Margin="0 0 0 15" IsChecked="{Binding PdfSetting.AreShortHalfHoursEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBlock Style="{StaticResource OutsideTextBlock}">
+                                Zobrazit "<TextBlock Text="půlhodiny jako desetiny" Style="{StaticResource InnerTextBlock}" />"
+                            </TextBlock>
+                    </CheckBox>
+
+                    <CheckBox IsChecked="{Binding PdfSetting.AreWorkedHoursVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBlock Style="{StaticResource OutsideTextBlock}">
+                            Zobrazit pole "<TextBlock Text="Odpracované hodiny" Style="{StaticResource InnerTextBlock}" />"
+                        </TextBlock>
+                    </CheckBox>
+
+                    <CheckBox IsChecked="{Binding PdfSetting.AreLunchHoursVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBlock Style="{StaticResource OutsideTextBlock}">
+                            Zobrazit pole "<TextBlock Text="Obědy" Style="{StaticResource InnerTextBlock}" />"
+                        </TextBlock>
+                    </CheckBox>
+
+                    <CheckBox IsChecked="{Binding PdfSetting.AreOtherHoursVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBlock Style="{StaticResource OutsideTextBlock}">
+                            Zobrazit pole "<TextBlock Text="Ostatní hodiny" Style="{StaticResource InnerTextBlock}" />"
+                        </TextBlock>
+                    </CheckBox>
+
+                    <CheckBox IsChecked="{Binding PdfSetting.AreTotalWorkedHoursVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBlock Style="{StaticResource OutsideTextBlock}">
+                            Zobrazit pole "<TextBlock Text="Hodin celkem" Style="{StaticResource InnerTextBlock}" />"
+                        </TextBlock>
+                    </CheckBox>
+
+                    <CheckBox IsChecked="{Binding PdfSetting.IsVacationVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBlock Style="{StaticResource OutsideTextBlock}">
+                            Zobrazit pole "<TextBlock Text="Dovolená" Style="{StaticResource InnerTextBlock}" />"
+                        </TextBlock>
+                    </CheckBox>
+
+                    <CheckBox IsChecked="{Binding PdfSetting.AreSiknessHoursVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBlock Style="{StaticResource OutsideTextBlock}">
+                            Zobrazit pole "<TextBlock Text="Nemoc hod." Style="{StaticResource InnerTextBlock}" />"
+                        </TextBlock>
+                    </CheckBox>
+
+                    <CheckBox IsChecked="{Binding PdfSetting.AreHolidaysHoursVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBlock Style="{StaticResource OutsideTextBlock}">
+                            Zobrazit pole "<TextBlock Text="Svátek" Style="{StaticResource InnerTextBlock}" />"
+                        </TextBlock>
+                    </CheckBox>
+                </StackPanel>
+            </Border>
+
+            <TextBlock Text="Souhrn" Style="{StaticResource LabelText}" />
+            <Border BorderBrush="#CCC" BorderThickness="0 1 0 0" Padding="0 10 0 10" Margin="0 5 0 10">
+                <StackPanel>
+                    <CheckBox IsChecked="{Binding PdfSetting.IsHourlyWageVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBlock Style="{StaticResource OutsideTextBlock}">
+                            Zobrazit pole "<TextBlock Text="Základní mzda" Style="{StaticResource InnerTextBlock}" />"
+                        </TextBlock>
+                    </CheckBox>
+
+                    <CheckBox IsChecked="{Binding PdfSetting.AreVacationDaysVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBlock Style="{StaticResource OutsideTextBlock}">
+                            Zobrazit pole "<TextBlock Text="Dovolení dni" Style="{StaticResource InnerTextBlock}" />"
+                        </TextBlock>
+                    </CheckBox>
+
+                    <CheckBox IsChecked="{Binding PdfSetting.AreDietsVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBlock Style="{StaticResource OutsideTextBlock}">
+                            Zobrazit pole "<TextBlock Text="Diety" Style="{StaticResource InnerTextBlock}" />"
+                        </TextBlock>
+                    </CheckBox>
+
+                    <CheckBox IsChecked="{Binding PdfSetting.ArePaidHolidaysVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBlock Style="{StaticResource OutsideTextBlock}">
+                            Zobrazit pole "<TextBlock Text="Placené svátky" Style="{StaticResource InnerTextBlock}" />"
+                        </TextBlock>
+                    </CheckBox>
+
+                    <CheckBox IsChecked="{Binding PdfSetting.AreBonusesVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBlock Style="{StaticResource OutsideTextBlock}">
+                            Zobrazit pole "<TextBlock Text="Odměny" Style="{StaticResource InnerTextBlock}" />"
+                        </TextBlock>
+                    </CheckBox>
+
+                    <CheckBox IsChecked="{Binding PdfSetting.AreDollarsVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBlock Style="{StaticResource OutsideTextBlock}">
+                            Zobrazit pole "<TextBlock Text="$" Style="{StaticResource InnerTextBlock}" />"
+                        </TextBlock>
+                    </CheckBox>
+
+                    <CheckBox IsChecked="{Binding PdfSetting.IsPrepaymentVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBlock Style="{StaticResource OutsideTextBlock}">
+                            Zobrazit pole "<TextBlock Text="Zálohy" Style="{StaticResource InnerTextBlock}" />"
+                        </TextBlock>
+                    </CheckBox>
+
+                    <CheckBox IsChecked="{Binding PdfSetting.IsSicknessVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBlock Style="{StaticResource OutsideTextBlock}">
+                            Zobrazit pole "<TextBlock Text="Nemoc" Style="{StaticResource InnerTextBlock}" />"
+                        </TextBlock>
+                    </CheckBox>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+
+</UserControl>
