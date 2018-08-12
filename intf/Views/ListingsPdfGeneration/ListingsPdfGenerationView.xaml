@@ -45,7 +45,7 @@
                       ItemsSource="{Binding Months}"
                       SelectedIndex="{Binding SelectedMonth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-                <Button Margin="10 0 0 0" Content="Generuj PDF dokument" Command="{Binding GeneratePdfCommand}" Style="{StaticResource PrimaryButton}" />
+                <Button Margin="10 0 0 0" IsEnabled="{Binding CanGenerate}" Content="Generuj PDF dokument" Command="{Binding GeneratePdfCommand}" Style="{StaticResource PrimaryButton}" />
             </StackPanel>
 
             <ScrollViewer Grid.Row="2" Padding="0 0 10 0" VerticalScrollBarVisibility="Auto" Template="{StaticResource ScrollViewerControlTemplate}">

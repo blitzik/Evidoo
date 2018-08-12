@@ -77,6 +77,14 @@ namespace intf.Views
         }
 
 
+        private bool _canGenerate;
+        public bool CanGenerate
+        {
+            get { return _canGenerate; }
+            private set { Set(ref _canGenerate, value); }
+        }
+
+
         private PdfGenerationSettingsViewModel _pdfGenerationSettingsViewModel;
         public PdfGenerationSettingsViewModel PdfGenerationSettingsViewModel
         {
@@ -143,6 +151,8 @@ namespace intf.Views
 
             BaseWindowTitle = "Hromadné generování PDF dokumentů";
 
+            CanGenerate = false;
+
             _years = Date.GetYears(2010, "DESC");
             _months = new List<string>(Date.Months);
             _months.Reverse();
@@ -184,10 +194,15 @@ namespace intf.Views
 
         private void LoadListings(int year, int month)
         {
+            CanGenerate = false;
             var listings = _listingFacade.FindListings(year, month);
             _listingsList = new List<ListingCheckBoxWrapper>();
             foreach (Listing l in listings) {
                 ListingCheckBoxWrapper w = new ListingCheckBoxWrapper(l);
+                w.OnIsCheckedChanged += (s, v) => {
+                    IEnumerable<Listing> result = from ListingCheckBoxWrapper lw in _listingsList where lw.IsChecked == true select lw.Listing;
+                    CanGenerate = result.Count() > 0;
+                };
                 _listingsList.Add(w);
             }
             Listings = CollectionViewSource.GetDefaultView(_listingsList);
@@ -210,7 +225,7 @@ namespace intf.Views
             }
 
             IOverlayToken ot = Overlay.DisplayOverlay(PrepareViewModel<ProgressViewModel>());
-            Task.Factory.StartNew(() => {
+            Task.Factory.StartNew(() => {// todo when no listings are selected / loaded
                 IEnumerable<Listing> listings = from ListingCheckBoxWrapper lw in _listingsList where lw.IsChecked == true select lw.Listing;
                 Document doc = _multipleListingReportFactory.Create(listings, PdfGenerationSettingsViewModel.PdfSetting);
 

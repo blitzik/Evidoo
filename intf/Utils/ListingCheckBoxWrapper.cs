@@ -28,9 +28,15 @@ namespace intf.Utils
         public bool IsChecked
         {
             get { return _isChecked; }
-            set { Set(ref _isChecked , value); }
+            set
+            {
+                Set(ref _isChecked , value);
+                OnIsCheckedChanged?.Invoke(this, value);
+            }
         }
 
+
+        public event Action<ListingCheckBoxWrapper, bool> OnIsCheckedChanged;
 
         public ListingCheckBoxWrapper(Listing listing, bool isChecked = false)
         {
