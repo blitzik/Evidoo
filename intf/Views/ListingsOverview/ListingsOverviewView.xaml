@@ -39,7 +39,7 @@
             <Button Margin="10 0 0 0"
                     Padding="7"
                     FontSize="14"
-                    Content="Generovat PDF"
+                    Content="Generovat PDF pro období"
                     Command="{Binding DisplayListingsPdfGenerationCommand}" />
         </StackPanel>
         
