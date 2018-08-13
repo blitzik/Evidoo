@@ -171,8 +171,8 @@
 
                                                     <ControlTemplate.Triggers>
                                                         <Trigger Property="IsChecked" Value="True">
-                                                            <Setter TargetName="InnerBorder" Property="BorderBrush" Value="#e67e22" />
-                                                            <Trigger.EnterActions>
+                                                            <Setter TargetName="InnerBorder" Property="BorderBrush" Value="#1abc9c" />
+                                                                <Trigger.EnterActions>
                                                                 <BeginStoryboard>
                                                                     <Storyboard>
                                                                         <DoubleAnimation Storyboard.TargetName="OuterBorder" Storyboard.TargetProperty="Opacity" From=".7" To="1" Duration="0:0:.3" />
