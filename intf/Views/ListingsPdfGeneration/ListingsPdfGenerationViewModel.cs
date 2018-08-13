@@ -211,6 +211,10 @@ namespace intf.Views
 
         private void GeneratePdf()
         {
+            if (CanGenerate == false) {
+                return;
+            }
+
             string fileName = SelectedMonth == 0 ?
                               string.Format("Rok {0}", SelectedYear) :
                               string.Format("{1} {0}", SelectedYear, Date.Months[12 - SelectedMonth]);
@@ -225,7 +229,7 @@ namespace intf.Views
             }
 
             IOverlayToken ot = Overlay.DisplayOverlay(PrepareViewModel<ProgressViewModel>());
-            Task.Factory.StartNew(() => {// todo when no listings are selected / loaded
+            Task.Factory.StartNew(() => {
                 IEnumerable<Listing> listings = from ListingCheckBoxWrapper lw in _listingsList where lw.IsChecked == true select lw.Listing;
                 Document doc = _multipleListingReportFactory.Create(listings, PdfGenerationSettingsViewModel.PdfSetting);
 

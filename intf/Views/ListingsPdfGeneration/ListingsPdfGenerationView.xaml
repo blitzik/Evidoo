@@ -171,7 +171,7 @@
 
                                                     <ControlTemplate.Triggers>
                                                         <Trigger Property="IsChecked" Value="True">
-                                                            <Setter TargetName="InnerBorder" Property="BorderBrush" Value="#3498db" />
+                                                            <Setter TargetName="InnerBorder" Property="BorderBrush" Value="#e67e22" />
                                                             <Trigger.EnterActions>
                                                                 <BeginStoryboard>
                                                                     <Storyboard>
