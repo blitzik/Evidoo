@@ -68,7 +68,7 @@ namespace intf.Views
 
         private IIODialogService _filePathDialogService;
         private SettingFacade _settingFacade;
-        private IListingPdfDocumentFactory _listingPdfDocumentFactory;
+        private IListingsReportFactory _listingsReportFactory;
         private IListingReportGenerator _listingReportGenerator;
 
         private DefaultSettings _defaultSettings;
@@ -76,12 +76,12 @@ namespace intf.Views
         public ListingPdfGenerationViewModel(
             SettingFacade settingFacade,
             IIODialogService filePathDialogService,
-            IListingPdfDocumentFactory listingPdfDocumentFactory,
+            IListingsReportFactory listingsReportFactory,
             IListingReportGenerator listingReportGenerator
         ) {
             _settingFacade = settingFacade;
             _filePathDialogService = filePathDialogService;
-            _listingPdfDocumentFactory = listingPdfDocumentFactory;
+            _listingsReportFactory = listingsReportFactory;
             _listingReportGenerator = listingReportGenerator;
         }
 
@@ -124,7 +124,7 @@ namespace intf.Views
 
             IOverlayToken ot = Overlay.DisplayOverlay(PrepareViewModel<ProgressViewModel>());
             Task.Run(() => {
-                Document doc = _listingPdfDocumentFactory.Create(Listing, _pdfGenerationSettingsViewModel.PdfSetting);
+                Document doc = _listingsReportFactory.Create(new Listing[] { Listing }, _pdfGenerationSettingsViewModel.PdfSetting);
                 _listingReportGenerator.Save(filePath, doc);
 
                 ot.HideOverlay();

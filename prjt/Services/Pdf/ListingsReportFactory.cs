@@ -8,12 +8,12 @@ using MigraDoc.DocumentObjectModel;
 
 namespace prjt.Services.Pdf
 {
-    public class MultipleListingReportFactory : IMultipleListingReportFactory
+    public class ListingsReportFactory : IListingsReportFactory
     {
         private readonly IListingSectionFactory _listingSectionFactory;
 
 
-        public MultipleListingReportFactory(IListingSectionFactory listingSectionFactory)
+        public ListingsReportFactory(IListingSectionFactory listingSectionFactory)
         {
             _listingSectionFactory = listingSectionFactory;
         }

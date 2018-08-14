@@ -111,14 +111,12 @@
     <Compile Include="Services\Entities\ListingFactory.cs" />
     <Compile Include="Services\IO\FilePathDialogService.cs" />
     <Compile Include="Services\IO\IIODialogService.cs" />
-    <Compile Include="Services\Pdf\DefaultListingPdfReportFactory.cs" />
-    <Compile Include="Services\Pdf\IListingPdfDocumentFactory.cs" />
     <Compile Include="Services\Pdf\IListingReportGenerator.cs" />
     <Compile Include="Services\Pdf\IListingSectionFactory.cs" />
-    <Compile Include="Services\Pdf\IMultipleListingReportFactory.cs" />
+    <Compile Include="Services\Pdf\IListingsReportFactory.cs" />
     <Compile Include="Services\Pdf\ListingReportGenerator.cs" />
     <Compile Include="Services\Pdf\ListingSectionFactory.cs" />
-    <Compile Include="Services\Pdf\MultipleListingReportFactory.cs" />
+    <Compile Include="Services\Pdf\ListingsReportFactory.cs" />
     <Compile Include="Services\PerstStorageFactory.cs" />
     <Compile Include="Services\Root.cs" />
     <Compile Include="Services\StoragePool.cs" />
