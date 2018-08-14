@@ -70,8 +70,7 @@ namespace Evidoo
             _container.Singleton<StoragePool>();
             _container.Singleton<IIODialogService, FilePathDialogService>();
             _container.Singleton<IListingSectionFactory, ListingSectionFactory>();
-            _container.Singleton<IListingPdfDocumentFactory, DefaultListingPdfReportFactory>();
-            _container.Singleton<IMultipleListingReportFactory, MultipleListingReportFactory>();
+            _container.Singleton<IListingsReportFactory, ListingsReportFactory>();
             _container.Singleton<IListingReportGenerator, ListingReportGenerator>();
             _container.Singleton<IBackupImport, BackupImport>();
             _container.Singleton<IEmployerViewModelsFactory, EmployerViewModelsFactory>();

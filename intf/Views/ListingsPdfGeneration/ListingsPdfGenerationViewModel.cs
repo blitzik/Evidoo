@@ -125,7 +125,7 @@ namespace intf.Views
         private DefaultSettings _defaultSettings;
 
         private IIODialogService _filePathDialogService;
-        private IMultipleListingReportFactory _multipleListingReportFactory;
+        private IListingsReportFactory _multipleListingReportFactory;
         private IListingReportGenerator _listingReportGenerator;
         private ListingFacade _listingFacade;
         private SettingFacade _settingFacade;
@@ -134,7 +134,7 @@ namespace intf.Views
             ListingFacade listingFacade,
             SettingFacade settingFacade,
             IIODialogService filePathDialogService,
-            IMultipleListingReportFactory multipleListingReportFactory,
+            IListingsReportFactory multipleListingReportFactory,
             IListingReportGenerator listingReportGenerator
         ) {
             _listingFacade = listingFacade;

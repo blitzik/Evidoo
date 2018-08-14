@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace prjt.Services.Pdf
 {
-    public interface IMultipleListingReportFactory
+    public interface IListingsReportFactory
     {
         Document Create(IEnumerable<Listing> listings, DefaultListingPdfReportSetting settings);
     }
