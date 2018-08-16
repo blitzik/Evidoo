@@ -100,6 +100,7 @@ namespace Evidoo
             _container.Singleton<EmptyListingsGenerationViewModel>();
             _container.PerRequest<WorkedTimeSettingViewModel>();
             _container.Singleton<ListingsPdfGenerationViewModel>();
+            _container.Singleton<CopyListingViewModel>();
 
             // Subscribers
             _container.Singleton<ListingSubscriber>().GetInstance<ListingSubscriber>();

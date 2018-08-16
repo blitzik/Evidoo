@@ -14,6 +14,12 @@ namespace intf.Views
 {
     public class WorkedTimeSettingViewModel : BaseScreen
     {
+        public TimeSetting TimeSetting
+        {
+            get { return new TimeSetting(_startTime, _endTime, _lunchStart, _lunchEnd, _otherHours); }
+        }
+
+
         private int _startTime;
         public int StartTime
         {

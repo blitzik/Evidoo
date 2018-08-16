@@ -136,7 +136,7 @@
                                     </Grid.ColumnDefinitions>
                                     
                                     <!-- Listing Name -->
-                                    <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" FontSize="18" FontWeight="Bold" Text="{Binding Name}" />
+                                    <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" FontSize="18" FontWeight="Bold" Text="{Binding Name}" TextWrapping="Wrap" />
 
                                     <!-- Worked hours -->
                                     <TextBlock Grid.Row="2" Grid.Column="0" Text="Odpracované hodiny" Style="{StaticResource LabelText}" />

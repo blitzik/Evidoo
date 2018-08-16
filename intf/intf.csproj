@@ -124,12 +124,17 @@
     <Compile Include="Subscribers\Messages\EmployerSuccessfullyDeletedMessage.cs" />
     <Compile Include="Subscribers\Messages\EmployerSuccessfullySavedMessage.cs" />
     <Compile Include="Subscribers\Messages\ListingPdfSuccessfullyGeneratedMessage.cs" />
+    <Compile Include="Subscribers\Messages\ListingSuccessfullyCopiedMessage.cs" />
     <Compile Include="Subscribers\Messages\ListingSuccessfullyDeletedMessage.cs" />
     <Compile Include="Subscribers\Messages\ListingSuccessfulySavedMessage.cs" />
     <Compile Include="Subscribers\Messages\SettingsSuccessfullySavedMessage.cs" />
     <Compile Include="Subscribers\SettingsSubscriber.cs" />
     <Compile Include="Utils\IntegersOnlyUtils.cs" />
     <Compile Include="Utils\ListingCheckBoxWrapper.cs" />
+    <Compile Include="Views\CopyListing\CopyListingView.xaml.cs">
+      <DependentUpon>CopyListingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CopyListing\CopyListingViewModel.cs" />
     <Compile Include="Views\Employers\EmployerDeletionView.xaml.cs">
       <DependentUpon>EmployerDeletionView.xaml</DependentUpon>
     </Compile>
@@ -248,6 +253,10 @@
     <Page Include="Validation\ValidationResource.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CopyListing\CopyListingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Employers\EmployerDeletionView.xaml">
       <Generator>MSBuild:Compile</Generator>

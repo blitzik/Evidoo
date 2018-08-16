@@ -17,7 +17,8 @@ namespace intf.Subscribers
     public class ListingSubscriber : BaseSubscriber,
         IHandle<ListingSuccessfulySavedMessage>,
         IHandle<ListingSuccessfullyDeletedMessage>,
-        IHandle<ListingPdfSuccessfullyGeneratedMessage>
+        IHandle<ListingPdfSuccessfullyGeneratedMessage>,
+        IHandle<ListingSuccessfullyCopiedMessage>
     {
         public ListingSubscriber(IEventAggregator eventAggregator, IFlashMessagesManager flashMessagesManager) : base(eventAggregator, flashMessagesManager)
         {
@@ -40,7 +41,14 @@ namespace intf.Subscribers
 
         public void Handle(ListingPdfSuccessfullyGeneratedMessage message)
         {
-            _flashMessagesManager.DisplayFlashMessage("Váš PDF dokument byl úspěšně uložen", Common.FlashMessages.Type.SUCCESS);
+            _flashMessagesManager.DisplayFlashMessage("Váš PDF dokument byl úspěšně uložen.", Common.FlashMessages.Type.SUCCESS);
+        }
+
+
+        public void Handle(ListingSuccessfullyCopiedMessage message)
+        {
+            _eventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingDetailViewModel>(x => x.Listing = message.Listing));
+            _flashMessagesManager.DisplayFlashMessage("Kopie výčetky byla úspěšně vytvořena.", Common.FlashMessages.Type.SUCCESS);
         }
     }
 }

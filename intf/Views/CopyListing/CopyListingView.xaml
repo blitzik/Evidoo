@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="intf.Views.CopyListingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:intf.Views"
+             xmlns:converters="clr-namespace:intf.Converters"
+             xmlns:c="http://www.caliburnproject.org"
+             xmlns:b="clr-namespace:Common.Behaviors;assembly=Common"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="900">
+
+    <UserControl.Resources>
+        <converters:NegateBoolConverter x:Key="NegateBoolConverter" />
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </UserControl.Resources>    
+    
+    <Grid Width="875" HorizontalAlignment="Left">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="325" />
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+        <!-- Listing Name -->
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Název výčetky" Style="{StaticResource LabelText}" />
+        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding ListingName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="50" Style="{StaticResource DefaultTextBox}" />
+        
+        <!-- Copy listing button -->
+        <Button Grid.Row="1" Grid.Column="1" Margin="5 0 0 0" Content="Vytvořit kopii" Command="{Binding CopyListingCommand}" Style="{StaticResource PrimaryButton}" Width="200" HorizontalAlignment="Right" />
+
+        <CheckBox Grid.Row="2" Margin="0 5 0 0" IsChecked="{Binding ChangeItemsTimes}" Content="Hromadně změnit čas vytvořených položek" />
+
+        <Border Grid.Row="3"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Margin="0 25 0 0"
+                b:AnimateableVisibility.Visibility="{Binding ChangeItemsTimes, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=reversed}">
+            
+            <ContentControl c:View.Model="{Binding WorkedTimeSettingViewModel}" />
+        </Border>
+
+    </Grid>
+
+</UserControl>

@@ -167,13 +167,7 @@
 
                                     <!-- Day number -->
                                     <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Background="#78909C" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                        <TextBlock Foreground="#FFF" FontSize="19" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                            <TextBlock.Text>
-                                                <MultiBinding StringFormat="{}{0}.">
-                                                    <Binding Path="Day" />
-                                                </MultiBinding>
-                                            </TextBlock.Text>
-                                        </TextBlock>
+                                        <TextBlock Text="{Binding Day, StringFormat={}{0}.}" Foreground="#FFF" FontSize="19" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                     </Border>
 
                                     <!-- Short day name -->

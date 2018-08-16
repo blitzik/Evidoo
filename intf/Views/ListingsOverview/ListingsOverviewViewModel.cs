@@ -116,6 +116,12 @@ namespace intf.Views
             NotifyOfPropertyChange(() => SelectedYear);
             _selectedMonth = DateTime.Now.Month;
             NotifyOfPropertyChange(() => SelectedMonth);
+        }
+
+
+        protected override void OnActivate()
+        {
+            base.OnActivate();
 
             LoadListings(SelectedYear, SelectedMonth);
         }

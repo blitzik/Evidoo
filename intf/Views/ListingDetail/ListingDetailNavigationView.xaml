@@ -70,8 +70,11 @@
         <RadioButton x:Name="DisplayListingEditing" IsChecked="{Binding CurrentlyActivatedItem, Converter={StaticResource ViewModelToBooleanConverter}, ConverterParameter=ListingEditingViewModel}">
             <TextBlock Text="Upravit výčetku" />
         </RadioButton>
+        <RadioButton x:Name="DisplayCopyListing" IsChecked="{Binding CurrentlyActivatedItem, Converter={StaticResource ViewModelToBooleanConverter}, ConverterParameter=CopyListingViewModel}">
+            <TextBlock Text="Vytvořit kopii" />
+        </RadioButton>
         <RadioButton x:Name="DisplayListingDeletion" IsChecked="{Binding CurrentlyActivatedItem, Converter={StaticResource ViewModelToBooleanConverter}, ConverterParameter=ListingDeletionViewModel}">
             <TextBlock Text="Odstranit výčetku" />
-        </RadioButton>        
+        </RadioButton>
     </StackPanel>
 </UserControl>

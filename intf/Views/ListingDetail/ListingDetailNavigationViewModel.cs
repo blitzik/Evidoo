@@ -75,5 +75,14 @@ namespace intf.Views
                 x.SecondNavigation = this;
             }));
         }
+
+
+        public void DisplayCopyListing()
+        {
+            EventAggregator.PublishOnUIThread(new ChangeViewMessage<CopyListingViewModel>(x => {
+                x.Listing = _listing;
+                x.SecondNavigation = this;
+            }));
+        }
     }
 }
