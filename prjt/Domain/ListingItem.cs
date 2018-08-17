@@ -9,6 +9,9 @@ using Caliburn.Micro;
 
 namespace prjt.Domain
 {
+    /// <summary>
+    /// Immutable object
+    /// </summary>
     public class ListingItem : PropertyChangedBase
     {
         private readonly DateTime _date;

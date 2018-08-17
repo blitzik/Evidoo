@@ -111,7 +111,7 @@ namespace Evidoo
 
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
-            /*if (!mutex.WaitOne(TimeSpan.FromSeconds(1), false) || AppDomain.CurrentDomain.IsDefaultAppDomain() == true) {
+            /*if (!mutex.WaitOne(TimeSpan.FromSeconds(1), false)) {
                 System.Windows.Application.Current.Shutdown();
             }*/
 

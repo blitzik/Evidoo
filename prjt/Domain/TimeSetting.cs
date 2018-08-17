@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace prjt.Domain
 {
+    /// <summary>
+    /// Immutable object
+    /// </summary>
     public class TimeSetting
     {
         private readonly Time _start = new Time();

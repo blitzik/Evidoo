@@ -5,6 +5,7 @@ using prjt.Utils;
 using Perst;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace prjt.Domain
 {
@@ -119,13 +120,18 @@ namespace prjt.Domain
         }
 
 
+        [NonSerialized()]
+        private IReadOnlyDictionary<int, ListingItem> _readOnlyItemsDictionary;
+
         private IPersistentMap<int, ListingItem> _items;
-        public IPersistentMap<int, ListingItem> Items
+        public IReadOnlyDictionary<int, ListingItem> Items
         {
-            get { return _items; }
-            private set
+            get
             {
-                _items = value;
+                if (_readOnlyItemsDictionary == null) {
+                    _readOnlyItemsDictionary = new ReadOnlyDictionary<int, ListingItem>(_items);
+                }
+                return _readOnlyItemsDictionary;
             }
         }
 

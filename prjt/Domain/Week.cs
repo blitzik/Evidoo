@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -25,10 +26,17 @@ namespace prjt.Domain
         }
 
 
+        private IReadOnlyCollection<DayItem> _readOnlyDayItemsCollection;
         private List<DayItem>_dayItems;
-        public List<DayItem> DayItems
+        public IReadOnlyCollection<DayItem> DayItems
         {
-            get { return _dayItems; }
+            get
+            {
+                if (_readOnlyDayItemsCollection == null) {
+                    _readOnlyDayItemsCollection = new ReadOnlyCollection<DayItem>(_dayItems);
+                }
+                return _readOnlyDayItemsCollection;
+            }
         }
 
 
