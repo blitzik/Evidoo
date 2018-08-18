@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using Common.ExtensionMethods;
 using Common.Commands;
 using prjt.Domain;
 using prjt.EventArguments;
@@ -34,17 +35,8 @@ namespace intf.Views
             get { return _selectedWeek; }
             set {
                 Set(ref _selectedWeek, value);
-                RefillCollection(value == null ? _dayItems : value.DayItems, _displayableItems);
+                _displayableItems.Refill(value == null ? _dayItems : value.DayItems);
                 ExpandItemsCommand.RaiseCanExecuteChanged();
-            }
-        }
-
-
-        private void RefillCollection(IEnumerable<DayItem> items, ObservableCollection<DayItem> source)
-        {
-            source.Clear();
-            foreach (DayItem di in items) {
-                source.Add(di);
             }
         }
 

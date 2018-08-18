@@ -61,6 +61,7 @@
     <Compile Include="Behavior\ContentControlExtension.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="EventAggregator\Messages\IChangeViewMessage.cs" />
+    <Compile Include="ExtensionMethods\ObservableCollectionExtensions.cs" />
     <Compile Include="FlashMessages\FlashMessage.cs" />
     <Compile Include="FlashMessages\FlashMessageDecorator.cs" />
     <Compile Include="FlashMessages\FlashMessagesManager.cs" />
