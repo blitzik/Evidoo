@@ -21,7 +21,6 @@ using System.Linq;
 
 namespace intf.Views
 {
-    // todo  metoda LoadListings se spouští několikrát
     public class ListingsPdfGenerationViewModel : BaseScreen
     {
         private List<ListingCheckBoxWrapper> _listingsList;
