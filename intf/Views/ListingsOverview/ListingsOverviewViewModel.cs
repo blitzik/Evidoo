@@ -20,7 +20,9 @@ namespace intf.Views
             get
             {
                 if (_openListingCommand == null) {
-                    _openListingCommand = new DelegateCommand<Listing>(p => OpenListing(p));
+                    _openListingCommand = new DelegateCommand<Listing>(
+                        listing => EventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingDetailViewModel>(x => { x.Listing = listing; }))
+                    );
                 }
 
                 return _openListingCommand;
@@ -34,7 +36,13 @@ namespace intf.Views
             get
             {
                 if (_displayListingsPdfGenerationCommand == null) {
-                    _displayListingsPdfGenerationCommand = new DelegateCommand<object>(p => DisplayListingsPdfGeneration());
+                    _displayListingsPdfGenerationCommand = new DelegateCommand<object>(
+                        p => EventAggregator.PublishOnUIThread(
+                            new ChangeViewMessage<ListingsPdfGenerationViewModel>(x => {
+                                x.SetDefaultPeriod(SelectedYear, SelectedMonth);
+                            })
+                        )
+                    );
                 }
                 return _displayListingsPdfGenerationCommand;
             }
@@ -130,20 +138,6 @@ namespace intf.Views
         private void LoadListings(int year, int month)
         {
             Listings = CollectionViewSource.GetDefaultView(_listingFacade.FindListings(year, month));
-        }
-
-
-        private void OpenListing(Listing listing)
-        {
-            EventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingDetailViewModel>(x => { x.Listing = listing; }));
-        }
-
-
-        private void DisplayListingsPdfGeneration()
-        {
-            EventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingsPdfGenerationViewModel>(x => {
-                x.SetDefaultPeriod(SelectedYear, SelectedMonth);
-            }));
         }
     }
 }
