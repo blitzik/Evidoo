@@ -34,12 +34,17 @@ namespace intf.Views
             get { return _selectedWeek; }
             set {
                 Set(ref _selectedWeek, value);
-                if (value == null) {
-                    DisplayableItems = new ObservableCollection<DayItem>(_dayItems);
-                } else {
-                    DisplayableItems = new ObservableCollection<DayItem>(value.DayItems);
-                }
+                RefillCollection(value == null ? _dayItems : value.DayItems, _displayableItems);
                 ExpandItemsCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+
+        private void RefillCollection(IEnumerable<DayItem> items, ObservableCollection<DayItem> source)
+        {
+            source.Clear();
+            foreach (DayItem di in items) {
+                source.Add(di);
             }
         }
 
@@ -52,12 +57,15 @@ namespace intf.Views
 
 
         private ObservableCollection<DayItem> _displayableItems;
-        public ObservableCollection<DayItem> DisplayableItems
+        private ReadOnlyObservableCollection<DayItem> _readOnlyObservableCollection;
+        public ReadOnlyObservableCollection<DayItem> DisplayableItems
         {
-            get { return _displayableItems; }
-            set
+            get
             {
-                Set(ref _displayableItems, value);
+                if (_readOnlyObservableCollection == null) {
+                    _readOnlyObservableCollection = new ReadOnlyObservableCollection<DayItem>(_displayableItems);
+                }
+                return _readOnlyObservableCollection;
             }
         }
 
@@ -75,6 +83,15 @@ namespace intf.Views
         }
 
 
+        private void OpenListingItemDetail(int day)
+        {
+            EventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingItemViewModel>(x => {
+                x.DayItem = _dayItems[day - 1];
+                x.SecondNavigation = _secondNavigation;
+            }));
+        }
+
+
         private DelegateCommand<int> _removeItemCommand;
         public DelegateCommand<int> RemoveItemCommand
         {
@@ -85,6 +102,19 @@ namespace intf.Views
                 }
                 return _removeItemCommand;
             }
+        }
+
+
+        private void RemoveItemByDay(int day)
+        {
+            if (_dayItems[day - 1].Listing == null) {
+                return;
+            }
+
+            Listing.RemoveItemByDay(day);
+            _dayItems[day - 1].Reset();
+
+            _listingFacade.Update(Listing);
         }
 
 
@@ -101,6 +131,20 @@ namespace intf.Views
         }
 
 
+        private void CopyItemDown(int day)
+        {
+            DayItem dayItem = _dayItems[day - 1];
+            if (dayItem.ListingItem == null || _dayItems[day].IsEqual(dayItem)) {
+                return;
+            }
+            ListingItem newItem = Listing.ReplaceItem(day + 1, dayItem.Locality, dayItem.ListingItem.TimeSetting);
+
+            _dayItems[day].Update(newItem);
+
+            _listingFacade.Update(Listing);
+        }
+
+
         private DelegateCommand<object> _expandItemsCommand;
         public DelegateCommand<object> ExpandItemsCommand
         {
@@ -108,7 +152,7 @@ namespace intf.Views
             {
                 if (_expandItemsCommand == null) {
                     _expandItemsCommand = new DelegateCommand<object>(
-                        p => ExpandItems(),
+                        p => { SelectedWeek = null; },
                         p => SelectedWeek != null
                     );
                 }
@@ -127,6 +171,7 @@ namespace intf.Views
         ) {
             _listingFacade = listingFacade;
             _dayItems = new List<DayItem>();
+            _displayableItems = new ObservableCollection<DayItem>();
         }
 
 
@@ -146,48 +191,6 @@ namespace intf.Views
 
             ListingDetailNavigationViewModel s = SecondNavigation as ListingDetailNavigationViewModel;
             s.Listing = Listing;
-        }
-
-
-        private void OpenListingItemDetail(int day)
-        {
-            EventAggregator.PublishOnUIThread(new ChangeViewMessage<ListingItemViewModel>(x => {
-                x.DayItem = _dayItems[day - 1];
-                x.SecondNavigation = _secondNavigation;
-            }));
-        }
-
-
-        private void RemoveItemByDay(int day)
-        {
-            if (_dayItems[day - 1].Listing == null) {
-                return;
-            }
-
-            Listing.RemoveItemByDay(day);
-            _dayItems[day - 1].Reset();
-
-            _listingFacade.Update(Listing);
-        }
-
-
-        private void CopyItemDown(int day)
-        {
-            DayItem dayItem = _dayItems[day - 1];
-            if (dayItem.ListingItem == null || _dayItems[day].IsEqual(dayItem)) {
-                return;
-            }
-            ListingItem newItem = Listing.ReplaceItem(day + 1, dayItem.Locality, dayItem.ListingItem.TimeSetting);
-
-            _dayItems[day].Update(newItem);
-
-            _listingFacade.Update(Listing);
-        }
-
-
-        private void ExpandItems()
-        {
-            SelectedWeek = null;
         }
 
 
