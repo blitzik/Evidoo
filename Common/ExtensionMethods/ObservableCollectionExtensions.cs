@@ -22,5 +22,22 @@ namespace Common.ExtensionMethods
                 source.Add(i);
             }
         }
+
+
+        /// <summary>
+        /// Clears the ObservableCollection and re-fills it with the given items
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="I"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="items"></param>
+        /// <param name="modifier"></param>
+        public static void Refill<T, I>(this ObservableCollection<T> source, IEnumerable<I> items, Func<I, T> modifier)
+        {
+            source.Clear();
+            foreach (I i in items) {
+                source.Add(modifier.Invoke(i));
+            }
+        }
     }
 }

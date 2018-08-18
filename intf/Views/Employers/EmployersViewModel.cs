@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using Common.ExtensionMethods;
 using Common.Commands;
 using prjt.Domain;
 using prjt.Facades;
@@ -18,11 +19,15 @@ namespace intf.Views
     public class EmployersViewModel : BaseScreen
     {
         private ObservableCollection<EmployerItemViewModel> _employers;
-        public ObservableCollection<EmployerItemViewModel> Employers
+        private ReadOnlyObservableCollection<EmployerItemViewModel> _readOnlyEmployersCollection;
+        public ReadOnlyObservableCollection<EmployerItemViewModel> Employers
         {
             get
             {
-                return _employers;
+                if (_readOnlyEmployersCollection == null) {
+                    _readOnlyEmployersCollection = new ReadOnlyObservableCollection<EmployerItemViewModel>(_employers);
+                }
+                return _readOnlyEmployersCollection;
             }
         }
 
@@ -55,6 +60,18 @@ namespace intf.Views
         }
 
 
+        private void SaveNewEmployer()
+        {
+            Employer e = _employerFacade.CreateEmployer(NewEmployerName.Trim());
+
+            _employers.Insert(0, CreateEmployerItemViewModel(e));
+
+            NewEmployerName = null;
+
+            EventAggregator.PublishOnUIThread(new EmployerSuccessfullySavedMessage(e));
+        }
+
+
         private IEmployerViewModelsFactory _employersVMFactory;
         private EmployerFacade _employerFacade;
 
@@ -69,45 +86,22 @@ namespace intf.Views
         }
 
 
-        private void SaveNewEmployer()
+        protected override void OnActivate()
         {
-            Employer e = _employerFacade.CreateEmployer(NewEmployerName.Trim());
+            base.OnActivate();
 
-            Employers.Insert(0, CreateEmployerItemViewModel(e));
-
-            NewEmployerName = null;
-
-            EventAggregator.PublishOnUIThread(new EmployerSuccessfullySavedMessage(e));
+            _employers.Refill(_employerFacade.FindAllEmployers(), CreateEmployerItemViewModel);
         }
 
 
         private EmployerItemViewModel CreateEmployerItemViewModel(Employer employer)
         {
             EmployerItemViewModel vm = (EmployerItemViewModel)_employersVMFactory.Create(employer, EmployerViewModel.ITEM);
-            vm.OnDeletedEmployer += OnEmployerDeletion;
+            vm.OnDeletedEmployer += (s, e) => {
+                _employers.Remove((EmployerItemViewModel)s);
+            };
 
             return vm;
-        }
-
-
-        private void OnEmployerDeletion(object sender, EventArgs args)
-        {
-            _employers.Remove((EmployerItemViewModel)sender);
-        }
-
-
-        // -----
-
-
-        protected override void OnActivate()
-        {
-            base.OnActivate();
-
-            _employers.Clear();
-            List<Employer> foundEmployers = _employerFacade.FindAllEmployers();
-            foreach (Employer e in foundEmployers) {
-                _employers.Add(CreateEmployerItemViewModel(e));
-            }
         }
     }
 }
