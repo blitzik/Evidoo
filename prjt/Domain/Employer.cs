@@ -2,6 +2,7 @@
 using Perst;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,10 +32,18 @@ namespace prjt.Domain
 
 
         private IPersistentList<Listing> _listings;
-        private IPersistentList<Listing> Listings
+
+        [NonSerialized()]
+        private IReadOnlyCollection<Listing> _readOnlyCollection;
+        public IReadOnlyCollection<Listing> Listings
         {
-            get { return _listings; }
-            set { _listings = value; }
+            get
+            {
+                if (_readOnlyCollection == null) {
+                    _readOnlyCollection = new ReadOnlyCollection<Listing>(_listings);
+                }
+                return _readOnlyCollection;
+            }
         }
 
 
@@ -45,25 +54,19 @@ namespace prjt.Domain
             Name = name;
             CreatedAt = DateTime.Now;
 
-            Listings = db.CreateScalableList<Listing>();
+            _listings = db.CreateScalableList<Listing>();
         }
 
 
         public void AddListing(Listing listing)
         {
-            Listings.Add(listing);
+            _listings.Add(listing);
         }
 
 
         public void RemoveListing(Listing listing)
         {
-            Listings.Remove(listing);
-        }
-
-
-        public List<Listing> GetListings()
-        {
-            return new List<Listing>(Listings);
+            _listings.Remove(listing);
         }
 
 

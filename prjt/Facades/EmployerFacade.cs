@@ -34,7 +34,7 @@ namespace prjt.Facades
         public void Delete(Employer employer)
         {
             Root().Employers.Remove(employer);
-            foreach (Listing l in employer.GetListings()) {
+            foreach (Listing l in employer.Listings) {
                 l.Employer = null;
                 Storage().Modify(l);
             }

@@ -35,11 +35,10 @@ namespace prjt.Domain
         }
 
 
-        private string _locality;
+        private readonly string _locality;
         public string Locality
         {
             get { return _locality; }
-            private set { _locality = value; }
         }
 
 
@@ -50,7 +49,7 @@ namespace prjt.Domain
             _date = new DateTime(listing.Year, listing.Month, day);
 
             _day = day;
-            _locality = locality;
+            _locality = locality?.Trim();
             
             _timeSetting = new TimeSetting(start, end, lunchStart, lunchEnd, otherHours);
         }

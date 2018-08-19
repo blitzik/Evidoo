@@ -25,11 +25,7 @@ namespace intf.Views
         public Listing Listing
         {
             get { return _listing; }
-            set
-            {
-                Set(ref _listing, value);
-                Reset(Listing);
-            }
+            set { Set(ref _listing, value); }
         }
 
 
@@ -50,10 +46,7 @@ namespace intf.Views
         private List<Employer> _employers;
         public List<Employer> Employers
         {
-            get
-            {
-                return _employers;
-            }
+            get {  return _employers; }
         }
 
 
@@ -225,6 +218,16 @@ namespace intf.Views
 
             BaseWindowTitle = "Úprava výčetky";
             _selectedEmployer = _promptEmployer;
+        }
+
+
+        protected override void OnActivate()
+        {
+            base.OnActivate();
+
+            if (Listing != null) {
+                Reset(Listing);
+            }
         }
 
 

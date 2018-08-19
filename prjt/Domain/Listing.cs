@@ -96,9 +96,8 @@ namespace prjt.Domain
             set
             {
                 _employer?.RemoveListing(this);
-                _employer = value;
+                Set(ref _employer, value);
                 _employer?.AddListing(this);
-                NotifyOfPropertyChange(() => Employer);
             }
         }
 
@@ -140,30 +139,15 @@ namespace prjt.Domain
         public int WorkedDays
         {
             get { return _workedDays; }
-            private set
-            {
-                _workedDays = value;
-                NotifyOfPropertyChange(() => WorkedDays);
-            }
+            private set { Set(ref _workedDays, value); }
         }
-
-
-        public delegate void ListingSummaryTimeChangedHandler(object sender, Time changedTime);
-        public event ListingSummaryTimeChangedHandler OnSummaryTimeChanged;
 
 
         private Time _workedHours;
         public Time WorkedHours
         {
             get { return _workedHours ?? new Time("00:00"); }
-            private set
-            {
-                if (_workedHours != null) {
-                    OnSummaryTimeChanged?.Invoke(this, _workedHours);
-                }
-                _workedHours = value;
-                NotifyOfPropertyChange(() => WorkedHours);
-            }
+            private set { Set(ref _workedHours, value); }
         }
 
 
@@ -171,13 +155,7 @@ namespace prjt.Domain
         public Time OtherHours
         {
             get { return _otherHours ?? new Time("00:00"); }
-            set
-            {
-                if (_otherHours != null) {
-                    OnSummaryTimeChanged?.Invoke(this, _otherHours);
-                }
-                _otherHours = value;
-            }
+            set { Set(ref _otherHours, value); }
         }
 
 
@@ -185,13 +163,7 @@ namespace prjt.Domain
         public Time LunchHours
         {
             get { return _lunchHours ?? new Time("00:00"); }
-            set
-            {
-                if (_lunchHours != null) {
-                    OnSummaryTimeChanged?.Invoke(this, _lunchHours);
-                }
-                _lunchHours = value;
-            }
+            set { Set(ref _lunchHours, value); }
         }
 
 
@@ -199,14 +171,7 @@ namespace prjt.Domain
         public Time TotalWorkedHours
         {
             get { return _totalWorkedHours ?? new Time("00:00"); }
-            private set
-            {
-                if (_totalWorkedHours != null) {
-                    OnSummaryTimeChanged?.Invoke(this, _totalWorkedHours);
-                }
-                _totalWorkedHours = value;
-                NotifyOfPropertyChange(() => TotalWorkedHours);
-            }
+            private set { Set(ref _totalWorkedHours, value); }
         }
 
 
@@ -362,7 +327,9 @@ namespace prjt.Domain
             OtherHours += newItem.TimeSetting.OtherHours;
             TotalWorkedHours += newItem.TimeSetting.TotalWorkedHours;
 
-            Localities.Add(locality);
+            if (!string.IsNullOrEmpty(newItem.Locality)) {
+                Localities.Add(locality);
+            }
 
             return newItem;
         }
@@ -391,7 +358,9 @@ namespace prjt.Domain
 
             _items[day] = newItem;
 
-            Localities.Add(locality);
+            if (!string.IsNullOrEmpty(newItem.Locality)) {
+                Localities.Add(locality);
+            }
 
             return newItem;
         }
