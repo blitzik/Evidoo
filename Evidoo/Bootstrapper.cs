@@ -111,9 +111,9 @@ namespace Evidoo
 
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
-            /*if (!mutex.WaitOne(TimeSpan.FromSeconds(1), false)) {
+            if (!mutex.WaitOne(TimeSpan.FromSeconds(1), false)) {
                 System.Windows.Application.Current.Shutdown();
-            }*/
+            }
 
             ResultObject<object> ro = new ResultObject<object>(true);
             try {
@@ -147,7 +147,7 @@ namespace Evidoo
         protected override void OnExit(object sender, EventArgs e)
         {
             _container.GetInstance<StoragePool>().CloseAll();
-            //mutex.ReleaseMutex();
+            mutex.ReleaseMutex();
         }
 
 
