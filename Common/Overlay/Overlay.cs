@@ -30,10 +30,9 @@ namespace Common.Overlay
         }
 
 
-        public IOverlayToken DisplayOverlay<VM>(VM content) where VM : IViewModel
+        public IOverlayToken DisplayOverlay(IOverlayToken overlayToken)
         {
-            IOverlayToken token = new OverlayToken(content);
-            token.OnOverlayHide += (s) => {
+            overlayToken.OnOverlayHide += (s) => {
                 if (s != Token) { // only current token can disable overlay
                     return;
                 }
@@ -42,11 +41,41 @@ namespace Common.Overlay
                 NotifyOfPropertyChange(() => IsActive);
             };
 
+            _token = overlayToken;
+            NotifyOfPropertyChange(() => Token);
+            NotifyOfPropertyChange(() => IsActive);
+
+            ScreenExtensions.TryActivate(overlayToken.Content);
+
+            return overlayToken;
+        }
+
+
+        public IOverlayToken DisplayOverlay<VM>(VM content, bool isMandatory = false) where VM : IViewModel
+        {
+            IOverlayToken token = new OverlayToken(content, isMandatory);
+            token.OnOverlayHide += (s) => {
+                if (s != Token) { // only current token can disable overlay
+                    return;
+                }
+                _token = null;
+                NotifyOfPropertyChange(() => Token);
+                NotifyOfPropertyChange(() => IsActive);
+            };           
+
             _token = token;
             NotifyOfPropertyChange(() => Token);
             NotifyOfPropertyChange(() => IsActive);
 
+            ScreenExtensions.TryActivate(content);
+
             return token;
+        }
+
+
+        public void HideOverlay()
+        {
+            if (Token != null) Token.HideOverlay();
         }
     }
 }

@@ -268,7 +268,7 @@ namespace intf.Views
                 return;
             }
 
-            IOverlayToken ot = Overlay.DisplayOverlay(PrepareViewModel<ProgressViewModel>());
+            IOverlayToken ot = Overlay.DisplayOverlay(PrepareViewModel<ProgressViewModel>(), true);
             Task.Run(() => {
                 ResultObject<object> ro = _settingFacade.BackupData(filePath);
 
@@ -280,7 +280,7 @@ namespace intf.Views
 
         private async void ImportBackup()
         {
-            IOverlayToken ot = Overlay.DisplayOverlay(PrepareViewModel<ProgressViewModel>());
+            IOverlayToken ot = Overlay.DisplayOverlay(PrepareViewModel<ProgressViewModel>(), true);
             Task<ResultObject<object>> t = Task.Run(() => {
                 ResultObject<object> r = _settingFacade.ImportBackup(BackupFilePath);
 

@@ -24,6 +24,23 @@ namespace intf.Views
         }
 
 
+        private DelegateCommand<object> _hideOverlayCommand;
+        public DelegateCommand<object> HideOverlayCommand
+        {
+            get
+            {
+                if (_hideOverlayCommand == null) {
+                    _hideOverlayCommand = new DelegateCommand<object>(p => {
+                        if (!Overlay.Token.IsMandatory) {
+                            Overlay.HideOverlay();
+                        }
+                    });
+                }
+                return _hideOverlayCommand;
+            }
+        }
+
+
         private string _version;
         public string AppVersion
         {

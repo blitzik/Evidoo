@@ -227,7 +227,7 @@ namespace intf.Views
                 return;
             }
 
-            IOverlayToken ot = Overlay.DisplayOverlay(PrepareViewModel<ProgressViewModel>());
+            IOverlayToken ot = Overlay.DisplayOverlay(PrepareViewModel<ProgressViewModel>(), true);
             Task.Factory.StartNew(() => {
                 IEnumerable<Listing> listings = from ListingCheckBoxWrapper lw in _listingsList where lw.IsChecked == true select lw.Listing;
                 Document doc = _multipleListingReportFactory.Create(listings, PdfGenerationSettingsViewModel.PdfSetting);

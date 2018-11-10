@@ -122,7 +122,7 @@ namespace intf.Views
                 return;
             }
 
-            IOverlayToken ot = Overlay.DisplayOverlay(PrepareViewModel<ProgressViewModel>());
+            IOverlayToken ot = Overlay.DisplayOverlay(PrepareViewModel<ProgressViewModel>(), true);
             Task.Run(() => {
                 Document doc = _listingsReportFactory.Create(new Listing[] { Listing }, _pdfGenerationSettingsViewModel.PdfSetting);
                 _listingReportGenerator.Save(filePath, doc);

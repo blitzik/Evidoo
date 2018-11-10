@@ -94,7 +94,7 @@ namespace intf.Views
                 return;
             }
 
-            IOverlayToken ot = Overlay.DisplayOverlay(PrepareViewModel<ProgressViewModel>());
+            IOverlayToken ot = Overlay.DisplayOverlay(PrepareViewModel<ProgressViewModel>(), true);
             Task.Run(() => {
                 List<Listing> list = new List<Listing>();
                 for (int month = 0; month < 12; month++) {
