@@ -16,7 +16,6 @@ namespace prjt.Facades
         {
             Employer e = new Employer(Storage(), name);
 
-            Storage().Store(e);
             Root().Employers.Add(e);
             Storage().Commit();
 

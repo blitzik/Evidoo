@@ -16,7 +16,6 @@ namespace prjt.Facades
 
         public void StoreListing(Listing listing)
         {
-            Storage().Store(listing);
             Root().Listings.Put(new Key(new Object[] { listing.Year, listing.Month }), listing);
             Storage().Commit();
         }
